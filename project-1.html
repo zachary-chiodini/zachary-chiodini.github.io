@@ -112,14 +112,14 @@
       <span style="margin-left:2em"><span style="color:#FF8000">return</span> ask_for_cols( fb, cols )</span><br/>
       <br/>
       <span style="color:#FF8000">def</span> <span style="color:#5E5EFF">ask_for_input</span>() :<br/>
-      <span style="margin-left:2em">in_file = <span style="color:#FF00FF">str</span>( <span style="color:#FF00FF">input</span>( <span style="color:#02FF02">'\nPlease enter the input file name: '</span> ) )</span><br/>
+      <span style="margin-left:2em">in_file = <span style="color:#FF00FF">str</span>( <span style="color:#FF00FF">input</span>( <span style="color:#02FF02">'\nEnter the input file name: '</span> ) )</span><br/>
       <span style="margin-left:2em"><span style="color:#FF8000">if</span> <span style="color:#02FF02">'.xlsx'</span> <span style="color:#FF8000">not in</span> in_file :</span><br/>
-      <span style="margin-left:4em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'\nThe input file type must be ".xlsx"'</span> )</span><br/>
-      <span style="margin-left:4em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'Please, make the appropriate corrections and try again.'</span> )</span><br/>
+      <span style="margin-left:4em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'\nThe input file type must be ".xlsx."'</span> )</span><br/>
+      <span style="margin-left:4em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'Please, try again.'</span> )</span><br/>
       <span style="margin-left:4em"><span style="color:#FF8000">return</span> ask_for_input()</span><br/>
       <span style="margin-left:2em"><span style="color:#FF8000">try</span> : fb = pd.read_excel( in_file, dtype = <span style="color:#FF00FF">str</span> )</span><br/>
       <span style="margin-left:2em"><span style="color:#FF8000">except</span> :</span><br/>
-      <span style="margin-left:4em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'\nThe file name you have entered does not exist.'</span> )</span><br/>
+      <span style="margin-left:4em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'\nThe file you entered does not exist.'</span> )</span><br/>
       <span style="margin-left:4em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'Please, try again.'</span> )</span><br/>
       <span style="margin-left:4em"><span style="color:#FF8000">return</span> ask_for_input()</span><br/>
       <span style="margin-left:2em"><span style="color:#FF8000">return</span> fb</span><br/>
