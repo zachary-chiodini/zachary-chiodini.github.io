@@ -94,24 +94,23 @@
       <span style="margin-left:2em"><span style="color:#FF8000">if</span> user.lower() == <span style="color:#02FF02">'n'</span> :</span><br/>
       <span style="margin-left:4em">cols = <span style="color:#FF00FF">str</span>(</span><br/>
       <span style="margin-left:6em"><span style="color:#FF00FF">input</span>( <span style="color:#02FF02">'\nPlease type the appropriate column '</span> +\</span><br/>
-      <span style="margin-left:10em">'labels exactly as they are in the ' &nbsp;&nbsp; +\</span><br/>
-                   'input file and separate each by a '    +\
-                   'comma. The resolution column must be ' +\
-                   'at the of the list:\n ' )
-            )
-        cols = cols.split( ',' )
-        for i in range( len( cols ) ) :
-            cols[ i ] = cols[ i ].strip()
-        try : fb[ cols ]
-        except :
-            print( '\nOne or more columns you have entered do not exist.' )
-            print( 'Please, try again.' )
-            return ask_for_cols( fb, cols )
-        return ask_for_cols( fb, cols )
-    print( '\nYour response must be either "Y" for yes or "N" for no.' )
-    print( 'Please, try again.' )
-    return ask_for_cols( fb, cols )
-
+      <span style="margin-left:10.1em"><span style="color:#02FF02">'labels exactly as they are in the '</span> &nbsp;&nbsp; +\</span><br/>
+      <span style="margin-left:10.1em"><span style="color:#02FF02">'input file and separate each by a '</span> &nbsp;&nbsp; +\</span><br/>
+      <span style="margin-left:10.1em"><span style="color:#02FF02">'comma. The resolution column must be '</span> +\</span><br/>
+      <span style="margin-left:10.1em"><span style="color:#02FF02">'at the of the list:\n '</span> )</span><br/>
+      <span style="margin-left:6em">)</span><br/>
+      <span style="margin-left:4em">cols = cols.split( <span style="color:#02FF02">','</span> )</span><br/>
+      <span style="margin-left:4em"><span style="color:#FF8000">for</span> i in <span style="color:#FF00FF">range</span>( <span style="color:#FF00FF">len</span>( cols ) ) :</span><br/>
+      <span style="margin-left:6em">cols[ i ] = cols[ i ].strip()</span>
+      <span style="margin-left:4em"><span style="color:#FF8000">try</span> : fb[ cols ]</span><br/>
+      <span style="margin-left:4em"><span style="color:#FF8000">except</span> :</span><br/>
+      <span style="margin-left:6em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'\nOne or more columns do not exist.'</span> )</span><br/>
+      <span style="margin-left:6em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'Please, try again.'</span> )</span><br/>
+      <span style="margin-left:4em"><span style="color:#FF8000">return</span> ask_for_cols( fb, cols )</span><br/>
+      <span style="margin-left:2em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'\nYour response must be "Y" for yes or "N" for no.'</span> )</span><br/>
+      <span style="margin-left:2em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'Please, try again.'</span> )</span><br/>
+      <span style="margin-left:2em"><span style="color:#FF8000">return</span> ask_for_cols( fb, cols )</span><br/>
+      <br/>
 def ask_for_input() :
     in_file = str( input( '\nPlease enter the input file name: ' ) )
     if '.xlsx' not in in_file :
