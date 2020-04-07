@@ -71,13 +71,12 @@
       <span style="margin-left:5.6em"><span style="color:#02FF02">'"Install launcher for all users" and '</span> &nbsp; +\</span><br/>
       <span style="margin-left:5.6em"><span style="color:#02FF02">'"add Python to PATH" on the setup '</span> &nbsp;&nbsp;&nbsp;&nbsp; +\</span><br/>
       <span style="margin-left:5.6em"><span style="color:#02FF02">'window before installing.'</span></span><br/>
-      <span style="margin-left:5.6em">popup( msg, <span style="color:#02FF02">'Python Version Incompatible!'</span> )</span><br/>
-      <span style="margin-left:5.6em"><span style="color:#FF00FF">exit</span>()</span><br/>
+      <span style="margin-left:2em">popup( msg, <span style="color:#02FF02">'Python Version Incompatible!'</span> )</span><br/>
+      <span style="margin-left:2em"><span style="color:#FF00FF">exit</span>()</span><br/>
       <br/>
-
-def ask_for_cols( fb, cols ) :
-    labels = ', '.join( cols )
-    print( '\nCurrently selecting columns {}.'.format( labels ) )
+      <span style="color:#FF8000">def</span> <span style="color:#5E5EFF">ask_for_cols</span>( fb, cols ) :<br/>
+      <span style="margin-left:2em">labels = <span style="color:#02FF02">', '</span>.join( cols )</span><br/>
+      <span style="margin-left:2em"> <span style="color:#FF00FF">print</span> <span style="color:#02FF02">'\nCurrently selecting columns {}.'</span>.format( labels ) )</span></br>
     user = str( input( 'Do the column labels above exist ' +\
                        'in the input file? (Y/N) ' ) )
     if user.lower() == 'y' :
