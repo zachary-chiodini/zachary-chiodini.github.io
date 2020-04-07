@@ -124,15 +124,15 @@
       <span style="margin-left:4em"><span style="color:#FF8000">return</span> ask_for_input()</span><br/>
       <span style="margin-left:2em"><span style="color:#FF8000">return</span> fb</span><br/>
       <br/>
-def are_you_ready( fb ):
-    print( '\nReady to process {} records.'.format( len( fb ) ) )
-    user = str( input( 'Is this number correct? (Y/N) ' ) )
-    if user.lower() == 'y' : return
-    if user.lower() == 'n' : exit()
-    print( '\nYour response must be either "Y" for yes or "N" for no.' )
-    print( 'Please, try again.' )
-    return are_you_ready( fb )
-
+      <span style="color:#FF8000">def</span> <span style="color:#5E5EFF">are_you_ready</span>( fb ):</span><br/>
+      <span style="margin-left:2em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'\nReady to process {} records.'</span>.format( <span style="color:#FF00FF">len</span>( fb ) ) )</span><br/>
+      <span style="margin-left:2em">user = <span style="color:#FF00FF">str</span>( <span style="color:#FF00FF">input</span>( <span style="color:#02FF02">'Is this number correct? (Y/N) '</span> ) )</span><br/>
+      <span style="margin-left:2em"><span style="color:#FF8000">if</span> user.lower() == <span style="color:#02FF02">'y'</span> : return</span><br/>
+      <span style="margin-left:2em"><span style="color:#FF8000">if</span> user.lower() == <span style="color:#02FF02">'n'</span> : <span style="color:#FF00FF">exit</span>()</span><br/>
+      <span style="margin-left:2em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'\nResponse must be "Y" for yes or "N" for no.'</span> )</span><br/>
+      <span style="margin-left:2em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'Please, try again.'</span> )</span><br/>
+      <span style="margin-left:2em"><span style="color:#FF8000">return</span> are_you_ready( fb )</span><br/>
+      <br/>
 # let's get started
 fb = ask_for_input()
 out_file = 'gso_processor_output.xlsx'
