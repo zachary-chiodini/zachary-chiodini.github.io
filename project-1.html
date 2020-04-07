@@ -7,5 +7,237 @@
   <img style="width:574; height:441px" src="workflow.png" alt="workflow"/>
   <body style="background-color:#002240; color:white;">
     <h1 style="color:#02FF02">Program Launcher</h1>
+    <textarea rows="10" cols="100">
+import sys, time
+version = [ sys.version_info[ 0 ], 
+            sys.version_info[ 1 ], 
+            sys.version_info[ 2 ] ]
+correct = version[ 0 ] == 3
+correct = correct and ( 
+    float( '.'.join( map( str, version[ 1 : 3 ] ) ) ) <= 7.5 )
+correct = correct and ( 
+    6.0 <= float( '.'.join( map( str, version[ 1 : 3 ] ) ) ) )
+
+def countdown( s, n ) :
+    for i in range( n, -1, -1 ):
+        print( s.format( str( i ).rjust( 2, ' ' ) ), flush = True, end = '\r' )
+        time.sleep( 1 )
+        
+if not correct :
+    version = '.'.join( map( str, version ) )
+    print( 'You are using Python version {}.'.format( version ) )
+    print( 'This program only supports Python versions 3.6.0 to 3.7.5.' )
+    print( 'Please, uninstall your current version of Python, visit ' +\
+           'www.python.org/downloads/ and download Python 3.7.5.' )
+    print( 'Make sure you check "Install launcher for all users" and ' +\
+           '"add Python to PATH" on the Setup window before installing.')
+    countdown( 'Exiting program in {}.', 30 )
+    print( 'Goodbye.' )
+    exit()
+
+try :
+    import numpy as np, os, pandas as pd, tkinter as tk
+    from tkinter import ttk
+    from trackingtools import Main, Runtime
+except :
+    print( '\nPlease install the appropriate libraries and ' +\
+           'make sure "trackingtools.py" is in your current ' +\
+           'directory.' )
+    countdown( 'Exiting program in {}.', 30 )
+    print( 'Goodbye.' )
+    exit()
+
+def popup( msg, title, length = 100, con_err = False ) :
+    ''' 
+    Generates a popup message with 
+    the title "Error Encountered!" 
+    '''
+    def organize( msg ) :
+        '''
+        Creates next line 
+        characters where necessary 
+        '''
+        lst = []
+        while True :
+            if len( msg ) <= length :
+                lst.append( msg )
+                break
+            slc = msg[ 0 : length ]
+            idx = slc[ ::-1 ].index( ' ' )
+            idx = length - idx
+            lst.append( msg[ 0 : idx ] )
+            msg = msg[ idx : ]
+        return '\n'.join( lst )
+    pop = tk.Tk()
+    pop.wm_title( title )
+    msg = organize( msg )
+    if con_err :
+        err = 'If this is a connection error, ' +\
+              'please check the connection and run the program again. ' +\
+              'Once a good connection is reestablished, ' +\
+              'the process will resume where it has left off.'
+        err = organize( err )
+        msg = msg + '\n\n' + err
+    lbl = ttk.Label( pop, text = msg )
+    lbl.pack( padx = length, pady = msg.count( '\n' ) )
+    btn = ttk.Button( pop, text = 'Okay', 
+                      command = pop.destroy )
+    btn.pack()
+    pop.mainloop()
+
+def ask_for_cols( fb, cols ) :
+    labels = ', '.join( cols )
+    print( '\nCurrently selecting columns {}.'.format( labels ) )
+    user = str( input( 'Do the column labels above exist ' +\
+                       'in the input file? (Y/N) ' ) )
+    if user.lower() == 'y' :
+        try : r = fb[ cols ]
+        except :
+            print( '\nOne or more of the column labels do not exist.' )
+            print( 'Please, try again.' )
+            return ask_for_cols( fb, cols )
+        if 'resolution' not in cols[ -1 ].lower() :
+            print( '\nThe resolution column must be at the of the list.' )
+            print( 'Please, try again.' )
+            return ask_for_cols( fb, cols )
+        return r, cols
+    if user.lower() == 'n' :
+        cols = str( input( '\nPlease type the appropriate column labels ' +\
+                           'exactly as they are in the input file and ' +\
+                           'separate each by a comma. The resolution ' +\
+                           'column must be at the of the list:\n ' ) )
+        cols = cols.split( ',' )
+        for i in range( len( cols ) ) :
+            cols[ i ] = cols[ i ].strip()
+        try : fb[ cols ]
+        except :
+            print( '\nOne or more column labels you have entered do not exist.' )
+            print( 'Please, try again.' )
+            return ask_for_cols( fb, cols )
+        return ask_for_cols( fb, cols )
+    print( '\nYour response must be either "Y" for yes or "N" for no.' )
+    print( 'Please, try again.' )
+    return ask_for_cols( fb, cols )
+
+def ask_for_input() :
+    in_file = str( input( '\nPlease enter the input file name: ' ) )
+    if '.xlsx' not in in_file :
+        print( '\nThe input file type must be ".xlsx"' )
+        print( 'Please, make the appropriate corrections and try again.' )
+        return ask_for_input()
+    try : fb = pd.read_excel( in_file, dtype = str )
+    except :
+        print( '\nThe file name you have entered does not exist.' )
+        print( 'Please, try again.' )
+        return ask_for_input()
+    return fb
+
+def are_you_ready( fb ):
+    print( '\nReady to process {} records.'.format( len( fb ) ) )
+    user = str( input( 'Is this number correct? (Y/N) ' ) )
+    if user.lower() == 'y' : return
+    if user.lower() == 'n' : exit()
+    print( '\nYour response must be either "Y" for yes or "N" for no.' )
+    print( 'Please, try again.' )
+    return are_you_ready( fb )
+
+# let's get started
+fb = ask_for_input()
+out_file = 'gso_processor_output.xlsx'
+
+
+cols = [ 'Account Name',
+           'Issue Type',      
+         'Email Domain',
+         'Rate Program',
+         'Resolution (For DGR Use ONLY)' ]
+# Ask if these are the appropriate columns
+fb, cols = ask_for_cols( fb, cols )
+# Filter data by the resolution column
+idx = fb[ cols[ -1 ] ].astype( str ).str.lower().str.contains( 'pending' )
+idx = idx | fb[ cols[ -1 ] ].isna()
+fb = fb[ idx ]
+
+# Drop the resolution column
+fb = fb.drop( columns = cols[ -1 ] )
+keys = [ 'Associated Account',  'Assoc. Acc. in AW', 'Parent Account', 
+          'Parent Acc. in AW',         'Found Link',      'Hierarchy', 
+              'Archived Link', 'Archived Hierarchy',     'Resolution' ]
+# Add columns to store the processor output
+for key in keys :
+    fb[ key ] = np.nan
+# Generate a cache to enable ending the program at
+# any time and picking it up where it left off.
+try : df = pd.read_csv( 'cache.txt' )
+except : 
+    df = pd.DataFrame( columns = fb.columns.tolist() )
+    df.to_csv( 'cache.txt', index = False )
+# Exclude records that were found in the cache
+fb = fb.iloc[ len( df ) : ]
+
+# Buckle up
+are_you_ready( fb )
+
+# Upload external files
+try : 
+    main = Main()
+except :
+    print( 'You may be missing one of the following files:\n' +\
+           'UAI_All_Reltio_Rates_Master.xlsx, ' +\
+           'UAI_MASTER_Email_Domain_Alignment_TEMP.xlsx, ' +\
+           'UAI_MASTER_Rate_to_Account_Alignment.xlsx or ' +\
+           'properties.txt' )
+    print( 'Please make sure these files are located in their' +\
+           'respective directories. Additionally, make sure '  +\
+           'the properties.txt file contains the appropriate ' +\
+           'credentials and you are connected to the '         +\
+           'appropriate Marriott internet network.' )
+    countdown( 'Exiting program in {}.', 30 )
+    print( 'Goodbye.' )
+    exit()
+
+# No stopping now!
+# Processing has begun.
+total = Runtime()
+track = Runtime()
+track.total = len( fb )
+track.prog = 'Time Remaining: --:--:--:--. '  +\
+             'Progress:  0.00% ------------'  +\
+             '-----------------------------'  +\
+             '-----------------------------'  +\
+             '------------------------------'
+for idx in fb.index.tolist() :
+    issueid = fb.loc[ idx,  'Issue Type'  ]
+    if  'Rate' in issueid : colm = 'Rate Program'
+    if 'Email' in issueid : colm = 'Email Domain'
+    main.process.track.prog = track.prog
+    try : 
+        main.processor( account = fb.loc[ idx, 'Account Name' ],
+                        analyte = fb.loc[ idx, colm ],
+                        issueid = issueid, 
+                        sleep   = 15 )
+    except Exception as e :
+        msg = str( e ).replace( '\n', ' ' ).capitalize()
+        popup( msg,
+               title = 'Error Encountered!',
+               con_err = True ) #Did the internet cut off?
+        exit()
+    for key, val in main.process.info.to_dict()[ 'Info' ].items() :
+        fb.loc[ idx, key ] = val
+    fb.loc[ [ idx ] ].to_csv(    'cache.txt',
+                              index  = False,
+                              header = False,
+                              mode   =   'a' )
+    track.log = main.process.track.log
+    track.progbar()
+out = pd.read_csv( 'cache.txt', dtype = str )
+out.to_excel( out_file, 
+              sheet_name = out_file.replace( '.xlsx', '' ), 
+              index = False )
+os.remove( 'cache.txt' )
+total.logtime() # log total runtime
+os.remove(  'log.txt'  )
+popup( total.log, 'Process Complete!' )
+    </textarea>
   </body>
 </html>
