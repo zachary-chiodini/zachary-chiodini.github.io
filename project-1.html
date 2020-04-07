@@ -39,7 +39,7 @@
       <span style="margin-left:2em">lbl = ttk.Label( pop, text = msg )</span><br/>
       <span style="margin-left:2em">lbl.pack( padx = length, pady = msg.count( <span style="color:#02FF02">'\n'</span> ) )</span><br/>
       <span style="margin-left:2em">btn = ttk.Button( pop, text = <span style="color:#02FF02">'Okay'</span>,</span><br/> 
-      <span style="margin-left:12.5em">command = pop.destroy )</span><br/>
+      <span style="margin-left:12em"> command = pop.destroy )</span><br/>
       <span style="margin-left:2em">btn.pack()</span><br/>
       <span style="margin-left:2em">pop.mainloop()</span><br/>
       <br/>
@@ -47,14 +47,14 @@
       <span style="color:#FF8000">try</span> :<br/>
       <span style="margin-left:2em"><span style="color:#FF8000">import</span> numpy <span style="color:#FF8000">as</span> np, os, pandas <span style="color:#FF8000">as</span> pd, sys, time</span><br/>
       <span style="margin-left:2em"><span style="color:#FF8000">from</span> trackingtools <span style="color:#FF8000">import</span> Main, Runtime</span><br/>
-except :
-    msg = 'Please install the libraries '   +\
-          '(1) numpy, (2) pandas and make ' +\
-          'sure "trackingtools.py" is in '  +\
-          'your current directory.'
-    popup( msg, 'Missing Packages!' )
-    exit()
-
+      <span style="color:#FF8000">except</span> :<br/>
+      <span style="margin-left:2em">msg = <span style="color:#02FF02">'Please install the libraries '</span>   +\</span><br/>
+      <span style="margin-left:2em"><span style="color:#02FF02">'(1) numpy, (2) pandas and make '</span> +\</span><br/>
+      <span style="margin-left:2em"><span style="color:#02FF02">'sure "trackingtools.py" is in '</span>  +\</span><br/>
+      <span style="margin-left:2em; color:#02FF02">'your current directory.'</span><br/>
+      <span style="margin-left:2em">popup( msg, <span style="color:#02FF02">'Missing Packages!'</span> )</span><br/>
+      <span style="margin-left:2em"><span style="color:#FF00FF">exit</span>()</span><br/>
+      <br/>
 # Check python version
 ver = sys.version_info[ 0 ]       \
     + sys.version_info[ 1 ] / 10  \
