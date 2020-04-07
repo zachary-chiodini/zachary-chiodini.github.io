@@ -76,17 +76,18 @@
       <br/>
       <span style="color:#FF8000">def</span> <span style="color:#5E5EFF">ask_for_cols</span>( fb, cols ) :<br/>
       <span style="margin-left:2em">lbls = <span style="color:#02FF02">', '</span>.join( cols )</span><br/>
-      <span style="margin-left:2em"> <span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'\nSelecting columns {}.'</span>.format( lbls ) )</span></br>
-      <span style="margin-left:2em">user = <span style="color:#FF00FF">str</span>( <span style="color:#FF00FF">input</span>( <span style="color:#02FF02">'Do the column labels above '</span> +\</span></br>
+      <span style="margin-left:2em"> <span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'\nSelecting columns {}.'</span>.format( lbls ) )</span><br/>
+      <span style="margin-left:2em">user = <span style="color:#FF00FF">str</span>( <span style="color:#FF00FF">input</span>( <span style="color:#02FF02">'Do the column labels above '</span> +\</span><br/>
       <span style="margin-left:13.5em"><span style="color:#02FF02">'exist in the input file? (Y/N) '</span> ) )</span><br/>
-    if user.lower() == 'y' :
-        try : r = fb[ cols ]
-        except :
-            print( '\nOne or more of the column labels do not exist.' )
-            print( 'Please, try again.' )
-            return ask_for_cols( fb, cols )
-        if 'resolution' not in cols[ -1 ].lower() :
-            print( '\nThe resolution column must be at the of the list.' )
+      <span style="margin-left:2em"><span style="color:#FF8000">if</span> user.lower() == <span style="color:#02FF02">'y'</span> :</span><br/>
+      <span style="margin-left:2em"><span style="color:#FF8000">try</span> : r = fb[ cols ]</span><br/>
+      <span style="margin-left:2em"><span style="color:#FF8000">except</span> :</span><br/>
+      <span style="margin-left:4em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'\nOne or more of the column labels do not exist.'</span> )</span><br/>
+      <span style="margin-left:4em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'Please, try again.'</span> )</span><br/>
+      <span style="margin-left:4em"><span style="color:#FF8000">return</span> ask_for_cols( fb, cols )</span><br/>
+      <span style="margin-left:2em"><span style="color:#FF8000">if</span> <span style="color:#02FF02">'resolution'</span> <span style="color:#FF8000">not in</span> cols[ -1 ].lower() :</span><br/>
+      <span style="margin-left:4em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'\nThe resolution column label must '</span> +\</span><br/>
+      <span style="margin-left:12em"><span style="color:#02FF02">'be at the end of the list.'</span> )</span><br/>
             print( 'Please, try again.' )
             return ask_for_cols( fb, cols )
         return r, cols
