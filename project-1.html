@@ -101,13 +101,13 @@
       <span style="margin-left:6em">)</span><br/>
       <span style="margin-left:4em">cols = cols.split( <span style="color:#02FF02">','</span> )</span><br/>
       <span style="margin-left:4em"><span style="color:#FF8000">for</span> i in <span style="color:#FF00FF">range</span>( <span style="color:#FF00FF">len</span>( cols ) ) :</span><br/>
-      <span style="margin-left:6em">cols[ i ] = cols[ i ].strip()</span>
+      <span style="margin-left:6em">cols[ i ] = cols[ i ].strip()</span><br/>
       <span style="margin-left:4em"><span style="color:#FF8000">try</span> : fb[ cols ]</span><br/>
       <span style="margin-left:4em"><span style="color:#FF8000">except</span> :</span><br/>
       <span style="margin-left:6em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'\nOne or more columns do not exist.'</span> )</span><br/>
       <span style="margin-left:6em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'Please, try again.'</span> )</span><br/>
       <span style="margin-left:4em"><span style="color:#FF8000">return</span> ask_for_cols( fb, cols )</span><br/>
-      <span style="margin-left:2em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'\nYour response must be "Y" for yes or "N" for no.'</span> )</span><br/>
+      <span style="margin-left:2em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'\nResponse must be "Y" for yes or "N" for no.'</span> )</span><br/>
       <span style="margin-left:2em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'Please, try again.'</span> )</span><br/>
       <span style="margin-left:2em"><span style="color:#FF8000">return</span> ask_for_cols( fb, cols )</span><br/>
       <br/>
