@@ -62,17 +62,16 @@
       <br/>
       <span style="color:#FF8000">if not</span> ( 3.60 <= ver <span style="color:#FF8000">and</span> ver <= 3.75 ) :<br/>
       <span style="margin-left:2em">ver = <span style="color:#02FF02">'.'</span>.join( <span style="color:#FF00FF">map</span>( <span style="color:#FF00FF">str</span>, sys.version_info[ 0 : 3 ] ) )</span><br/>
-    
-    
-    msg = 'You are using Python version {}. '.format( ver )        +\
-          'This program supports Python versions 3.6.0 to 3.7.5. ' +\
-          'Please, uninstall your current version of Python, '     +\
-          'visit "www.python.org/downloads/ and download Python '  +\
-          '3.7.5. Make sure to check "Install launcher for all '   +\
-          'users" and "add Python to PATH" on the setup window '   +\
-          'before installing.'
-    popup( msg, 'Python Version Incompatible!' )
-    exit()
+      <span style="margin-left:2em"> msg = <span style="color:#02FF02">'You are using Python version {}. '</span>.format( ver ) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +\</span><br/>
+      <span style="margin-left:2em"><span style="color:#02FF02">'This program supports Python versions 3.6.0 to 3.7.5. '</span> +\</span><br/>
+      <span style="margin-left:2em"><span style="color:#02FF02">'Please, uninstall your current version of Python, '</span> &nbsp;&nbsp;&nbsp; +\</span><br/>
+      <span style="margin-left:2em"><span style="color:#02FF02">''visit "www.python.org/downloads/ and download Python '</span> &nbsp;+\</span><br/>
+      <span style="margin-left:2em"><span style="color:#02FF02">''3.7.5. Make sure to check "Install launcher for all '</span> &nbsp;&nbsp;+\</span><br/>
+      <span style="margin-left:2em"><span style="color:#02FF02">''users" and "add Python to PATH" on the setup window '</span> &nbsp; +\</span><br/>
+      <span style="margin-left:2em; color:#02FF02">'before installing.'</span><br/>
+      <span style="margin-left:2em">popup( msg, <span style="color:#02FF02">'Python Version Incompatible!'</span> )</span><br/>
+      <span style="margin-left:2em"><span style="color:#FF00FF">exit</span>()</span><br/>
+      <br/>
 
 def ask_for_cols( fb, cols ) :
     labels = ', '.join( cols )
