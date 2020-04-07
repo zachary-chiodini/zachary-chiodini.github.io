@@ -8,8 +8,226 @@
   <body style="background-color:#002240; color:white;">
     <h1 style="color:#02FF02">Program Launcher</h1>
     <div style="width:150px; height:150px; overflow:auto;" face="courier">
-      This 'div' element contains more content than the previous one. 
-      Because there's too much text to fit into the box, the box grows scrollbars. 
+####################
+# Program Launcher #
+####################
+
+import tkinter as tk
+from tkinter import ttk
+
+def popup( msg, title, length = 100 ) :
+    ''' Generates a popup with title and message '''
+    def organize( msg ) :
+        '''
+        Creates next line 
+        characters where necessary 
+        '''
+        lst = []
+        while True :
+            if len( msg ) <= length :
+                lst.append( msg )
+                break
+            slc = msg[ 0 : length ]
+            idx = slc[ ::-1 ].index( ' ' )
+            idx = length - idx
+            lst.append( msg[ 0 : idx ] )
+            msg = msg[ idx : ]
+        return '\n'.join( lst )
+    pop = tk.Tk()
+    pop.wm_title( title )
+    msg = organize( msg )
+    lbl = ttk.Label( pop, text = msg )
+    lbl.pack( padx = length, pady = msg.count( '\n' ) )
+    btn = ttk.Button( pop, text = 'Okay', 
+                      command = pop.destroy )
+    btn.pack()
+    pop.mainloop()
+
+# Check packages
+try :
+    import numpy as np, os, pandas as pd, sys, time
+    from trackingtools import Main, Runtime
+except :
+    msg = 'Please install the libraries '   +\
+          '(1) numpy, (2) pandas and make ' +\
+          'sure "trackingtools.py" is in '  +\
+          'your current directory.'
+    popup( msg, 'Missing Packages!' )
+    exit()
+
+# Check python version
+ver = sys.version_info[ 0 ]       \
+    + sys.version_info[ 1 ] / 10  \
+    + sys.version_info[ 2 ] / 100 \
+        
+if not ( 3.60 <= ver and ver <= 3.75 ) :
+    ver = '.'.join( map( str, sys.version_info[ 0 : 3 ] ) )
+    msg = 'You are using Python version {}. '.format( ver )        +\
+          'This program supports Python versions 3.6.0 to 3.7.5. ' +\
+          'Please, uninstall your current version of Python, '     +\
+          'visit "www.python.org/downloads/ and download Python '  +\
+          '3.7.5. Make sure to check "Install launcher for all '   +\
+          'users" and "add Python to PATH" on the setup window '   +\
+          'before installing.'
+    popup( msg, 'Python Version Incompatible!' )
+    exit()
+
+def ask_for_cols( fb, cols ) :
+    labels = ', '.join( cols )
+    print( '\nCurrently selecting columns {}.'.format( labels ) )
+    user = str( input( 'Do the column labels above exist ' +\
+                       'in the input file? (Y/N) ' ) )
+    if user.lower() == 'y' :
+        try : r = fb[ cols ]
+        except :
+            print( '\nOne or more of the column labels do not exist.' )
+            print( 'Please, try again.' )
+            return ask_for_cols( fb, cols )
+        if 'resolution' not in cols[ -1 ].lower() :
+            print( '\nThe resolution column must be at the of the list.' )
+            print( 'Please, try again.' )
+            return ask_for_cols( fb, cols )
+        return r, cols
+    if user.lower() == 'n' :
+        cols = str(
+            input( '\nPlease type the appropriate column labels ' +\
+                   'exactly as they are in the input file and '   +\
+                   'separate each by a comma. The resolution '    +\
+                   'column must be at the of the list:\n ' )
+            )
+        cols = cols.split( ',' )
+        for i in range( len( cols ) ) :
+            cols[ i ] = cols[ i ].strip()
+        try : fb[ cols ]
+        except :
+            print( '\nOne or more columns you have entered do not exist.' )
+            print( 'Please, try again.' )
+            return ask_for_cols( fb, cols )
+        return ask_for_cols( fb, cols )
+    print( '\nYour response must be either "Y" for yes or "N" for no.' )
+    print( 'Please, try again.' )
+    return ask_for_cols( fb, cols )
+
+def ask_for_input() :
+    in_file = str( input( '\nPlease enter the input file name: ' ) )
+    if '.xlsx' not in in_file :
+        print( '\nThe input file type must be ".xlsx"' )
+        print( 'Please, make the appropriate corrections and try again.' )
+        return ask_for_input()
+    try : fb = pd.read_excel( in_file, dtype = str )
+    except :
+        print( '\nThe file name you have entered does not exist.' )
+        print( 'Please, try again.' )
+        return ask_for_input()
+    return fb
+
+def are_you_ready( fb ):
+    print( '\nReady to process {} records.'.format( len( fb ) ) )
+    user = str( input( 'Is this number correct? (Y/N) ' ) )
+    if user.lower() == 'y' : return
+    if user.lower() == 'n' : exit()
+    print( '\nYour response must be either "Y" for yes or "N" for no.' )
+    print( 'Please, try again.' )
+    return are_you_ready( fb )
+
+# let's get started
+fb = ask_for_input()
+out_file = 'gso_processor_output.xlsx'
+
+cols = [ 'Account Name',
+           'Issue Type',      
+         'Email Domain',
+         'Rate Program',
+         'Resolution (For DGR Use ONLY)' ]
+# Ask if these are the appropriate columns
+fb, cols = ask_for_cols( fb, cols )
+
+# Filter data by the resolution column
+idx = fb[ cols[ -1 ] ].astype( str ).str.lower().str.contains( 'pending' )
+idx = idx | fb[ cols[ -1 ] ].isna()
+fb = fb[ idx ]
+
+# Drop the resolution column
+fb = fb.drop( columns = cols[ -1 ] )
+keys = [ 'Associated Account',  'Assoc. Acc. in AW', 'Parent Account', 
+          'Parent Acc. in AW',         'Found Link',      'Hierarchy', 
+              'Archived Link', 'Archived Hierarchy',     'Resolution' ]
+
+# Add columns to store the processor output
+for key in keys :
+    fb[ key ] = np.nan
+    
+# Generate cache
+try : df = pd.read_csv( 'cache.txt' )
+except : 
+    df = pd.DataFrame( columns = fb.columns.tolist() )
+    df.to_csv( 'cache.txt', index = False )
+    
+# Exclude records found in cache
+fb = fb.iloc[ len( df ) : ]
+
+# Buckle up
+are_you_ready( fb )
+
+# Upload external files
+try : 
+    main = Main()
+except :
+    msg = 'You may be missing one of the following files '    +\
+          '(1) UAI_All_Reltio_Rates_Master.xlsx, '            +\
+          '(2) UAI_MASTER_Email_Domain_Alignment_TEMP.xlsx, ' +\
+          '(3) UAI_MASTER_Rate_to_Account_Alignment.xlsx or ' +\
+          '(4) properties.txt. Please make sure these files ' +\
+          'are located in their respective directories. '     +\
+          'Additionally, make sure the properties.txt file '  +\
+          'contains the appropriate credentials and you are ' +\
+          'connected to the appropriate Marriott internet network.'
+    popup( msg, 'Main Processor Encountered an Error!' )
+    exit()
+
+# Processing starts now
+total = Runtime()
+track = Runtime()
+track.total = len( fb )
+track.prog = 'Time Remaining: --:--:--:--. '  +\
+             'Progress:  0.00% ------------'  +\
+             '-----------------------------'  +\
+             '-----------------------------'  +\
+             '------------------------------'
+for idx in fb.index.tolist() :
+    issueid = fb.loc[ idx,  'Issue Type'  ]
+    if  'Rate' in issueid : colm = 'Rate Program'
+    if 'Email' in issueid : colm = 'Email Domain'
+    main.process.track.prog = track.prog
+    try : 
+        main.processor( account = fb.loc[ idx, 'Account Name' ],
+                        analyte = fb.loc[ idx, colm ],
+                        issueid = issueid, 
+                        sleep   = 15 )
+    except Exception as e :
+        msg = str( e ).replace( '\n', ' ' ).capitalize()
+        msg += ' This may be a connection error, please check' +\
+               ' the connection and run the program again.'    +\
+               ' Once a good connection is established, the'   +\
+               ' process will resume where it has left off.'
+        popup( msg, 'Error Encountered!' )
+        exit()
+    for key, val in main.process.info.to_dict()[ 'Info' ].items() :
+        fb.loc[ idx, key ] = val
+    fb.loc[ [ idx ] ].to_csv(    'cache.txt',
+                              index  = False,
+                              header = False,
+                              mode   =   'a' )
+    track.log = main.process.track.log
+    track.progbar()
+out = pd.read_csv( 'cache.txt', dtype = str )
+out.to_excel( out_file, 
+              sheet_name = out_file.replace( '.xlsx', '' ), 
+              index = False )
+os.remove( 'cache.txt' )
+total.logtime() # log total runtime
+os.remove(  'log.txt'  )
+popup( total.log, 'Process Complete!' ) 
     </div>
     <h1 style="color:#02FF02">Main Processor</h1>
   </body>
