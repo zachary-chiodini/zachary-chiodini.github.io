@@ -161,23 +161,23 @@
       <span style="color:#FF8000">for</span> key <span style="color:#FF8000">in</span> keys :<br/>
       <span style="margin-left:2em">fb[ key ] = np.nan</span><br/>
       <br/>
-# Generate cache
-try : df = pd.read_csv( 'cache.txt' )
-except : 
-    df = pd.DataFrame( columns = fb.columns.tolist() )
-    df.to_csv( 'cache.txt', index = False )
-    
-# Exclude records found in cache
-fb = fb.iloc[ len( df ) : ]
-
-# Buckle up
-are_you_ready( fb )
-
-# Upload external files
-try : 
-    main = Main()
-except :
-    msg = 'You may be missing one of the following files '    +\
+      <span style="color:#DD0000"># Generate cache</span><br/>
+      <span style="color:#FF8000">try</span> : df = pd.read_csv( <span style="color:#02FF02">'cache.txt'</span> )<br/>
+      <span style="color:#FF8000">except</span> :<br/>
+      <span style="margin-left:2em">df = pd.DataFrame( columns = fb.columns.tolist() )</span><br/>
+      <span style="margin-left:2em">df.to_csv( <span style="color:#02FF02">'cache.txt'</span>, index = <span style="color:#FF8000">False</span> )</span><br/>
+      <br/>
+      <span style="color:#DD0000"># Exclude records found in cache</span><br/>
+      fb = fb.iloc[ <span style="color:#FF00FF">len</span>( df ) : ]<br/>
+      <br/>
+      <span style="color:#DD0000"># Buckle up</span><br/>
+      are_you_ready( fb )<br/>
+      <br/>
+      <span style="color:#DD0000"># Upload external files</span><br/>
+      <span style="color:#FF8000">try</span> :<br/>
+      <span style="margin-left:2em">main = Main()</span><br/>
+      <span style="color:#FF8000">except</span> :<br/>
+      <span style="margin-left:2em">msg = <span style="color:#02FF02">'You may be missing one of the following files '</span> +\</span><br/>
           '(1) UAI_All_Reltio_Rates_Master.xlsx, '            +\
           '(2) UAI_MASTER_Email_Domain_Alignment_TEMP.xlsx, ' +\
           '(3) UAI_MASTER_Rate_to_Account_Alignment.xlsx or ' +\
