@@ -195,18 +195,18 @@
       track = Runtime()<br/>
       track.total = <span style="color:#FF00FF">len</span>( fb )<br/>
       track.prog = <span style="color:#02FF02">'Time Remaining: --:--:--:--. '</span> +\<br/>
-      <span style="margin-left:7.8em">'Progress:  0.00% ------------' +\</span><br/>
-             '-----------------------------' +\
-             '-----------------------------' +\
-             '------------------------------'
-for idx in fb.index.tolist() :
-    issueid = fb.loc[ idx,  'Issue Type'  ]
-    if  'Rate' in issueid : colm = 'Rate Program'
-    if 'Email' in issueid : colm = 'Email Domain'
-    main.process.track.prog = track.prog
-    try : 
-        main.processor( account = fb.loc[ idx, 'Account Name' ],
-                        analyte = fb.loc[ idx, colm ],
+      <span style="margin-left:7.8em"><span style="color:#02FF02">'Progress:  0.00% ------------'</span> +\</span><br/>
+      <span style="margin-left:7.8em"><span style="color:#02FF02">'-----------------------------'</span> +\</span><br/>
+      <span style="margin-left:7.8em"><span style="color:#02FF02">'-----------------------------'</span> +\</span><br/>
+      <span style="margin-left:7.8em"><span style="color:#02FF02">'------------------------------'</span></span><br/>
+      <span style="color:#FF8000">for</span> idx <span style="color:#FF8000">in</span> fb.index.tolist() :<br/>
+      <span style="margin-left:2em">issueid = fb.loc[ idx,  <span style="color:#02FF02">'Issue Type'</span> ]</span><br/>
+      <span style="margin-left:2em"><span style="color:#FF8000">if</span> &nbsp;<span style="color:#02FF02">'Rate'</span> in issueid : colm = <span style="color:#02FF02">'Rate Program'</span></span><br/>
+      <span style="margin-left:2em"><span style="color:#FF8000">if</span> <span style="color:#02FF02">'Email'</span> in issueid : colm = <span style="color:#02FF02">'Email Domain'</span></span><br/>
+      <span style="margin-left:2em">main.process.track.prog = track.prog</span><br/>
+      <span style="margin-left:2em"><span style="color:#FF8000">try</span> :</span><br/>
+      <span style="margin-left:4em">main.processor( account = fb.loc[ idx, <span style="color:#02FF02">'Account Name'</span> ],</span><br/>
+      <span style="margin-left:12em">analyte = fb.loc[ idx, colm ],</span><br/>
                         issueid = issueid, 
                         sleep   = 15 )
     except Exception as e :
