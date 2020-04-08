@@ -8,269 +8,37 @@
   <body style="background-color:#002240; color:white;">
     <h1 style="color:#02FF02">Main Processor</h1>
     <div style="width:600px; height:300px; overflow:auto; font-family:courier">
-      <span style="color:#DD0000">##################</span><br/>
-      <span style="color:#DD0000"># Main Processor #</span><br/>
-      <span style="color:#DD0000">##################</span><br/>
-      <br/>
-      <span style="color:#FF8000">import</span> tkinter <span style="color:#FF8000">as</span> tk<br/> 
-      <span style="color:#FF8000">from</span> tkinter <span style="color:#FF8000">import</span> ttk<br/> 
-      <br/>
-      <span style="color:#FF8000">def</span> <span style="color:#5E5EFF">popup</span>( msg, title, length = 100 ) :<br/>
-      <span style="color:#02FF02; margin-left:2em">''' Generates a popup with title and message '''</span><br/>
-      <span style="color:#FF8000; margin-left:2em">def</span> <span style="color:#5E5EFF">organize</span>( msg ) :<br/>
-      <span style="color:#02FF02; margin-left:4em">'''</span><br/>
-      <span style="color:#02FF02; margin-left:4em">Creates next line</span><br/>
-      <span style="color:#02FF02; margin-left:4em">characters where necessary</span><br/>
-      <span style="color:#02FF02; margin-left:4em">'''</span><br/>
-      <span style="margin-left:4em">lst = []</span><br/>
-      <span style="color:#FF8000; margin-left:4em">while True</span> :<br/>
-      <span style="color:#FF8000; margin-left:6em">if</span> <span style="color:#FF00FF">len</span>( msg ) <= length :<br/>
-      <span style="margin-left:8em">lst.append( msg )</span><br/>
-      <span style="color:#FF8000; margin-left:8em">break</span><br/>
-      <span style="margin-left:6em">slc = msg[ 0 : length ]</span><br/>
-      <span style="margin-left:6em">idx = slc[ ::-1 ].index( <span style="color:#02FF02">' '</span> )</span><br/>
-      <span style="margin-left:6em">idx = length - idx</span><br/>
-      <span style="margin-left:6em">lst.append( msg[ 0 : idx ] )</span><br/>
-      <span style="margin-left:6em">msg = msg[ idx : ]</span><br/>
-      <span style="margin-left:4em"><span style="color:#FF8000">return</span> <span style="color:#02FF02">'\n'</span>.join( lst )</span><br/>
-      <span style="margin-left:2em">pop = tk.Tk()</span><br/>
-      <span style="margin-left:2em">pop.wm_title( title )</span><br/>
-      <span style="margin-left:2em">msg = organize( msg )</span><br/>
-      <span style="margin-left:2em">lbl = ttk.Label( pop, text = msg )</span><br/>
-      <span style="margin-left:2em">lbl.pack( padx = length, pady = msg.count( <span style="color:#02FF02">'\n'</span> ) )</span><br/>
-      <span style="margin-left:2em">btn = ttk.Button( pop, text = <span style="color:#02FF02">'Okay'</span>,</span><br/> 
-      <span style="margin-left:12.7em"> command = pop.destroy )</span><br/>
-      <span style="margin-left:2em">btn.pack()</span><br/>
-      <span style="margin-left:2em">pop.mainloop()</span><br/>
-      <br/>
+      <!-- HTML generated using hilite.me --><div style="background: #000000; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #cdcd00">class</span> <span style="color: #00cdcd">Config</span><span style="color: #cccccc">():</span>
+    <span style="color: #cdcd00">def</span> <span style="color: #cccccc">__init__(</span> <span style="color: #cd00cd">self</span> <span style="color: #cccccc">)</span> <span style="color: #cccccc">:</span>
+        <span style="color: #cd00cd">self</span><span style="color: #3399cc">.</span><span style="color: #cccccc">config</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">{}</span>
+        <span style="color: #cd00cd">self</span><span style="color: #3399cc">.</span><span style="color: #cccccc">file</span>   <span style="color: #3399cc">=</span> <span style="color: #cd0000">&#39;properties.txt&#39;</span>
+        <span style="color: #cdcd00">global</span> <span style="color: #cccccc">path</span>
+        <span style="color: #cd00cd">self</span><span style="color: #3399cc">.</span><span style="color: #cccccc">path</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">path</span>
+        <span style="color: #cdcd00">with</span> <span style="color: #cd00cd">open</span><span style="color: #cccccc">(</span> <span style="color: #cd00cd">self</span><span style="color: #3399cc">.</span><span style="color: #cccccc">path</span> <span style="color: #3399cc">+</span> <span style="color: #cd00cd">self</span><span style="color: #3399cc">.</span><span style="color: #cccccc">file</span> <span style="color: #cccccc">)</span> <span style="color: #cdcd00">as</span> <span style="color: #cccccc">file:</span>
+            <span style="color: #cdcd00">for</span> <span style="color: #cccccc">line</span> <span style="color: #cdcd00">in</span> <span style="color: #cccccc">file:</span>
+                <span style="color: #cccccc">tup</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">line</span><span style="color: #3399cc">.</span><span style="color: #cccccc">split(</span> <span style="color: #cd0000">&#39;=&#39;</span> <span style="color: #cccccc">)</span>
+                <span style="color: #cccccc">key</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">tup[</span>  <span style="color: #cd00cd">0</span> <span style="color: #cccccc">]</span><span style="color: #3399cc">.</span><span style="color: #cccccc">strip()</span>
+                <span style="color: #cccccc">val</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">tup[</span> <span style="color: #3399cc">-</span><span style="color: #cd00cd">1</span> <span style="color: #cccccc">]</span><span style="color: #3399cc">.</span><span style="color: #cccccc">strip()</span>
+                <span style="color: #cd00cd">self</span><span style="color: #3399cc">.</span><span style="color: #cccccc">config[</span> <span style="color: #cccccc">key</span> <span style="color: #cccccc">]</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">val</span>
+    <span style="color: #cdcd00">def</span> <span style="color: #cccccc">getdict(</span> <span style="color: #cd00cd">self</span> <span style="color: #cccccc">)</span> <span style="color: #cccccc">:</span>
+        <span style="color: #cdcd00">return</span> <span style="color: #cd00cd">self</span><span style="color: #3399cc">.</span><span style="color: #cccccc">config</span>
+</pre></td></tr></table></div>
     </div>
     <h1 style="color:#02FF02">Program Launcher</h1>
     <div style="width:600px; height:300px; overflow:auto; font-family:courier">
-      <span style="color:#DD0000">####################</span><br/>
-      <span style="color:#DD0000"># Program Launcher #</span><br/>
-      <span style="color:#DD0000">####################</span><br/>
-      <br/>
-      <span style="color:#FF8000">import</span> tkinter <span style="color:#FF8000">as</span> tk<br/> 
-      <span style="color:#FF8000">from</span> tkinter <span style="color:#FF8000">import</span> ttk<br/> 
-      <br/>
-      <span style="color:#FF8000">def</span> <span style="color:#5E5EFF">popup</span>( msg, title, length = 100 ) :<br/>
-      <span style="color:#02FF02; margin-left:2em">''' Generates a popup with title and message '''</span><br/>
-      <span style="color:#FF8000; margin-left:2em">def</span> <span style="color:#5E5EFF">organize</span>( msg ) :<br/>
-      <span style="color:#02FF02; margin-left:4em">'''</span><br/>
-      <span style="color:#02FF02; margin-left:4em">Creates next line</span><br/>
-      <span style="color:#02FF02; margin-left:4em">characters where necessary</span><br/>
-      <span style="color:#02FF02; margin-left:4em">'''</span><br/>
-      <span style="margin-left:4em">lst = []</span><br/>
-      <span style="color:#FF8000; margin-left:4em">while True</span> :<br/>
-      <span style="color:#FF8000; margin-left:6em">if</span> <span style="color:#FF00FF">len</span>( msg ) <= length :<br/>
-      <span style="margin-left:8em">lst.append( msg )</span><br/>
-      <span style="color:#FF8000; margin-left:8em">break</span><br/>
-      <span style="margin-left:6em">slc = msg[ 0 : length ]</span><br/>
-      <span style="margin-left:6em">idx = slc[ ::-1 ].index( <span style="color:#02FF02">' '</span> )</span><br/>
-      <span style="margin-left:6em">idx = length - idx</span><br/>
-      <span style="margin-left:6em">lst.append( msg[ 0 : idx ] )</span><br/>
-      <span style="margin-left:6em">msg = msg[ idx : ]</span><br/>
-      <span style="margin-left:4em"><span style="color:#FF8000">return</span> <span style="color:#02FF02">'\n'</span>.join( lst )</span><br/>
-      <span style="margin-left:2em">pop = tk.Tk()</span><br/>
-      <span style="margin-left:2em">pop.wm_title( title )</span><br/>
-      <span style="margin-left:2em">msg = organize( msg )</span><br/>
-      <span style="margin-left:2em">lbl = ttk.Label( pop, text = msg )</span><br/>
-      <span style="margin-left:2em">lbl.pack( padx = length, pady = msg.count( <span style="color:#02FF02">'\n'</span> ) )</span><br/>
-      <span style="margin-left:2em">btn = ttk.Button( pop, text = <span style="color:#02FF02">'Okay'</span>,</span><br/> 
-      <span style="margin-left:12.7em"> command = pop.destroy )</span><br/>
-      <span style="margin-left:2em">btn.pack()</span><br/>
-      <span style="margin-left:2em">pop.mainloop()</span><br/>
-      <br/>
-      <span style="color:#DD0000"># Check packages</span><br/>
-      <span style="color:#FF8000">try</span> :<br/>
-      <span style="margin-left:2em"><span style="color:#FF8000">import</span> numpy <span style="color:#FF8000">as</span> np, os, pandas <span style="color:#FF8000">as</span> pd, sys, time</span><br/>
-      <span style="margin-left:2em"><span style="color:#FF8000">from</span> trackingtools <span style="color:#FF8000">import</span> Main, Runtime</span><br/>
-      <span style="color:#FF8000">except</span> :<br/>
-      <span style="margin-left:2em">msg = <span style="color:#02FF02">'Please install the libraries '</span> &nbsp;&nbsp;+\</span><br/>
-      <span style="margin-left:5.6em"><span style="color:#02FF02">'(1) numpy, (2) pandas and make '</span> +\</span><br/>
-      <span style="margin-left:5.6em"><span style="color:#02FF02">'sure "trackingtools.py" is in '</span> &nbsp;+\</span><br/>
-      <span style="margin-left:5.6em; color:#02FF02">'your current directory.'</span><br/>
-      <span style="margin-left:2em">popup( msg, <span style="color:#02FF02">'Missing Packages!'</span> )</span><br/>
-      <span style="margin-left:2em"><span style="color:#FF00FF">exit</span>()</span><br/>
-      <br/>
-      <span style="color:#DD0000"># Check python version</span><br/>
-      ver = sys.version_info[ 0 ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \<br/>
-      <span style="margin-left:2.4em">+ sys.version_info[ 1 ] / 10 &nbsp;\</span><br/>
-      <span style="margin-left:2.4em">+ sys.version_info[ 2 ] / 100 \</span><br/>
-      <br/>
-      <span style="color:#FF8000">if not</span> ( 3.60 <= ver <span style="color:#FF8000">and</span> ver <= 3.75 ) :<br/>
-      <span style="margin-left:2em">ver = <span style="color:#02FF02">'.'</span>.join( <span style="color:#FF00FF">map</span>( <span style="color:#FF00FF">str</span>, sys.version_info[ 0 : 3 ] ) )</span><br/>
-      <span style="margin-left:2em">msg = <span style="color:#02FF02">'You are using Python {}. '</span>.format( ver ) +\</span><br/>
-      <span style="margin-left:5.6em"><span style="color:#02FF02">'This program supports Python versions '</span> &nbsp;+\</span><br/>
-      <span style="margin-left:5.6em"><span style="color:#02FF02">'3.6.0 to 3.7.5. Please, uninstall your '</span> +\</span><br/>
-      <span style="margin-left:5.6em"><span style="color:#02FF02">'current version of Python, visit '</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +\</span><br/>
-      <span style="margin-left:5.6em"><span style="color:#02FF02">'"www.python.org/downloads/ and download '</span>+\</span><br/>
-      <span style="margin-left:5.6em"><span style="color:#02FF02">'Python 3.7.5. Make sure to check '</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +\</span><br/>
-      <span style="margin-left:5.6em"><span style="color:#02FF02">'"Install launcher for all users" and '</span> &nbsp; +\</span><br/>
-      <span style="margin-left:5.6em"><span style="color:#02FF02">'"add Python to PATH" on the setup '</span> &nbsp;&nbsp;&nbsp;&nbsp; +\</span><br/>
-      <span style="margin-left:5.6em"><span style="color:#02FF02">'window before installing.'</span></span><br/>
-      <span style="margin-left:2em">popup( msg, <span style="color:#02FF02">'Python Version Incompatible!'</span> )</span><br/>
-      <span style="margin-left:2em"><span style="color:#FF00FF">exit</span>()</span><br/>
-      <br/>
-      <span style="color:#FF8000">def</span> <span style="color:#5E5EFF">ask_for_cols</span>( fb, cols ) :<br/>
-      <span style="margin-left:2em">lbls = <span style="color:#02FF02">', '</span>.join( cols )</span><br/>
-      <span style="margin-left:2em"> <span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'\nSelecting columns {}.'</span>.format( lbls ) )</span><br/>
-      <span style="margin-left:2em">user = <span style="color:#FF00FF">str</span>( <span style="color:#FF00FF">input</span>( <span style="color:#02FF02">'Do the column labels above '</span> +\</span><br/>
-      <span style="margin-left:13.5em"><span style="color:#02FF02">'exist in the input file? (Y/N) '</span> ) )</span><br/>
-      <span style="margin-left:2em"><span style="color:#FF8000">if</span> user.lower() == <span style="color:#02FF02">'y'</span> :</span><br/>
-      <span style="margin-left:4em"><span style="color:#FF8000">try</span> : r = fb[ cols ]</span><br/>
-      <span style="margin-left:4em"><span style="color:#FF8000">except</span> :</span><br/>
-      <span style="margin-left:6em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'\nOne or more columns do not exist.'</span> )</span><br/>
-      <span style="margin-left:6em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'Please, try again.'</span> )</span><br/>
-      <span style="margin-left:6em"><span style="color:#FF8000">return</span> ask_for_cols( fb, cols )</span><br/>
-      <span style="margin-left:4em"><span style="color:#FF8000">if</span> <span style="color:#02FF02">'resolution'</span> <span style="color:#FF8000">not in</span> cols[ -1 ].lower() :</span><br/>
-      <span style="margin-left:6em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'\nThe resolution column label must '</span> +\</span><br/>
-      <span style="margin-left:10.1em"><span style="color:#02FF02">'be at the end of the list.'</span> )</span><br/>
-      <span style="margin-left:6em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'Please, try again.'</span> )</span><br/>
-      <span style="margin-left:6em"><span style="color:#FF8000">return</span> ask_for_cols( fb, cols )</span><br/>
-      <span style="margin-left:4em"><span style="color:#FF8000">return</span> r, cols</span><br/>
-      <span style="margin-left:2em"><span style="color:#FF8000">if</span> user.lower() == <span style="color:#02FF02">'n'</span> :</span><br/>
-      <span style="margin-left:4em">cols = <span style="color:#FF00FF">str</span>(</span><br/>
-      <span style="margin-left:6em"><span style="color:#FF00FF">input</span>( <span style="color:#02FF02">'\nPlease type the appropriate column '</span> +\</span><br/>
-      <span style="margin-left:10.1em"><span style="color:#02FF02">'labels exactly as they are in the '</span> &nbsp;&nbsp; +\</span><br/>
-      <span style="margin-left:10.1em"><span style="color:#02FF02">'input file and separate each by a '</span> &nbsp;&nbsp; +\</span><br/>
-      <span style="margin-left:10.1em"><span style="color:#02FF02">'comma. The resolution column must be '</span> +\</span><br/>
-      <span style="margin-left:10.1em"><span style="color:#02FF02">'at the of the list:\n '</span> )</span><br/>
-      <span style="margin-left:6em">)</span><br/>
-      <span style="margin-left:4em">cols = cols.split( <span style="color:#02FF02">','</span> )</span><br/>
-      <span style="margin-left:4em"><span style="color:#FF8000">for</span> i in <span style="color:#FF00FF">range</span>( <span style="color:#FF00FF">len</span>( cols ) ) :</span><br/>
-      <span style="margin-left:6em">cols[ i ] = cols[ i ].strip()</span><br/>
-      <span style="margin-left:4em"><span style="color:#FF8000">try</span> : fb[ cols ]</span><br/>
-      <span style="margin-left:4em"><span style="color:#FF8000">except</span> :</span><br/>
-      <span style="margin-left:6em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'\nOne or more columns do not exist.'</span> )</span><br/>
-      <span style="margin-left:6em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'Please, try again.'</span> )</span><br/>
-      <span style="margin-left:4em"><span style="color:#FF8000">return</span> ask_for_cols( fb, cols )</span><br/>
-      <span style="margin-left:2em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'\nResponse must be "Y" for yes or "N" for no.'</span> )</span><br/>
-      <span style="margin-left:2em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'Please, try again.'</span> )</span><br/>
-      <span style="margin-left:2em"><span style="color:#FF8000">return</span> ask_for_cols( fb, cols )</span><br/>
-      <br/>
-      <span style="color:#FF8000">def</span> <span style="color:#5E5EFF">ask_for_input</span>() :<br/>
-      <span style="margin-left:2em">in_file = <span style="color:#FF00FF">str</span>( <span style="color:#FF00FF">input</span>( <span style="color:#02FF02">'\nEnter the input file name: '</span> ) )</span><br/>
-      <span style="margin-left:2em"><span style="color:#FF8000">if</span> <span style="color:#02FF02">'.xlsx'</span> <span style="color:#FF8000">not in</span> in_file :</span><br/>
-      <span style="margin-left:4em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'\nThe input file type must be ".xlsx."'</span> )</span><br/>
-      <span style="margin-left:4em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'Please, try again.'</span> )</span><br/>
-      <span style="margin-left:4em"><span style="color:#FF8000">return</span> ask_for_input()</span><br/>
-      <span style="margin-left:2em"><span style="color:#FF8000">try</span> : fb = pd.read_excel( in_file, dtype = <span style="color:#FF00FF">str</span> )</span><br/>
-      <span style="margin-left:2em"><span style="color:#FF8000">except</span> :</span><br/>
-      <span style="margin-left:4em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'\nThe file you entered does not exist.'</span> )</span><br/>
-      <span style="margin-left:4em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'Please, try again.'</span> )</span><br/>
-      <span style="margin-left:4em"><span style="color:#FF8000">return</span> ask_for_input()</span><br/>
-      <span style="margin-left:2em"><span style="color:#FF8000">return</span> fb</span><br/>
-      <br/>
-      <span style="color:#FF8000">def</span> <span style="color:#5E5EFF">are_you_ready</span>( fb ):</span><br/>
-      <span style="margin-left:2em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'\nProcessing {} records.'</span>.format( <span style="color:#FF00FF">len</span>( fb ) ) )</span><br/>
-      <span style="margin-left:2em">user = <span style="color:#FF00FF">str</span>( <span style="color:#FF00FF">input</span>( <span style="color:#02FF02">'Is this number correct? (Y/N) '</span> ) )</span><br/>
-      <span style="margin-left:2em"><span style="color:#FF8000">if</span> user.lower() == <span style="color:#02FF02">'y'</span> : return</span><br/>
-      <span style="margin-left:2em"><span style="color:#FF8000">if</span> user.lower() == <span style="color:#02FF02">'n'</span> : <span style="color:#FF00FF">exit</span>()</span><br/>
-      <span style="margin-left:2em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'\nResponse must be "Y" for yes or "N" for no.'</span> )</span><br/>
-      <span style="margin-left:2em"><span style="color:#FF00FF">print</span>( <span style="color:#02FF02">'Please, try again.'</span> )</span><br/>
-      <span style="margin-left:2em"><span style="color:#FF8000">return</span> are_you_ready( fb )</span><br/>
-      <br/>
-      <span style="color:#DD0000"># let's get started</span><br/>
-      fb = ask_for_input()<br/>
-      out_file = <span style="color:#02FF02">'gso_processor_output.xlsx'</span><br/>
-      <br/>
-      cols = [ <span style="color:#02FF02">'Account Name'</span>,<br/>
-      <span style="margin-left:6.5em"><span style="color:#02FF02">'Issue Type'</span>,</span><br/>
-      <span style="margin-left:5.3em"><span style="color:#02FF02">'Email Domain'</span>,</span><br/>
-      <span style="margin-left:5.3em"><span style="color:#02FF02">'Rate Program'</span>,</span><br/>
-      <span style="margin-left:5.3em"><span style="color:#02FF02">'Resolution (For DGR Use ONLY)'</span> ]</span><br/>
-      <span style="color:#DD0000"># Ask if these are the appropriate columns</span><br/>
-      fb, cols = ask_for_cols( fb, cols )<br/>
-      <br/>
-      <span style="color:#DD0000"># Filter data by the resolution column</span><br/>
-      idx = fb[ cols[ -1 ] ].astype( <span style="color:#FF00FF">str</span> ).str.lower().str.contains( <span style="color:#02FF02">'pending'</span> )<br/>
-      idx = idx | fb[ cols[ -1 ] ].isna()<br/>
-      fb = fb[ idx ]<br/>
-      <span style="color:#DD0000"># Drop the resolution column</span><br/>
-      fb = fb.drop( columns = cols[ -1 ] )<br/>
-      <br/>
-      <span style="color:#DD0000"># Add columns to store the processor output</span><br/>
-      keys = [ <span style="color:#02FF02">'Associated Account'</span>, &nbsp;<span style="color:#02FF02">'Assoc. Acc. in AW'</span>, 
-      <span style="margin-left:7.8em"><span style="color:#02FF02">'Parent Account'</span>, &nbsp;<span style="color:#02FF02">'Parent Acc. in AW'</span>,</span><br/>
-      <span style="margin-left:10.2em"><span style="color:#02FF02">'Found Link'</span>, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#02FF02">'Hierarchy'</span>,</span><br/>
-      <span style="margin-left:8.3em"><span style="color:#02FF02">'Archived Link'</span>, <span style="color:#02FF02">'Archived Hierarchy'</span>,</span><br/>
-      <span style="margin-left:10.2em"><span style="color:#02FF02">'Resolution'</span> ]</span><br/>
-      <span style="color:#FF8000">for</span> key <span style="color:#FF8000">in</span> keys :<br/>
-      <span style="margin-left:2em">fb[ key ] = np.nan</span><br/>
-      <br/>
-      <span style="color:#DD0000"># Generate cache</span><br/>
-      <span style="color:#FF8000">try</span> : df = pd.read_csv( <span style="color:#02FF02">'cache.txt'</span> )<br/>
-      <span style="color:#FF8000">except</span> :<br/>
-      <span style="margin-left:2em">df = pd.DataFrame( columns = fb.columns.tolist() )</span><br/>
-      <span style="margin-left:2em">df.to_csv( <span style="color:#02FF02">'cache.txt'</span>, index = <span style="color:#FF8000">False</span> )</span><br/>
-      <br/>
-      <span style="color:#DD0000"># Exclude records found in cache</span><br/>
-      fb = fb.iloc[ <span style="color:#FF00FF">len</span>( df ) : ]<br/>
-      <br/>
-      <span style="color:#DD0000"># Buckle up</span><br/>
-      are_you_ready( fb )<br/>
-      <br/>
-      <span style="color:#DD0000"># Upload external files</span><br/>
-      <span style="color:#FF8000">try</span> :<br/>
-      <span style="margin-left:2em">main = Main()</span><br/>
-      <span style="color:#FF8000">except</span> :<br/>
-      <span style="margin-left:2em">msg = <span style="color:#02FF02">'You may be missing one of the following files '</span> +\</span><br/>
-      <span style="margin-left:5.6em"><span style="color:#02FF02">'(1) UAI_All_Reltio_Rates_Master.xlsx, '</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +\</span><br/>
-      <span style="margin-left:5.6em"><span style="color:#02FF02">'(2) UAI_MASTER_Email_Domain_Alignment_TEMP.xlsx'</span>+\</span><br/>
-      <span style="margin-left:5.6em"><span style="color:#02FF02">', (3) UAI_MASTER_Rate_to_Account_Alignment.xlsx'</span>+\</span><br/>
-      <span style="margin-left:5.6em"><span style="color:#02FF02">' or (4) properties.txt. Please make sure these '</span>+\</span><br/>
-      <span style="margin-left:5.6em"><span style="color:#02FF02">'files are located in their respective '</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +\</span><br/>
-      <span style="margin-left:5.6em"><span style="color:#02FF02">'directories. Additionally, make sure the '</span> &nbsp;&nbsp;&nbsp;&nbsp; +\</span><br/>
-      <span style="margin-left:5.6em"><span style="color:#02FF02">'properties.txt file contains the appropriate '</span> &nbsp;+\</span><br/>
-      <span style="margin-left:5.6em"><span style="color:#02FF02">'credentials and you are connected to the '</span> &nbsp;&nbsp;&nbsp;&nbsp; +\</span><br/>
-      <span style="margin-left:5.6em"><span style="color:#02FF02">'appropriate Marriott internet network.'</span></span><br/>
-      <span style="margin-left:2em">popup( msg, <span style="color:#02FF02">'Main Processor Encountered an Error!'</span> )</span><br/>
-      <span style="margin-left:2em"><span style="color:#FF00FF">exit</span>()</span><br/>
-      <br/>
-      <span style="color:#DD0000"># Processing starts now</span><br/>
-      total = Runtime()<br/>
-      track = Runtime()<br/>
-      track.total = <span style="color:#FF00FF">len</span>( fb )<br/>
-      track.prog = <span style="color:#02FF02">'Time Remaining: --:--:--:--. '</span> +\<br/>
-      <span style="margin-left:7.8em"><span style="color:#02FF02">'Progress:  0.00% ------------'</span> +\</span><br/>
-      <span style="margin-left:7.8em"><span style="color:#02FF02">'-----------------------------'</span> +\</span><br/>
-      <span style="margin-left:7.8em"><span style="color:#02FF02">'-----------------------------'</span> +\</span><br/>
-      <span style="margin-left:7.8em"><span style="color:#02FF02">'------------------------------'</span></span><br/>
-      <span style="color:#FF8000">for</span> idx <span style="color:#FF8000">in</span> fb.index.tolist() :<br/>
-      <span style="margin-left:2em">issueid = fb.loc[ idx,  <span style="color:#02FF02">'Issue Type'</span> ]</span><br/>
-      <span style="margin-left:2em"><span style="color:#FF8000">if</span> &nbsp;<span style="color:#02FF02">'Rate'</span> in issueid : colm = <span style="color:#02FF02">'Rate Program'</span></span><br/>
-      <span style="margin-left:2em"><span style="color:#FF8000">if</span> <span style="color:#02FF02">'Email'</span> in issueid : colm = <span style="color:#02FF02">'Email Domain'</span></span><br/>
-      <span style="margin-left:2em">main.process.track.prog = track.prog</span><br/>
-      <span style="margin-left:2em"><span style="color:#FF8000">try</span> :</span><br/>
-      <span style="margin-left:4em">main.processor( account = fb.loc[ idx, <span style="color:#02FF02">'Account Name'</span> ],</span><br/>
-      <span style="margin-left:12em">analyte = fb.loc[ idx, colm ],</span><br/>
-                        issueid = issueid, 
-                        sleep   = 15 )
-    except Exception as e :
-        msg = str( e ).replace( '\n', ' ' ).capitalize()
-        msg += ' This may be a connection error, please check' +\
-               ' the connection and run the program again.'    +\
-               ' Once a good connection is established, the'   +\
-               ' process will resume where it has left off.'
-        popup( msg, 'Error Encountered!' )
-        exit()
-    for key, val in main.process.info.to_dict()[ 'Info' ].items() :
-        fb.loc[ idx, key ] = val
-    fb.loc[ [ idx ] ].to_csv(    'cache.txt',
-                              index  = False,
-                              header = False,
-                              mode   =   'a' )
-    track.log = main.process.track.log
-    track.progbar()
-out = pd.read_csv( 'cache.txt', dtype = str )
-out.to_excel( out_file, 
-              sheet_name = out_file.replace( '.xlsx', '' ), 
-              index = False )
-os.remove( 'cache.txt' )
-total.logtime() # log total runtime
-os.remove(  'log.txt'  )
-popup( total.log, 'Process Complete!' ) 
     </div>
   </body>
 </html>
