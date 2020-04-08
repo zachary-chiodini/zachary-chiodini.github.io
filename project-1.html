@@ -180,23 +180,24 @@
       <span style="margin-left:2em">msg = <span style="color:#02FF02">'You may be missing one of the following files '</span> +\</span><br/>
       <span style="margin-left:5.6em"><span style="color:#02FF02">'(1) UAI_All_Reltio_Rates_Master.xlsx, '</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +\</span><br/>
       <span style="margin-left:5.6em"><span style="color:#02FF02">'(2) UAI_MASTER_Email_Domain_Alignment_TEMP.xlsx'</span>+\</span><br/>
-          ', (3) UAI_MASTER_Rate_to_Account_Alignment.xlsx or ' +\
-          '(4) properties.txt. Please make sure these files ' +\
-          'are located in their respective directories. '     +\
-          'Additionally, make sure the properties.txt file '  +\
-          'contains the appropriate credentials and you are ' +\
-          'connected to the appropriate Marriott internet network.'
-    popup( msg, 'Main Processor Encountered an Error!' )
-    exit()
-
-# Processing starts now
-total = Runtime()
-track = Runtime()
-track.total = len( fb )
-track.prog = 'Time Remaining: --:--:--:--. '  +\
-             'Progress:  0.00% ------------'  +\
-             '-----------------------------'  +\
-             '-----------------------------'  +\
+      <span style="margin-left:5.6em"><span style="color:#02FF02">', (3) UAI_MASTER_Rate_to_Account_Alignment.xlsx'</span>+\</span><br/>
+      <span style="margin-left:5.6em"><span style="color:#02FF02">' or (4) properties.txt. Please make sure these '</span>+\</span><br/>
+      <span style="margin-left:5.6em"><span style="color:#02FF02">'files are located in their respective '</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +\</span><br/>
+      <span style="margin-left:5.6em"><span style="color:#02FF02">'directories. Additionally, make sure the '</span> &nbsp;&nbsp;&nbsp;&nbsp; +\</span><br/>
+      <span style="margin-left:5.6em"><span style="color:#02FF02">'properties.txt file contains the appropriate '</span> &nbsp;+\</span><br/>
+      <span style="margin-left:5.6em"><span style="color:#02FF02">'credentials and you are connected to the '</span> &nbsp;&nbsp;&nbsp;&nbsp; +\</span><br/>
+      <span style="margin-left:5.6em"><span style="color:#02FF02">'appropriate Marriott internet network.'</span></span><br/>
+      <span style="margin-left:2em">popup( msg, <span style="color:#02FF02">'Main Processor Encountered an Error!'</span> )</span><br/>
+      <span style="margin-left:2em"><span style="color:#FF00FF">exit</span>()</span><br/>
+      <br/>
+      <span style="color:#DD0000"># Processing starts now</span><br/>
+      total = Runtime()<br/>
+      track = Runtime()<br/>
+      track.total = <span style="color:#FF00FF">len</span>( fb )<br/>
+      track.prog = <span style="color:#02FF02">'Time Remaining: --:--:--:--. '</span> +\<br/>
+      <span style="margin-left:4em">'Progress:  0.00% ------------' +\</span><br/>
+             '-----------------------------' +\
+             '-----------------------------' +\
              '------------------------------'
 for idx in fb.index.tolist() :
     issueid = fb.loc[ idx,  'Issue Type'  ]
