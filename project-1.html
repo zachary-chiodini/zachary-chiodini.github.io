@@ -140,23 +140,25 @@
       cols = [ <span style="color:#02FF02">'Account Name'</span>,<br/>
       <span style="margin-left:6.5em"><span style="color:#02FF02">'Issue Type'</span>,</span><br/>
       <span style="margin-left:5.3em"><span style="color:#02FF02">'Email Domain'</span>,</span><br/>
-         'Rate Program',
-         'Resolution (For DGR Use ONLY)' ]
-# Ask if these are the appropriate columns
-fb, cols = ask_for_cols( fb, cols )
-
-# Filter data by the resolution column
-idx = fb[ cols[ -1 ] ].astype( str ).str.lower().str.contains( 'pending' )
-idx = idx | fb[ cols[ -1 ] ].isna()
-fb = fb[ idx ]
-
-# Drop the resolution column
-fb = fb.drop( columns = cols[ -1 ] )
-keys = [ 'Associated Account',  'Assoc. Acc. in AW', 'Parent Account', 
-          'Parent Acc. in AW',         'Found Link',      'Hierarchy', 
+      <span style="margin-left:5.3em"><span style="color:#02FF02">'Rate Program'</span>,</span><br/>
+      <span style="margin-left:5.3em"><span style="color:#02FF02">'Resolution (For DGR Use ONLY)'</span> ]</span><br/>
+      <span style="color:#DD0000"># Ask if these are the appropriate columns</span><br/>
+      fb, cols = ask_for_cols( fb, cols )<br/>
+      <br/>
+      <span style="color:#DD0000"># Filter data by the resolution column</span><br/>
+      idx = fb[ cols[ -1 ] ].astype( <span style="color:#FF00FF">str</span> ).str.lower().str.contains( <span style="color:#02FF02">'pending'</span> )<br/>
+      idx = idx | fb[ cols[ -1 ] ].isna()<br/>
+      fb = fb[ idx ]<br/>
+      <span style="color:#DD0000"># Drop the resolution column</span><br/>
+      fb = fb.drop( columns = cols[ -1 ] )<br/>
+      <br/>
+      <span style="color:#DD0000"># Add columns to store the processor output</span><br/>
+      keys = [ <span style="color:#02FF02">'Associated Account'</span>,  <span style="color:#02FF02">'Assoc. Acc. in AW'</span>, 
+      <span style="margin-left:5em">'Parent Account', 'Parent Acc. in AW',
+        'Found Link',      'Hierarchy', 
               'Archived Link', 'Archived Hierarchy',     'Resolution' ]
 
-# Add columns to store the processor output
+
 for key in keys :
     fb[ key ] = np.nan
     
