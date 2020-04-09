@@ -7,7 +7,7 @@
   <img style="width:574; height:441px" src="workflow.png" alt="workflow"/>
   <body style="background-color:#002240; color:white;">
     <h1 style="color:#02FF02">Main Processor</h1>
-    <div style="width:600px; height:300px; overflow:auto; font-family:courier"> 
+    <div style="width:610px; height:300px; overflow:auto; font-family:courier"> 
 <table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%"> 1
  2
  3
@@ -183,7 +183,7 @@
 </td></tr></table>
     </div>
     <h1 style="color:#02FF02">Processes</h1>
-    <div style="width:600px; height:300px; overflow:auto; font-family:courier">
+    <div style="width:610px; height:300px; overflow:auto; font-family:courier">
       <table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%">  1
   2
   3
@@ -843,7 +843,7 @@
                         <span style="color: #FF8000">else</span> :
                             <span style="color: #DD0000"># To account for orphans, search all the</span>
                             <span style="color: #DD0000"># company names in the archived hierarchy</span>
-                            <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">name</span> <span style="color: #FF8000">in</span> <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">info</span>[ <span style="color: #02FF02">&#39;Associated Account&#39;</span> ]:
+                            <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">name</span> <span style="color: #FF8000">in</span> <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">info</span>[ <span style="color: #02FF02">&#39;Associated Account&#39;</span> ] :
                                 <span style="color: #FF8000">if</span> <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">tools</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">acnt_in_web</span>( <span style="color: #FFFFFF">name</span>, <span style="color: #FFFFFF">web</span> ) :
                                     <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">orphans</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">True</span>
                         <span style="color: #FF8000">return</span> <span style="color: #FF69B4">True</span>
