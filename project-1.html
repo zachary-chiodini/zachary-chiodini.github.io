@@ -8,7 +8,161 @@
   <body style="background-color:#002240; color:white;">
     <h1 style="color:#02FF02">Main Processor</h1>
     <div style="width:600px; height:300px; overflow:auto; font-family:courier"> 
-<table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%">1</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">print</span>( <span style="color: #02FF02">&quot;Hello World&quot;</span> )
+<table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">from</span> <span style="color: #FF00FF">process</span> <span style="color: #FF8000">import</span> <span style="color: #FF00FF">Process</span>
+
+<span style="color: #FF8000">class</span> <span style="color: #5E5EFF">Main</span>():
+    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">__init__</span>( <span style="color: #FF00FF">self</span> ) :
+        <span style="color: #FF00FF">Connect</span>()<span style="color: #FF0080">.</span><span style="color: #FF00FF">aw</span>() <span style="color: #DD0000"># Assign DB</span>
+        <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span> <span style="color: #FF0080">=</span> <span style="color: #FF00FF">Process</span>()
+        <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">track</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">jotdown</span>(
+            <span style="color: #02FF02">&#39;External files are being loaded. &#39;</span> <span style="color: #FF0080">+</span>            <span style="color: #02FF02">&#39;This may take a few minutes. &#39;</span> )
+        <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">rate_archive</span> <span style="color: #FF0080">=</span>             <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">query</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">master_rate_alignment</span>()
+        <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">mail_archive</span> <span style="color: #FF0080">=</span>             <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">query</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">master_mail_alignment</span>()
+        <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">reltio_rates</span> <span style="color: #FF0080">=</span>             <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">query</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">all_rates_master</span>()
+        <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">track</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">logtime</span>()
+
+    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">processor</span>( <span style="color: #FF00FF">self</span>, <span style="color: #FF00FF">account</span>, <span style="color: #FF00FF">analyte</span>, <span style="color: #FF00FF">issueid</span>, <span style="color: #FF00FF">sleep</span> <span style="color: #FF0080">=</span> <span style="color: #FF0080">30</span> ):
+        <span style="color: #02FF02">&#39;&#39;&#39;</span>
+<span style="color: #02FF02">        +-------------------------------------------------+</span>
+<span style="color: #02FF02">        |             Feedback File Processor             |</span>
+<span style="color: #02FF02">        +-------------+-----------------------------------+</span>
+<span style="color: #02FF02">        |   Argument  |            Description            |</span>
+<span style="color: #02FF02">        +-------------+-----------------------------------+</span>
+<span style="color: #02FF02">        | (1) account | (1) Sales Hierarchy               |</span>
+<span style="color: #02FF02">        | (2) analyte | (2) Rate Program or Email Address |</span>
+<span style="color: #02FF02">        | (3) issueid | (3) Incorrect/Missing Rate/Email  |</span>
+<span style="color: #02FF02">        +-------------+-----------------------------------+</span>
+<span style="color: #02FF02">        &#39;&#39;&#39;</span>
+        <span style="color: #DD0000"># Reset timers</span>
+        <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">track</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">reset</span>()
+        <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">total</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">reset</span>()
+        <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">scrape</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">sleep</span> <span style="color: #FF0080">=</span> <span style="color: #FF00FF">sleep</span>
+        <span style="color: #DD0000"># Letting you know we&#39;ve started</span>
+        <span style="color: #FF00FF">log</span> <span style="color: #FF0080">=</span> <span style="color: #02FF02">&#39;Processing account {} with analyte {} ...&#39;</span>
+        <span style="color: #FF00FF">log</span> <span style="color: #FF0080">=</span> <span style="color: #FF00FF">log</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">format</span>( <span style="color: #FF00FF">account</span>, <span style="color: #FF00FF">analyte</span> )
+        <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">track</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">jotdown</span>( <span style="color: #FF00FF">log</span> )
+        <span style="color: #DD0000"># Commence program sequence</span>
+        <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">account</span> <span style="color: #FF0080">=</span> <span style="color: #FF00FF">account</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">lower</span>()
+        <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">analyte</span> <span style="color: #FF0080">=</span> <span style="color: #FF00FF">analyte</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">split</span>( <span style="color: #02FF02">&#39;@&#39;</span> )[ <span style="color: #FF0080">-1</span> ]
+        <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">issueid</span> <span style="color: #FF0080">=</span> <span style="color: #FF00FF">issueid</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">lower</span>()
+        <span style="color: #DD0000"># Reset parameters</span>
+        <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">reset</span>()
+        <span style="color: #DD0000"># (1) Check cache </span>
+        <span style="color: #FF00FF">cache</span> <span style="color: #FF0080">=</span> <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">scan_cache</span>()
+        <span style="color: #FF8000">if</span> <span style="color: #FF00FF">cache</span> <span style="color: #FF0080">is</span> <span style="color: #FF0080">not</span> <span style="color: #FF00FF">None</span>: <span style="color: #FF8000">return</span> <span style="color: #FF00FF">cache</span>
+        <span style="color: #DD0000"># (2) Is analyte valid?</span>
+        <span style="color: #FF8000">if</span> <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">validation</span>() :
+            <span style="color: #DD0000"># (3) Find the company that is</span>
+            <span style="color: #DD0000">#     associated with the analyte</span>
+            <span style="color: #FF00FF">trash</span> <span style="color: #FF0080">=</span> [] <span style="color: #DD0000"># Avoid infinite loop</span>
+            <span style="color: #FF00FF">prnts</span> <span style="color: #FF0080">=</span> [] <span style="color: #DD0000"># parent companies</span>
+            <span style="color: #FF00FF">names</span> <span style="color: #FF0080">=</span> <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">assoc_comp</span>()
+            <span style="color: #FF8000">while</span> <span style="color: #FF00FF">names</span> :
+                <span style="color: #FF00FF">name</span> <span style="color: #FF0080">=</span> <span style="color: #FF00FF">names</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">pop</span>( <span style="color: #FF0080">0</span> ) <span style="color: #DD0000">#LIFO queue</span>
+                <span style="color: #FF8000">if</span> <span style="color: #FF00FF">name</span> <span style="color: #FF0080">in</span> <span style="color: #FF00FF">trash</span> :
+                    <span style="color: #FF8000">continue</span> <span style="color: #DD0000"># Skip</span>
+                <span style="color: #FF8000">if</span> <span style="color: #FF00FF">name</span> <span style="color: #FF0080">in</span> <span style="color: #FF00FF">prnts</span> :
+                    <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">parents</span> <span style="color: #FF0080">=</span>  <span style="color: #FF00FF">True</span>
+                <span style="color: #FF8000">else</span> :
+                    <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">parents</span> <span style="color: #FF0080">=</span> <span style="color: #FF00FF">False</span>
+                <span style="color: #FF8000">if</span> <span style="color: #FF00FF">len</span>( <span style="color: #FF00FF">trash</span> ) <span style="color: #FF0080">&gt;</span> <span style="color: #FF0080">10</span> :
+                    <span style="color: #FF8000">break</span> <span style="color: #DD0000"># Just give up</span>
+                <span style="color: #DD0000"># (4) Search company name in AW</span>
+                <span style="color: #FF8000">if</span> <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">name_in_aw</span>( <span style="color: #FF00FF">name</span> ) :
+                    <span style="color: #DD0000"># (5) If found, link name to analyte</span>
+                    <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">link_analyte</span>( <span style="color: #FF00FF">name</span> )
+                    <span style="color: #DD0000"># (6) Search account in hierarchy</span>
+                    <span style="color: #FF00FF">web</span> <span style="color: #FF0080">=</span> <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">blowup_web</span>()
+                    <span style="color: #FF8000">if</span> <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">acnt_in_web</span>( <span style="color: #FF00FF">web</span> ) :
+                        <span style="color: #DD0000"># (7) If found, validate archive</span>
+                        <span style="color: #FF8000">return</span> <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">resolution</span>()
+                <span style="color: #FF00FF">trash</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">append</span>( <span style="color: #FF00FF">name</span> )
+                <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">parents</span> <span style="color: #FF0080">=</span> <span style="color: #FF00FF">True</span>
+                <span style="color: #FF00FF">pars</span> <span style="color: #FF0080">=</span> <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">assoc_comp</span>( <span style="color: #FF00FF">name</span> )
+                <span style="color: #FF8000">for</span> <span style="color: #FF00FF">comp</span> <span style="color: #FF0080">in</span> <span style="color: #FF00FF">pars</span> :
+                    <span style="color: #FF8000">if</span> <span style="color: #FF00FF">comp</span> <span style="color: #FF0080">not</span> <span style="color: #FF0080">in</span> <span style="color: #FF00FF">prnts</span> :
+                        <span style="color: #FF00FF">prnts</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">append</span>( <span style="color: #FF00FF">comp</span> )
+                    <span style="color: #FF8000">if</span> <span style="color: #FF00FF">comp</span> <span style="color: #FF0080">not</span> <span style="color: #FF0080">in</span> <span style="color: #FF00FF">names</span> :
+                        <span style="color: #FF00FF">names</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">append</span>( <span style="color: #FF00FF">comp</span> )
+        <span style="color: #DD0000"># Check archive</span>
+        <span style="color: #FF8000">return</span> <span style="color: #FF00FF">self</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">process</span><span style="color: #FF0080">.</span><span style="color: #FF00FF">resolution</span>()
 </pre></div>
 </td></tr></table>
     </div>
