@@ -4,12 +4,27 @@
     <title>Business Process Automation</title>
     <h1 style="color:#02FF02">Business Process Automation</h1>
     <p style="text-align:justify; max-width:580px;">
-      Monthly process at the Marriott HQ automated using Pythong and SQL.
+      This is a monthly business process at the Marriott Headquarters automated using Python and SQL.
+      The input is a Microsoft Excel Worksheet containing sales records downloaded from a private website.
+      Each record is manually entered by the sales associates. The pertinent attributes in the data are the
+      account name, issue type, email domain and rate program. The account name is the organization to
+      which the sale was made, issue type has the value "email domain" or "rate program," email domain
+      is the email or domain of the organization and rate program is a code associated with the sale.
+    </p>
+    <p style="text-align:justify; max-width:580px;">
+      The process is to validate the sales data. 
+      The program automates validation by utilizing string matching, an SQL database
+      containing sales hierarchies and web scraping. Additionally, the program attempts to
+      correct data in the database with data enrichment by web scraping.
+      The high-level workflow is illustrated below.
     </p>
   </head>
   <img style="width:574; height:441px" src="workflow.png" alt="workflow"/>
   <body style="background-color:#002240; color:white;">
     <h1 style="color:#02FF02">Main Processor</h1>
+    <p style="text-align:justify; max-width:580px;">
+      This is the main program.
+    </p>
     <div style="width:610px; height:300px; overflow:auto; font-family:courier"> 
 <table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%"> 1
  2
