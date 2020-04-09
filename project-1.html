@@ -23,7 +23,10 @@
   <body style="background-color:#002240; color:white;">
     <h1 style="color:#02FF02">Main Processor</h1>
     <p style="text-align:justify; max-width:580px;">
-      This is the main program.
+      This is the main program. 
+      Each step commented is slightly different from the above workflow.
+      This script is used to validate individual records in the sales data.
+      The term "analyte" is used to represent either an email domain or rate program code.
     </p>
     <div style="width:610px; height:300px; overflow:auto; font-family:courier"> 
 <table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%"> 1
@@ -203,6 +206,9 @@
 </td></tr></table>
     </div>
     <h1 style="color:#02FF02">Processes</h1>
+    <p style="text-align:justify; max-width:580px;">
+      These are the processes used by the main processor.
+    </p>
     <div style="width:610px; height:300px; overflow:auto; font-family:courier">
       <table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%">  1
   2
@@ -1255,6 +1261,13 @@
 </td></tr></table>
     </div>
     <h1 style="color:#02FF02">Tools</h1>
+    <p style="text-align:justify; max-width:580px;">
+      These are the tools and sub-processes used by the processes. The tools contains the classes Connect, Query, Runtime, Scrape, Tools and Verify.
+      Connect is used as a connector to the database. Query is used to query the database and upload external files.
+      Runtime is used to log the progress, time and approximate time remaining of the program launcher and all the program processes and sub-processes.
+      Scrape is used to web scrape and clean html source code. Tools contains miscellaneous sub-processes and helper functions.
+      Verify is used to validate emails and email domains.
+    </p>
     <div style="width:610px; height:300px; overflow:auto; font-family:courier">
       <table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%">   1
    2
@@ -4157,6 +4170,13 @@
 </td></tr></table>
     </div>
     <h1 style="color:#02FF02">Program Launcher</h1>
+    <p style="text-align:justify; max-width:580px;">
+      This is a user-friendly program used by the sales associates. After installing the appropriate software and downloading the
+      input file, the sales associate will double click this script to automatically run the main process on all the records in
+      the file. The launcher outputs a cache that will enable the program to resume without losing progress 
+      if interrupted by a connection error. It also outputs a log file which allows the associate to track the progress of the program
+      in real time. Both of these files will be deleted when the process is complete.
+    </p>
     <div style="width:610px; height:300px; overflow:auto; font-family:courier">
       <table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%">  1
   2
