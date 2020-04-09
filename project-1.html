@@ -2686,16 +2686,7 @@
 1446
 1447
 1448
-1449
-1450
-1451
-1452
-1453
-1454
-1455
-1456
-1457
-1458</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #DD0000">####################</span>
+1449</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #DD0000">####################</span>
 <span style="color: #DD0000"># trackingtools.py #</span>
 <span style="color: #DD0000">####################</span>
 
@@ -2744,15 +2735,12 @@
         <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">path</span>  <span style="color: #FF8000">=</span> <span style="color: #02FF02">&#39;&#39;</span> <span style="color: #DD0000"># Current directory</span>
 
     <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">print</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">s</span> ) :
-        <span style="color: #FF8000">print</span>( <span style="color: #FFFFFF">s</span>, <span style="color: #FFFFFF">end</span> <span style="color: #FF8000">=</span> <span style="color: #02FF02">&#39;</span>
-<span style="color: #02FF02">&#39;, flush = True )</span>
+        <span style="color: #FF8000">print</span>( <span style="color: #FFFFFF">s</span>, <span style="color: #FFFFFF">end</span> <span style="color: #FF8000">=</span> <span style="color: #02FF02">&#39;\r&#39;</span>, <span style="color: #FFFFFF">flush</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">True</span> )
             
     <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">clear</span>( <span style="color: #FF69B4">self</span> ) :
-        <span style="color: #FF8000">print</span>( <span style="color: #02FF02">&#39;</span>
-<span style="color: #02FF02">&#39;, end = &#39;&#39; )</span>
+        <span style="color: #FF8000">print</span>( <span style="color: #02FF02">&#39;\r&#39;</span>, <span style="color: #FFFFFF">end</span> <span style="color: #FF8000">=</span> <span style="color: #02FF02">&#39;&#39;</span> )
 
-    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">log_file</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">log</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">None</span>, <span style="color: #FFFFFF">end</span> <span style="color: #FF8000">=</span> <span style="color: #02FF02">&#39;</span>
-<span style="color: #02FF02">&#39; ) :</span>
+    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">log_file</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">log</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">None</span>, <span style="color: #FFFFFF">end</span> <span style="color: #FF8000">=</span> <span style="color: #02FF02">&#39;\n&#39;</span> ) :
         <span style="color: #FF8000">with</span> <span style="color: #FF69B4">open</span>( <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">path</span> <span style="color: #FF8000">+</span> <span style="color: #02FF02">&#39;log.txt&#39;</span>, <span style="color: #02FF02">&#39;a&#39;</span>,
                    <span style="color: #FFFFFF">encoding</span> <span style="color: #FF8000">=</span> <span style="color: #02FF02">&#39;utf-8&#39;</span>, <span style="color: #FFFFFF">errors</span> <span style="color: #FF8000">=</span> <span style="color: #02FF02">&#39;ignore&#39;</span> ) <span style="color: #FF8000">as</span> <span style="color: #FF69B4">file</span> :
             <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">log</span> : <span style="color: #FFFFFF">s</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">log</span>
@@ -3283,8 +3271,7 @@
                 <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">track</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">logtime</span>( <span style="color: #FFFFFF">flush</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">True</span> )
                 <span style="color: #FF8000">return</span> <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">tools</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">remove_accents</span>( <span style="color: #FFFFFF">df</span> )
             <span style="color: #FF8000">except</span> <span style="color: #FFFFFF">Exception</span> <span style="color: #FF8000">as</span> <span style="color: #FFFFFF">e</span>:
-                <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">track</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">jotdown</span>( <span style="color: #FF69B4">str</span>( <span style="color: #FFFFFF">e</span> )<span style="color: #FF8000">.</span><span style="color: #FFFFFF">replace</span>( <span style="color: #02FF02">&#39;</span>
-<span style="color: #02FF02">&#39;, &#39;</span> <span style="color: #02FF02">&#39; ).capitalize() )</span>
+                <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">track</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">jotdown</span>( <span style="color: #FF69B4">str</span>( <span style="color: #FFFFFF">e</span> )<span style="color: #FF8000">.</span><span style="color: #FFFFFF">replace</span>( <span style="color: #02FF02">&#39;\n&#39;</span>, <span style="color: #02FF02">&#39; &#39;</span> )<span style="color: #FF8000">.</span><span style="color: #FFFFFF">capitalize</span>() )
                 <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">req</span> : <span style="color: #FF8000">raise</span> <span style="color: #FFFFFF">Exception</span>( <span style="color: #FFFFFF">e</span> )
                 <span style="color: #FFFFFF">time</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">sleep</span>( <span style="color: #FF00FF">3</span> ) <span style="color: #DD0000"># Retry after 3 seconds</span>
             <span style="color: #FFFFFF">n</span> <span style="color: #FF8000">+=</span> <span style="color: #FF00FF">1</span>
@@ -3654,8 +3641,7 @@
             <span style="color: #FFFFFF">server</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">connect</span>( <span style="color: #FFFFFF">mx</span>, <span style="color: #FFFFFF">port</span> )
             <span style="color: #FF8000">return</span> <span style="color: #FF69B4">True</span>
         <span style="color: #FF8000">except</span> <span style="color: #FFFFFF">Exception</span> <span style="color: #FF8000">as</span> <span style="color: #FFFFFF">e</span> :
-            <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">track</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">jotdown</span>( <span style="color: #FF69B4">str</span>( <span style="color: #FFFFFF">e</span> )<span style="color: #FF8000">.</span><span style="color: #FFFFFF">replace</span>( <span style="color: #02FF02">&#39;</span>
-<span style="color: #02FF02">&#39;, &#39;</span> <span style="color: #02FF02">&#39; ) )</span>
+            <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">track</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">jotdown</span>( <span style="color: #FF69B4">str</span>( <span style="color: #FFFFFF">e</span> )<span style="color: #FF8000">.</span><span style="color: #FFFFFF">replace</span>( <span style="color: #02FF02">&#39;\n&#39;</span>, <span style="color: #02FF02">&#39; &#39;</span> ) )
             <span style="color: #FF8000">return</span> <span style="color: #FF69B4">False</span>
 
     <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">email_connect</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">address</span>, <span style="color: #FFFFFF">domain</span>, <span style="color: #FFFFFF">resolver</span>, <span style="color: #FFFFFF">port</span>, <span style="color: #FFFFFF">use_ssl</span>, <span style="color: #FFFFFF">use_tls</span> ) :
@@ -3685,8 +3671,7 @@
             <span style="color: #FFFFFF">server</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">mail</span>( <span style="color: #02FF02">&#39;&#39;</span> )
             <span style="color: #FFFFFF">code</span>, <span style="color: #FFFFFF">msge</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">server</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">rcpt</span>( <span style="color: #FFFFFF">address</span> )
             <span style="color: #FFFFFF">server</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">quit</span>()
-            <span style="color: #FFFFFF">msge</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">msge</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">decode</span>( <span style="color: #02FF02">&#39;UTF-8&#39;</span> )<span style="color: #FF8000">.</span><span style="color: #FFFFFF">replace</span>( <span style="color: #02FF02">&#39;</span>
-<span style="color: #02FF02">&#39;, &#39;</span> <span style="color: #02FF02">&#39; )</span>
+            <span style="color: #FFFFFF">msge</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">msge</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">decode</span>( <span style="color: #02FF02">&#39;UTF-8&#39;</span> )<span style="color: #FF8000">.</span><span style="color: #FFFFFF">replace</span>( <span style="color: #02FF02">&#39;\n&#39;</span>, <span style="color: #02FF02">&#39; &#39;</span> )
             <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">log</span> <span style="color: #FF8000">=</span> <span style="color: #02FF02">&#39;{} code: {}; message: {}&#39;</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">format</span>( <span style="color: #FFFFFF">address</span>, <span style="color: #FFFFFF">code</span>, <span style="color: #FFFFFF">msge</span> )
             <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">track</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">jotdown</span>( <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">log</span> )
             <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">code</span> <span style="color: #FF8000">==</span> <span style="color: #FF00FF">250</span> : <span style="color: #FF8000">return</span> <span style="color: #FF69B4">True</span>
@@ -3870,8 +3855,7 @@
         <span style="color: #FFFFFF">clean</span> <span style="color: #FF8000">=</span> []
         <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">t</span> <span style="color: #FF8000">in</span> <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">tools</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">extract_between</span>( <span style="color: #FFFFFF">s</span>, <span style="color: #FFFFFF">start</span>, <span style="color: #FFFFFF">stop</span>, <span style="color: #FFFFFF">strip</span>, <span style="color: #FFFFFF">inclusive</span> ) :
             <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">n</span> <span style="color: #FF8000">and</span> <span style="color: #FF69B4">len</span>( <span style="color: #FFFFFF">t</span> ) <span style="color: #FF8000">&gt;</span> <span style="color: #FFFFFF">n</span> : <span style="color: #FF8000">continue</span>
-            <span style="color: #FFFFFF">clean</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">append</span>( <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">clean_html</span>( <span style="color: #FFFFFF">t</span> )<span style="color: #FF8000">.</span><span style="color: #FFFFFF">replace</span>( <span style="color: #02FF02">&#39;</span>
-<span style="color: #02FF02">&#39;, &#39;</span> <span style="color: #02FF02">&#39; ).replace( &#39;</span> <span style="color: #FF8000">...</span><span style="color: #02FF02">&#39;, &#39;&#39; ) )</span>
+            <span style="color: #FFFFFF">clean</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">append</span>( <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">clean_html</span>( <span style="color: #FFFFFF">t</span> )<span style="color: #FF8000">.</span><span style="color: #FFFFFF">replace</span>( <span style="color: #02FF02">&#39;\n&#39;</span>, <span style="color: #02FF02">&#39; &#39;</span> )<span style="color: #FF8000">.</span><span style="color: #FFFFFF">replace</span>( <span style="color: #02FF02">&#39;\xa0...&#39;</span>, <span style="color: #02FF02">&#39;&#39;</span> ) )
         <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">clean</span>
 
     <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">scrape_domain_link</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">s</span>, <span style="color: #FFFFFF">dom</span> ) :
@@ -3993,9 +3977,7 @@
             <span style="color: #FF8000">try</span> : <span style="color: #FF8000">return</span> <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">yahoo</span>()
             <span style="color: #FF8000">except</span> <span style="color: #FFFFFF">Exception</span> <span style="color: #FF8000">as</span> <span style="color: #FFFFFF">e</span> :
                 <span style="color: #FF8000">return</span> <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">exception</span>( <span style="color: #02FF02">&#39;Yahoo&#39;</span>, <span style="color: #FFFFFF">e</span> )
-        <span style="color: #FF8000">raise</span> <span style="color: #FFFFFF">Exception</span>( <span style="color: #02FF02">&#39;All engines exhausted.</span>
-<span style="color: #FFFFFF">System</span> <span style="color: #FFFFFF">shutdown</span>
-<span style="color: #FFFFFF">Goodbye</span><span style="color: #FF8000">.</span><span style="color: #02FF02">&#39; )</span>
+        <span style="color: #FF8000">raise</span> <span style="color: #FFFFFF">Exception</span>( <span style="color: #02FF02">&#39;All engines exhausted.\nSystem shutdown\nGoodbye.&#39;</span> )
 
     <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">links</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">s</span> ) :
         <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">track</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">jotdown</span>( <span style="color: #02FF02">&#39;Scraping search links for {} ...&#39;</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">format</span>( <span style="color: #FFFFFF">s</span> ) )
