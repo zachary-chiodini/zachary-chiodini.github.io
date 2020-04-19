@@ -21,13 +21,13 @@
   </P>
 <p> <img style="width:372px; height:343px" src="grid.png"/> </p>
 <p style="text-align:justify; max-width:580px">
-  Each robot is given an integer identifier j. The cell in which a robot is located is called a substate. 
-  This is the position of the jth robot. The state of N robots is a list of all substates indexed by j.
-  Each robot j has a set of available actions which contain reachable substates after moving left, right, up or down 
-  by one unit on the grid, given its current substate.
-  The reachable states of N robots is a set of all states containing all possible combination of reachable substates.
+  Each robot is given an integer identifier j. The cell in which the jth robot is located is called a substate. 
+  The state of N robots is a list of all substates indexed by j.
+  Each robot j has a set of available actions which contain reachable or final substates after moving left, right, up or down 
+  by one unit on the grid, given its current or initial substate.
+  The reachable states of N robots is a set of all valid states containing all possible combinations of reachable substates.
   This is called the successor to the state Nj.
-  These are described mathematically below.
+  This is summarized below.
 </p>
 <p>
   <img style="width:450px; height:110px" src="defs.png"/>
