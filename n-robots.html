@@ -16,15 +16,22 @@
   
   <h1 style="color:#02FF02">Formalization</h1>
   <p style="text-align:justify; max-width:580px">
-  The grid is represented by an m by n matrix in which each element is the x-y coordinate location of a unique cell in the grid,
+  The grid is represented by an m by n matrix in which each element is the x-y coordinate location of each cell in the grid,
   illustrated below.
   </P>
-  <p>
-    <img style="width:372px; height:343px" src="grid.png"/>
-  </p>
-  <p>
-    <img style="width:450px; height:110px" src="defs.png"/>
-  </p>
+<p> <img style="width:372px; height:343px" src="grid.png"/> </p>
+<p style="text-align:justify; max-width:580px">
+  Each robot is given an integer identifier j. The cell in which a robot is located is called a substate. 
+  This is the position of the jth robot. The state of N robots is a list of all substates indexed by j.
+  Each robot j has a set of available actions which contain reachable substates after moving left, right, up or down 
+  by one unit on the grid, given its current substate.
+  The reachable states of N robots is a set of all states containing all possible combination of reachable substates.
+  This is called the successor to the state Nj.
+  These are described mathematically below.
+</p>
+<p>
+  <img style="width:450px; height:110px" src="defs.png"/>
+</p>
   <h1 style="color:#02FF02">Breadth First Search</h1>
   <p><img src="BFS_1r.gif"/><img src="BFS_1r_grid.gif"/></p>
   <p><img src="2x3_2r.gif"/><img src="2x3_2r_grid.gif"/></p>
