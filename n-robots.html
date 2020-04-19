@@ -16,25 +16,23 @@
   
   <h1 style="color:#02FF02">Formalization</h1>
   <p style="text-align:justify; max-width:580px">
-  The grid is represented by an m by n matrix in which each element is the x-y coordinate location of each cell in the grid,
-  illustrated below.
+  The grid is represented by an m by n matrix in which each element is the x-y coordinate location of each cell in the grid.
   </P>
 <p> <img style="width:372px; height:343px" src="grid.png"/> </p>
 <p style="text-align:justify; max-width:580px">
   Each robot is given an integer identifier j. The cell in which the jth robot is located is called a substate. 
-  The state of N robots is a list of all substates indexed by j.
+  The state of N robots is a list of all substates indexed by j in ascending order.
   Each robot j has a set of available actions which contain reachable or final substates after moving left, right, up or down 
   by one unit on the grid, given its current or initial substate.
   The reachable states of N robots is a set of all valid states containing all possible combinations of reachable substates,
-  given the current or initial state. This is called the successor set. These terms are summarized below.
+  given the current or initial state. This is called the successor set.
 </p>
 <p>
   <img style="width:450px; height:110px" src="defs.png"/>
 </p>
 <p style="text-align:justify; max-width:580px">
-  Not all substates and states are valid. The following restrictions apply: (1) Robots move by one grid unit,
-  (2) Robots cannot exit the grid, (3) Robots cannot collide or share position and (4) Robots cannot swap places.
-  These are summarized below.
+  Not all substates and states are valid. The following restrictions apply: (1) robots move by one grid unit,
+  (2) robots cannot exit the grid, (3) robots cannot collide or share position and (4) robots cannot swap places.
 </p>
 <p>
   <img style="width:514px; height:272px" src="conditions.png"/>
