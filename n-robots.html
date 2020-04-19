@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
+  <title>N Robots Problem</title>
   <head>
-    <title>N Robots Problem</title>
     <h1 style="color:#02FF02">N Robots Problem</h1>
     <p style="text-align:justify; max-width:580px">
       The problem involves N robots on an m by n grid, an initial state specifying the initial position of the robots
@@ -13,33 +13,31 @@
       will be compared.
     </p>
   </head>
-  
+ 
   <h1 style="color:#02FF02">Formalization</h1>
   <p style="text-align:justify; max-width:580px">
   The grid is represented by an m by n matrix in which each element is the x-y coordinate location of each cell in the grid.
   </P>
-<p> <img style="width:372px; height:343px" src="grid.png"/> </p>
-<p style="text-align:justify; max-width:580px">
-  Each robot is given an integer identifier j. The cell in which the jth robot is located is called a substate. 
-  The state of N robots is a list of all substates indexed by j in ascending order.
-  Each robot j has a set of available actions which contain reachable or final substates after moving left, right, up or down 
-  by one unit on the grid, given its current or initial substate.
-  The reachable states of N robots is a set of all valid states containing all possible combinations of reachable substates,
-  given the current or initial state. This is called the successor set.
-</p>
-<p>
-  <img style="width:450px; height:110px" src="defs.png"/>
-</p>
-<p style="text-align:justify; max-width:580px">
-  Not all substates and states are valid. The following restrictions apply: (1) robots move by one grid unit,
-  (2) robots cannot exit the grid, (3) robots cannot collide or share position and (4) robots cannot swap places.
-</p>
-<p>
-  <img style="width:514px; height:272px" src="conditions.png"/>
-</p>
-<p style="text-align:justify; max-width:580px>
-  The problem is defined in Python below.
-</p>
+  <p> <img style="width:372px; height:343px" src="grid.png"/> </p>
+  <p style="text-align:justify; max-width:580px">
+    Each robot is given an integer identifier j. The cell in which the jth robot is located is called a substate. 
+    The state of N robots is a list of all substates indexed by j in ascending order.
+    Each robot j has a set of available actions which contain reachable or final substates after moving left, right, up or down 
+    by one unit on the grid, given its current or initial substate.
+    The reachable states of N robots is a set of all valid states containing all possible combinations of reachable substates,
+    given the current or initial state. This is called the successor set.
+  </p>
+  <p>
+    <img style="width:450px; height:110px" src="defs.png"/>
+  </p>
+  <p style="text-align:justify; max-width:580px">
+    Not all substates and states are valid. The following restrictions apply: (1) robots move by one grid unit,
+    (2) robots cannot exit the grid, (3) robots cannot collide or share position and (4) robots cannot swap places.
+  </p>
+  <p>
+    <img style="width:514px; height:272px" src="conditions.png"/>
+  </p>
+  <p>The problem is defined in Python below.</p>
   <div style="width:610px; height:300px; overflow:auto; font-family:courier">
 <table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%"> 1
  2
@@ -216,7 +214,7 @@
         <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">state</span> <span style="color: #FF8000">==</span> <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">goal</span>
 </pre></div>
 </td></tr></table>
-</div>
+  </div>
   <h1 style="color:#02FF02">Breadth First Search</h1>
   <p><img src="BFS_1r.gif"/><img src="BFS_1r_grid.gif"/></p>
   <p><img src="2x3_2r.gif"/><img src="2x3_2r_grid.gif"/></p>
