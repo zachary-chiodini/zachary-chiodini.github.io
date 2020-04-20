@@ -606,12 +606,16 @@
   <h1 style="color:#02FF02">Breadth-First Search</h1>
   <p style="text-align:justify; max-width:580px">
     This algorithm explores all of the nodes at the present depth prior to moving on to the next depth.
+    In other words, breadth-first search explores paths of length 1 first, then all those of length 2, and so on.
+    Therefore, if there a solution exists, breadth-first search will find the shallowest goal state first.
+    Breadth-first search is complete and optimal. However, beadth-first search has an exponential complexity bound,
+    which means it is only practical for simple problems.
   </p>
   <h1 style="color:#02FF02">Breadth-First Search in Python</h1>
   <p style="text-align:justify; max-width:580px">
     The algorithm is written using the classes above. A list containing explored nodes is used
-    to avoid an infinite loop, which can occur if a child node is identical to any of its parent nodes.
-    The frontier contains all of the nodes to be explored as a first in first out (FIFO) queue.
+    to avoid infinite loops, which can occur if a child node is identical to any of its parent nodes.
+    The frontier contains all of the nodes to be explored as a first-in-first-out (FIFO) queue.
   </p>
   <div style="width:610px; height:300px; overflow:auto; font-family:courier">
  <table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%"> 1
