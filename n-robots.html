@@ -684,14 +684,22 @@
   <p style="text-align:justify">
     The search process and path is animated below. The violet portion of the search tree shows the current path.
     The current path of the robot is also animated on the grid to the right of the tree. Even for a simple example
-    like this, the tree has a depth of 6 and 50 nodes before finding a solution.
+    like this, the tree generates a depth of 6 and 50 nodes before finding a solution.
   </p>
   <p style="text-align:center"><img src="BFS_1r.gif"/><img src="BFS_1r_grid.gif"/></p>
-   <p style="text-align:justify">
+  <p style="text-align:justify">
     Using 2 robots on a 2 by 3 cell grid with an initial state [ ( 1, 1 ), ( 2, 1 ) ] and a goal state [ ( 2, 3 ), ( 1, 3 ) ],
-     
+    breadth-first search finds the path <br/>
+    [ ( 1, 1 ), ( 2, 1 ) ] → [ ( 2, 1 ), ( 2, 2 ) ] → [ ( 2, 2 ), ( 2, 3 ) ] → [ ( 2, 3 ), ( 1, 3 ) ]
+  </p>
+  <p style="text-align:center"><img src="solution2.png"/></p>
+  <p style="text-align:justify">
+    The search process and path is animated below. On the grid to the right of the tree, the path of robot 1 is
+    highlighted in violet and the path of robot 2 is highlighted in orange. However, the solution is a single path
+    containing both robots. The tree is shallower due to a shorter path length, but the complexity of the tree
+    has increased dramatically by adding another robot and generates 94 nodes before finding a solution. Due
+    to the exponential time and space complexity of breadth-fist search, more complicated problems will not be entertained.
   </p>
   <p style="text-align:center"><img src="2x3_2r.gif"/><img src="2x3_2r_grid.gif"/></p>
-    
   </body>
 </html>
