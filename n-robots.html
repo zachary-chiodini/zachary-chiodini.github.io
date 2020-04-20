@@ -468,7 +468,9 @@
 122
 123
 124
-125</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">import</span> <span style="color: #FFFFFF">matplotlib.pyplot</span> <span style="color: #FF8000">as</span> <span style="color: #FFFFFF">plt</span>
+125
+126
+127</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">import</span> <span style="color: #FFFFFF">matplotlib.pyplot</span> <span style="color: #FF8000">as</span> <span style="color: #FFFFFF">plt</span>
 <span style="color: #FF8000">import</span> <span style="color: #FFFFFF">matplotlib.patheffects</span> <span style="color: #FF8000">as</span> <span style="color: #FFFFFF">pe</span>
 
 <span style="color: #FF8000">class</span> <span style="color: #5E5EFF">Graph</span> :
@@ -540,7 +542,9 @@
             <span style="color: #DD0000"># Generating child coordinate</span>
             <span style="color: #FFFFFF">breadth</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">node</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">parent</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">children</span>
             <span style="color: #FFFFFF">yc</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">yp</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>
-            <span style="color: #FFFFFF">xc</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">node</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">count</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">0.5</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">breadth</span> <span style="color: #FF8000">/</span> <span style="color: #FF00FF">2</span>                  <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">breadth</span> <span style="color: #FF8000">%</span> <span style="color: #FF00FF">2</span> <span style="color: #FF8000">==</span> <span style="color: #FF00FF">0</span>                  <span style="color: #FF8000">else</span> <span style="color: #FFFFFF">node</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">count</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">breadth</span> <span style="color: #FF8000">//</span> <span style="color: #FF00FF">2</span>
+            <span style="color: #FFFFFF">xc</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">node</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">count</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">0.5</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">breadth</span> <span style="color: #FF8000">/</span> <span style="color: #FF00FF">2</span> \
+                 <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">breadth</span> <span style="color: #FF8000">%</span> <span style="color: #FF00FF">2</span> <span style="color: #FF8000">==</span> <span style="color: #FF00FF">0</span> \
+                 <span style="color: #FF8000">else</span> <span style="color: #FFFFFF">node</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">count</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">breadth</span> <span style="color: #FF8000">//</span> <span style="color: #FF00FF">2</span>
             <span style="color: #FFFFFF">xc</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">xp</span> <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">xc</span> <span style="color: #FF8000">/</span> <span style="color: #FFFFFF">node</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">lineage</span>( <span style="color: #FFFFFF">node</span> )
         <span style="color: #FF8000">else</span> :
             <span style="color: #FFFFFF">xc</span>, <span style="color: #FFFFFF">yc</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0</span>, <span style="color: #FF00FF">0</span>
