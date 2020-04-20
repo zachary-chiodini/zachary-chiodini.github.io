@@ -218,7 +218,7 @@
   </div>
   
   <h1 style="color:#02FF02">Nodes and Tree Data Structure</h1>
-  <p style="text-align:justify; max-width:580px">
+  <p style="text-align:justify">
     To solve the problem using a search tree, the node and tree data structure should be defined.
     Tree structures are composed of nodes. A single node has a single parent node and one or more
     child nodes, for which it is the parent node. The branches extending from parent to child nodes create
@@ -228,21 +228,21 @@
     Sibling nodes are nodes that share the same parent. Leaf nodes are the bottommost nodes, which have no children.
     The path of a node is its lineage to the root node.
 </p>
-<p style="text-align:justify; max-width:580px">
+<p style="text-align:justify">
   For this problem, each node represents a state. The child nodes represent the states reachable from the parent node.
   The branch connecting the parent node to the child node represents the action taken. The initial state
   is the root node, and the goal state is a leaf node. The solution is the path from the root node to the leaf node representing
   the goal state.
 </p>
 <h1 style="color:#02FF02">Writing the Tree in Python</h1>
-<p style="text-align:justify; max-width:580px">
+<p style="text-align:justify">
   This script defines a node which is used to create the tree. New parameters are the count and number.
   Number is the number of the node, which is used to uniquely identify it. This is necessary when graphing the 
   tree, because reachable states can be repeated throughout the tree and cannot be used to uniquely identify the node.
   The count is the number of the node in relation to its siblings. This is used to determine the horizontal position of 
   the node in the tree when graphing. The path cost will be explained later.
 </p>
-  <div style="width:610px; height:300px; overflow:auto; font-family:courier">
+  <div style="height:300px; overflow:auto; font-family:courier">
   <table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%"> 1
  2
  3
@@ -340,13 +340,13 @@
 </td></tr></table>
   </div>
 <h1 style="color:#02FF02">Graphing and Animating the Search Process</h1>
-<p style="text-align:justify; max-width:580px">
+<p style="text-align:justify">
   Graphing and animating the search process is used to visualize how the algorithms work. 
   This class generates a png of the search tree and the current path of the robot on the grid, given a node.
   The tree and path are generated incrementally with each node processed. The png files are then turned into
   a gif animation outside of Python.
 </p>
-  <div style="width:610px; height:300px; overflow:auto; font-family:courier">
+  <div style="height:300px; overflow:auto; font-family:courier">
   <table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%">  1
   2
   3
@@ -604,7 +604,7 @@
 </td></tr></table>
   </p>
   <h1 style="color:#02FF02">Breadth-First Search</h1>
-  <p style="text-align:justify; max-width:580px">
+  <p style="text-align:justify">
     This algorithm explores all of the nodes at the present depth prior to moving on to the next depth.
     In other words, breadth-first search explores paths of length 1 first, then all those of length 2, and so on.
     Therefore, if a solution exists, breadth-first search will find the shallowest goal state first, making it 
@@ -612,12 +612,12 @@
     which means it is only practical for simple problems.
   </p>
   <h1 style="color:#02FF02">Breadth-First Search in Python</h1>
-  <p style="text-align:justify; max-width:580px">
+  <p style="text-align:justify">
     The algorithm is written using the classes above. A list containing explored nodes is used
     to avoid infinite loops, which can occur if a child node is identical to any of its parent nodes.
     The frontier contains all of the nodes to be explored as a first-in-first-out (FIFO) queue.
   </p>
-  <div style="width:610px; height:300px; overflow:auto; font-family:courier">
+  <div style="height:300px; overflow:auto; font-family:courier">
  <table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%"> 1
  2
  3
@@ -675,23 +675,23 @@
 </td></tr></table>
   </div>
   <h1 style="color:#02FF02">Examples</h1>
-  <p style="text-align:justify; max-width:580px">
+  <p style="text-align:justify">
     Using only 1 robot on a 4 by 4 grid with an initial state [ ( 1, 1 ) ] and a goal state [ ( 4, 4 ) ],
-    breadth-first search finds the path [ ( 1, 1 ) ] → [ ( 1, 2 ) ] → [ ( 2, 2 ) ] → [ ( 3, 2 ) ] → [ ( 3, 3 ) ] 
-    → [ ( 4, 3 ) ] → [ ( 4, 4 ) ].
+    breadth-first search finds the path 
+    [ ( 1, 1 ) ] → [ ( 1, 2 ) ] → [ ( 2, 2 ) ] → [ ( 3, 2 ) ] → [ ( 3, 3 ) ] → [ ( 4, 3 ) ] → [ ( 4, 4 ) ].
   </p>
-  <p><img src="solution1.png"/></p>
-  <p style="text-align:justify; max-width:580px">
+  <p style="text-align:center"><img src="solution1.png"/></p>
+  <p style="text-align:justify">
     The search process and path is animated below. The violet portion of the search tree shows the current path.
     The current path of the robot is also animated on the grid to the right of the tree. Even for a simple example
     like this, the tree has a depth of 6 and 50 nodes before finding a solution.
   </p>
-  <p><img src="BFS_1r.gif"/><img src="BFS_1r_grid.gif"/></p>
-   <p style="text-align:justify; max-width:580px">
+  <p style="text-align:center"><img src="BFS_1r.gif"/><img src="BFS_1r_grid.gif"/></p>
+   <p style="text-align:justify">
     Using 2 robots on a 2 by 3 cell grid with an initial state [ ( 1, 1 ), ( 2, 1 ) ] and a goal state [ ( 2, 3 ), ( 1, 3 ) ],
      
   </p>
-  <p><img src="2x3_2r.gif"/><img src="2x3_2r_grid.gif"/></p>
+  <p style="text-align:center"><img src="2x3_2r.gif"/><img src="2x3_2r_grid.gif"/></p>
     
   </body>
 </html>
