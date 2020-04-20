@@ -5,8 +5,8 @@
   <head>
     <h1 style="color:#02FF02">Search Algorithms & Simple Robot Navigation</h1>
     <p style="text-align:justify; max-width:580px">
-      The problem of simple robot navigation involves N robots on a 2D m by n grid, an initial state specifying the initial position of the robots
-      and a goal state specifying the final position of the robots. 
+      The problem of simple robot navigation involves N simple circular robots on a 2D m by n grid, an initial state specifying the 
+      initial position of the robots and a goal state specifying the final position of the robots. 
     </p>
     <p style="text-align:justify; max-width:580px">
       Using various searching algorithms, the path from the initial to goal state will be found, without any robot exiting the grid, 
@@ -676,7 +676,23 @@
 </pre></div>
 </td></tr></table>
   </div>
+  <h1 style="color:#02FF02">Examples</h1>
+  <p style="text-align:justify; max-width:580px">
+    Using only 1 robot on a 4 by 4 cell grid with an initial state [ ( 1, 1 ) ] and a goal state [ ( 4, 4 ) ],
+    breadth-first search finds the path [ ( 1, 1 ) ] → [ ( 1, 2 ) ] → [ ( 2, 2 ) ] → [ ( 3, 2 ) ] → [ ( 3, 3 ) ] 
+    → [ ( 4, 3 ) ] → [ ( 4, 4 ) ].
+  </p>
+  <p><img src="BFS_1r.gif"/><img src="solution1.png"/></p>
+  <p style="text-align:justify; max-width:580px">
+    The search process and path is animated below. The violet portion of the search tree shows the current path.
+    The current path of the robot is also animated on the grid to the right of the tree. Even for a simple example
+    like this, the tree has a depth of 6 and 50 nodes before finding a solution.
+  </p>
   <p><img src="BFS_1r.gif"/><img src="BFS_1r_grid.gif"/></p>
+   <p style="text-align:justify; max-width:580px">
+    Using 2 robots on a 2 by 3 cell grid with an initial state [ ( 1, 1 ), ( 2, 1 ) ] and a goal state [ ( 2, 3 ), ( 1, 3 ) ],
+     
+  </p>
   <p><img src="2x3_2r.gif"/><img src="2x3_2r_grid.gif"/></p>
     
   </body>
