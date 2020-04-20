@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <title>N Robots Problem</title>
+  <body style="background-color:#002240; color:white;">
   <head>
     <h1 style="color:#02FF02">N Robots Problem</h1>
     <p style="text-align:justify; max-width:580px">
@@ -218,435 +219,130 @@
   </div>
   <h1 style="color:#02FF02">Nodes and Tree Data Structures</h1>
   <p>
-    To solve the problem using a search tree, the node and tree data structure must be defined.
-  </p>
+    To solve the problem using a search tree, the node and tree data structure should be defined.
+    Tree structures are composed of nodes. A single node has a single parent node and multiple
+    child nodes, for which it is the parent node. The branches extending from parent to child nodes create
+    what looks like an upside down tree in which the root node is at the top. The root node is the only node
+    that has no parents and represents the grandparent of all nodes in the tree. The degree of a node is the
+    number of children of the node. The depth of the node is the number of parent nodes above it. 
+    Sibling nodes are nodes that share the same parent. Leaf nodes are the bottommost nodes, which have no children nodes.
+    The path of a node is its lineage to the root node.
+</p>
+<p>
+  For this problem, each node represents a state. The child nodes represent the states reachable from the parent node.
+  The branch connecting the parent node to the child node represents the action taken to reach the child state. The initial state
+  is the root node, and the goal state is a leaf node. The solution is the path from the root node to the leaf node representing
+  the goal state.
+</p>
+<h1 style="color:#02FF02">Writing a Tree in Python</h1>
+<p>
+  This script defines a node which is used to create the tree. New parameters are the count and number.
+  Number is the number of the node, which is used to uniquely identify it. This is necessary when graphing the 
+  tree, because reachable states can be repeated throughout the tree and cannot be used to uniquely identify the node.
+  The count is the number of the node in relation to its siblings. This is used to determine the horizontal position of 
+  the node in the tree when graphing.
+</p>
+  <div style="width:610px; height:300px; overflow:auto; font-family:courier">
+  <table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">class</span> <span style="color: #5E5EFF">Node</span> :
+    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">__init__</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">state</span>,
+                  <span style="color: #FFFFFF">parent</span>   <span style="color: #FF8000">=</span> <span style="color: #FF69B4">None</span>,
+                  <span style="color: #FFFFFF">children</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0</span>,
+                  <span style="color: #FFFFFF">pathcost</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0</span>,
+                  <span style="color: #FFFFFF">count</span>    <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0</span>,
+                  <span style="color: #FFFFFF">number</span>   <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0</span> ) :
+        <span style="color: #02FF02">&#39;&#39;&#39; Create a search tree node &#39;&#39;&#39;</span>
+        <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">state</span>    <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">state</span>
+        <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">parent</span>   <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">parent</span>
+        <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">children</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">children</span>
+        <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">pathcost</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">pathcost</span>
+        <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">count</span>    <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">count</span>
+        <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">number</span>   <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">number</span> 
+
+    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">reverse</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">l</span> ) :
+        <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">l</span>[ ::<span style="color: #FF8000">-</span><span style="color: #FF00FF">1</span> ]
+    
+    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">lineage</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">child</span> ) :
+        <span style="color: #02FF02">&#39;&#39;&#39;</span>
+<span style="color: #02FF02">        Generates the product of the count of all</span>
+<span style="color: #02FF02">        parent nodes and their children, used to</span>
+<span style="color: #02FF02">        contrict the spread of the lower branches</span>
+<span style="color: #02FF02">        of the tree when graphing</span>
+<span style="color: #02FF02">        &#39;&#39;&#39;</span>
+        <span style="color: #FFFFFF">n</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">1</span>
+        <span style="color: #FF8000">while</span> <span style="color: #FFFFFF">child</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">parent</span> :
+            <span style="color: #FFFFFF">parent</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">child</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">parent</span>
+            <span style="color: #FFFFFF">n</span> <span style="color: #FF8000">*=</span> <span style="color: #FFFFFF">parent</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">children</span>
+            <span style="color: #FFFFFF">child</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">parent</span>
+        <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">n</span>
+
+    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">path</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">child</span> ) :
+        <span style="color: #02FF02">&#39;&#39;&#39; </span>
+<span style="color: #02FF02">        Returns dictionary storing chosen states </span>
+<span style="color: #02FF02">        and the identifiers for the chosen nodes</span>
+<span style="color: #02FF02">        &#39;&#39;&#39;</span>
+        <span style="color: #FFFFFF">path</span> <span style="color: #FF8000">=</span> { <span style="color: #02FF02">&#39;path&#39;</span>   : [  <span style="color: #FFFFFF">child</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">state</span> ], 
+                 <span style="color: #02FF02">&#39;number&#39;</span> : [ <span style="color: #FFFFFF">child</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">number</span> ] }
+        <span style="color: #FF8000">while</span> <span style="color: #FFFFFF">child</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">parent</span> :
+            <span style="color: #FFFFFF">parent</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">child</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">parent</span>
+            <span style="color: #FFFFFF">path</span>[ <span style="color: #02FF02">&#39;path&#39;</span>   ]<span style="color: #FF8000">.</span><span style="color: #FFFFFF">append</span>(  <span style="color: #FFFFFF">parent</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">state</span> )
+            <span style="color: #FFFFFF">path</span>[ <span style="color: #02FF02">&#39;number&#39;</span> ]<span style="color: #FF8000">.</span><span style="color: #FFFFFF">append</span>( <span style="color: #FFFFFF">parent</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">number</span> )
+            <span style="color: #FFFFFF">child</span>  <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">parent</span>
+        <span style="color: #FFFFFF">path</span>[ <span style="color: #02FF02">&#39;path&#39;</span>   ] <span style="color: #FF8000">=</span> <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">reverse</span>( <span style="color: #FFFFFF">path</span>[   <span style="color: #02FF02">&#39;path&#39;</span> ] )
+        <span style="color: #FFFFFF">path</span>[ <span style="color: #02FF02">&#39;number&#39;</span> ] <span style="color: #FF8000">=</span> <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">reverse</span>( <span style="color: #FFFFFF">path</span>[ <span style="color: #02FF02">&#39;number&#39;</span> ] )
+        <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">path</span>
+</pre></div>
+</td></tr></table>
+  </div>
+
   <h1 style="color:#02FF02">Breadth First Search</h1>
   <p><img src="BFS_1r.gif"/><img src="BFS_1r_grid.gif"/></p>
   <p><img src="2x3_2r.gif"/><img src="2x3_2r_grid.gif"/></p>
-  
-  <h1 style="color:#02FF02">Script</h1>
-  <body style="background-color:#002240; color:white;">
-    <h1 style="color:#02FF02">Problem</h1>
-    <p style="text-align:justify; max-width:580px;">
-      Formalizing the problem
-    </p>
-    <div style="width:610px; height:300px; overflow:auto; font-family:courier"> 
- <table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">class</span> <span style="color: #5E5EFF">Problem</span> :
-    <span style="color: #02FF02">&#39;&#39;&#39;</span>
-<span style="color: #02FF02">    +------------------------------------------------------------+</span>
-<span style="color: #02FF02">    |                 N Robots on an m x n Grid                  |</span>
-<span style="color: #02FF02">    +------------+-----------------------------------------------+</span>
-<span style="color: #02FF02">    | Substate j | Position of Robot j: ( jx, jy )               |</span>
-<span style="color: #02FF02">    +------------+-----------------------------------------------+</span>
-<span style="color: #02FF02">    | State N    | ( Substate 1, Substate 2, ..., Substate N )   |</span>
-<span style="color: #02FF02">    +------------+-----------------------------------------------+</span>
-<span style="color: #02FF02">    | Conditions | (1) Robots cannot move outside grid:          |</span>
-<span style="color: #02FF02">    |            |     (a) 1 &lt;= jx &lt;= m;                         |</span>
-<span style="color: #02FF02">    |            |     (b) 1 &lt;= jy &lt;= n.                         |</span>
-<span style="color: #02FF02">    |            | (2) Robots cannot share position:             |</span>
-<span style="color: #02FF02">    |            |     Count( Substate j ) = 1.                  |</span>
-<span style="color: #02FF02">    +------------+-----------------------------------------------+</span>
-<span style="color: #02FF02">    | Actions j  | { Substate 1f, Substate 2f, ... }             |</span>
-<span style="color: #02FF02">    +------------+-----------------------------------------------+</span>
-<span style="color: #02FF02">    | Successor  | { State 1f, State 2f, ... }                   |</span>
-<span style="color: #02FF02">    +------------+-----------------------------------------------+</span>
-<span style="color: #02FF02">    | Conditions | (1) Robots move by one grid unit:             |</span>
-<span style="color: #02FF02">    |            |     (a) xi - 1 &lt;= xf &lt;= xi + 1;               |</span>
-<span style="color: #02FF02">    |            |     (b) yi - 1 &lt;= yf &lt;= yi + 1.               |</span>
-<span style="color: #02FF02">    |            | (2) Robots should not collide:                |</span>
-<span style="color: #02FF02">    |            |     Count( Substate jf ) = 1.                 |</span>
-<span style="color: #02FF02">    |            | (3) Robots cannot swap places:                |</span>
-<span style="color: #02FF02">    |            |     (a) ( Substate ji, Substate jf )          |</span>
-<span style="color: #02FF02">    |            |         != ( Substate kf, Substate ki );      |</span>
-<span style="color: #02FF02">    |            |     (b) ( Substate ji, Substate ki )          |</span>
-<span style="color: #02FF02">    |            |         != ( Substate kf, Substate jf );      |</span>
-<span style="color: #02FF02">    |            |     (c) j &lt; k.                                |</span>
-<span style="color: #02FF02">    +------------+-----------------------------------------------+</span>
-<span style="color: #02FF02">    &#39;&#39;&#39;</span>
-    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">__init__</span>( <span style="color: #FF69B4">self</span> ) :
-        <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">grid_x</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">1</span>
-        <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">grid_y</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">1</span>
-        <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">init</span> <span style="color: #FF8000">  =</span> [ ( <span style="color: #FF00FF">1</span>, <span style="color: #FF00FF">1</span> ) ]
-        <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">goal</span> <span style="color: #FF8000">  =</span> [ ( <span style="color: #FF00FF">1</span>, <span style="color: #FF00FF">1</span> ) ]
-        <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">robots</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">len</span>( <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">init</span> )
     
-    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">successor</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">state</span> ) :
-        <span style="color: #02FF02">&#39;&#39;&#39; </span>
-<span style="color: #02FF02">        Generates set of reachable states</span>
-<span style="color: #02FF02">        by an action from a given state. </span>
-<span style="color: #02FF02">        &#39;&#39;&#39;</span>
-        <span style="color: #FFFFFF">swap</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">set</span>() <span style="color: #DD0000"># { ( Substate ji, Substate ki ), ... };</span>
-                     <span style="color: #DD0000"># j &lt; k.</span>
-        <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">j</span> <span style="color: #FF8000">in</span> <span style="color: #FF69B4">range</span>( <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">robots</span> ) :
-            <span style="color: #FFFFFF">sub_ji</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">state</span>[ <span style="color: #FFFFFF">j</span> ]
-            <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">sub_ki</span> <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">state</span>[ <span style="color: #FFFFFF">j</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> : ] :
-                <span style="color: #FFFFFF">swap</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( <span style="color: #FFFFFF">sub_ji</span>, <span style="color: #FFFFFF">sub_ki</span> ) )
-        <span style="color: #FFFFFF">acts</span> <span style="color: #FF8000">=</span> [] <span style="color: #DD0000"># Actions available to each</span>
-                  <span style="color: #DD0000"># robot j, indexed by robot</span>
-        <span style="color: #DD0000"># Generating actions for each robot j</span>
-        <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">sub</span> <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">state</span> :
-            <span style="color: #FFFFFF">acts_j</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">set</span>()
-            <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">act</span> <span style="color: #FF8000">in</span> [ <span style="color: #FF00FF">0</span>, <span style="color: #FF00FF">1</span> , <span style="color: #FF8000">-</span><span style="color: #FF00FF">1</span> ] :
-                <span style="color: #FFFFFF">xi</span>, <span style="color: #FFFFFF">yi</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">sub</span>[ <span style="color: #FF00FF">0</span> ], <span style="color: #FFFFFF">sub</span>[ <span style="color: #FF00FF">1</span> ]
-                <span style="color: #FFFFFF">xf</span>, <span style="color: #FFFFFF">yf</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">sub</span>[ <span style="color: #FF00FF">0</span> ] <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">act</span>, <span style="color: #FFFFFF">sub</span>[ <span style="color: #FF00FF">1</span> ] <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">act</span>
-                <span style="color: #DD0000"># (1) Robot cannot move outside grid</span>
-                <span style="color: #FF8000">if</span> <span style="color: #FF00FF">1</span> <span style="color: #FF8000">&lt;=</span> <span style="color: #FFFFFF">xf</span> <span style="color: #FF8000">&lt;=</span> <span style="color: #FF00FF">10</span> : <span style="color: #FFFFFF">acts_j</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( <span style="color: #FFFFFF">xf</span>, <span style="color: #FFFFFF">yi</span> ) )
-                <span style="color: #FF8000">if</span> <span style="color: #FF00FF">1</span> <span style="color: #FF8000">&lt;=</span> <span style="color: #FFFFFF">yf</span> <span style="color: #FF8000">&lt;=</span> <span style="color: #FF00FF">10</span> : <span style="color: #FFFFFF">acts_j</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( <span style="color: #FFFFFF">xi</span>, <span style="color: #FFFFFF">yf</span> ) )
-            <span style="color: #FFFFFF">acts</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">append</span>( <span style="color: #FFFFFF">acts_j</span> )
-        <span style="color: #FFFFFF">succ</span> <span style="color: #FF8000">=</span> []
-        <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">combine</span>( <span style="color: #FFFFFF">acts</span>, <span style="color: #FFFFFF">j</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0</span>, <span style="color: #FFFFFF">state_jf</span> <span style="color: #FF8000">=</span> [] ) :
-            <span style="color: #02FF02">&#39;&#39;&#39; </span>
-<span style="color: #02FF02">            Generates N nested for loops to</span>
-<span style="color: #02FF02">            combine all available actions</span>
-<span style="color: #02FF02">            &#39;&#39;&#39;</span>
-            <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">j</span> <span style="color: #FF8000">==</span> <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">robots</span> :
-                <span style="color: #DD0000"># (3) Robots cannot swap places</span>
-                <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">j</span> <span style="color: #FF8000">in</span> <span style="color: #FF69B4">range</span>( <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">robots</span> ) :
-                    <span style="color: #FFFFFF">sub_jf</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">state_jf</span>[ <span style="color: #FFFFFF">j</span> ]
-                    <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">sub_kf</span> <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">state_jf</span>[ <span style="color: #FFFFFF">j</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> : ] :
-                        <span style="color: #DD0000"># ( Substate ji, Substate ki ) </span>
-                        <span style="color: #DD0000"># != ( Substate kf, Substate jf )</span>
-                        <span style="color: #FF8000">if</span> ( <span style="color: #FFFFFF">sub_kf</span>, <span style="color: #FFFFFF">sub_jf</span> ) <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">swap</span> :
-                            <span style="color: #FF8000">return</span> <span style="color: #DD0000"># Break all loops</span>
-                <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">succ</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">append</span>( <span style="color: #FF69B4">tuple</span>( <span style="color: #FFFFFF">state_jf</span> ) )
-            <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">sub_kf</span> <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">acts</span>[ <span style="color: #FFFFFF">j</span> ] : 
-                <span style="color: #DD0000"># (2) Robots cannot collide</span>
-                <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">sub_kf</span> <span style="color: #FF8000">not</span> <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">state_jf</span> :
-                    <span style="color: #FFFFFF">combine</span>( <span style="color: #FFFFFF">acts</span>, <span style="color: #FFFFFF">j</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">state_jf</span> <span style="color: #FF8000">+</span> [ <span style="color: #FFFFFF">sub_kf</span> ] )
-        <span style="color: #FFFFFF">combine</span>( <span style="color: #FFFFFF">acts</span> )
-        <span style="color: #FF8000">return</span> <span style="color: #FF69B4">set</span>( <span style="color: #FFFFFF">succ</span> )
-
-    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">goal</span>( <span style="color: #FFFFFF">state</span> ) :
-        <span style="color: #02FF02">&#39;&#39;&#39; True if the state is a goal. &#39;&#39;&#39;</span>
-        <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">state</span> <span style="color: #FF8000">==</span> <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">goal</span>
-</pre></div>
-</td></tr></table>
-    </div>
-    <h1 style="color:#02FF02">Node</h1>
-    <p style="text-align:justify; max-width:580px;">
-      Formalizing the problem
-    </p>
-    <div style="width:610px; height:300px; overflow:auto; font-family:courier">
- <table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">class</span> <span style="color: #5E5EFF">Node</span> :
-    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">__init__</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">state</span>, <span style="color: #FFFFFF">parent</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">None</span>, 
-                  <span style="color: #FFFFFF">action</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">None</span>, <span style="color: #FFFFFF">pathcost</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0</span> ) :
-        <span style="color: #02FF02">&#39;&#39;&#39; Create a search tree Node &#39;&#39;&#39;</span>
-        <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">state</span>    <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">state</span>
-        <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">parent</span>   <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">parent</span>
-        <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">action</span>   <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">action</span>
-        <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">pathcost</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">pathcost</span>
-
-    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">reverse</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">l</span> ) :
-        <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">path</span>[ ::<span style="color: #FF8000">-</span><span style="color: #FF00FF">1</span> ]
-
-    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">solution</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">child</span>, <span style="color: #FFFFFF">initial</span> ) :
-        <span style="color: #02FF02">&#39;&#39;&#39; Returns list of chosen states &#39;&#39;&#39;</span>
-        <span style="color: #FFFFFF">path</span> <span style="color: #FF8000">=</span> [ <span style="color: #FFFFFF">child</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">state</span> ]
-        <span style="color: #FF8000">while</span> <span style="color: #FFFFFF">initial</span> <span style="color: #FF8000">not</span> <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">path</span> :
-            <span style="color: #FFFFFF">parent</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">child</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">parent</span>
-            <span style="color: #FFFFFF">path</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">append</span>( <span style="color: #FFFFFF">parent</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">state</span> )
-            <span style="color: #FFFFFF">child</span>  <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">parent</span>
-        <span style="color: #FF8000">return</span> <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">reverse</span>( <span style="color: #FFFFFF">path</span> )
-</pre></div>
-</td></tr></table>
-    </div>
-    <h1 style="color:#02FF02">Breadth First Search</h1>
-    <p style="text-align:justify; max-width:580px;">
-      Description
-    </p>
-    <div style="width:610px; height:300px; overflow:auto; font-family:courier">
- <table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">def</span> <span style="color: #5E5EFF">breadth_first_search</span>( <span style="color: #FFFFFF">init</span>, <span style="color: #FFFFFF">goal</span>, <span style="color: #FFFFFF">m</span>, <span style="color: #FFFFFF">n</span> ) :
-    <span style="color: #FFFFFF">node</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">Node</span>( <span style="color: #FFFFFF">init</span> )
-    <span style="color: #FFFFFF">problem</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">Probem</span>( <span style="color: #FFFFFF">goal</span>, <span style="color: #FFFFFF">m</span>, <span style="color: #FFFFFF">n</span> )
-    <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">problem</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">goal</span>( <span style="color: #FFFFFF">init</span> ) : 
-        <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">init</span>
-    <span style="color: #FFFFFF">frontier</span> <span style="color: #FF8000">=</span> [ <span style="color: #FFFFFF">node</span> ]
-    <span style="color: #FFFFFF">explored</span> <span style="color: #FF8000">=</span> []
-    <span style="color: #FF8000">while</span> <span style="color: #FF69B4">True</span> :
-        <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">frontier</span> <span style="color: #FF8000">==</span> [] : <span style="color: #FF8000">return</span> <span style="color: #02FF02">&#39;Failure&#39;</span>
-        <span style="color: #FFFFFF">parent</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">frontier</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">pop</span>( <span style="color: #FF00FF">0</span> ) <span style="color: #DD0000"># FIFO queue</span>
-        <span style="color: #FFFFFF">explored</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">append</span>( <span style="color: #FFFFFF">parent</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">state</span> )
-        <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">state</span> <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">problem</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">successor</span>( <span style="color: #FFFFFF">parent</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">state</span> ) :
-            <span style="color: #FFFFFF">child</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">node</span>( <span style="color: #FFFFFF">state</span>, <span style="color: #FFFFFF">parent</span> )
-            <span style="color: #FF8000">if</span> ( <span style="color: #FFFFFF">child</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">state</span> <span style="color: #FF8000">not</span> <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">explored</span> <span style="color: #FF8000">and</span>
-                 <span style="color: #FFFFFF">child</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">state</span> <span style="color: #FF8000">not</span> <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">frontier</span> ) :
-                <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">problem</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">goal</span>( <span style="color: #FFFFFF">child</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">state</span> ) :
-                    <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">node</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">solution</span>( <span style="color: #FFFFFF">child</span>, <span style="color: #FFFFFF">init</span> )
-                <span style="color: #FFFFFF">frontier</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">append</span>( <span style="color: #FFFFFF">child</span> )
-</pre></div>
-</td></tr></table>
-    </div>
-    <h1 style="color:#02FF02">Graphing</h1>
-    <p style="text-align:justify; max-width:580px;">
-      Generate animation of search process
-    </p>
-    <div style="width:610px; height:300px; overflow:auto; font-family:courier">
- <table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">import</span> <span style="color: #FFFFFF">matplotlib.pyplot</span> <span style="color: #FF8000">as</span> <span style="color: #FFFFFF">plt</span>
-<span style="color: #FF8000">import</span> <span style="color: #FFFFFF">matplotlib.patheffects</span> <span style="color: #FF8000">as</span> <span style="color: #FFFFFF">pe</span>
-
-<span style="color: #FF8000">class</span> <span style="color: #5E5EFF">Graph</span> :
-    <span style="color: #02FF02">&#39;&#39;&#39; Graphs the search tree &#39;&#39;&#39;</span>
-    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">__init__</span>( <span style="color: #FF69B4">self</span> ) :
-        <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">graph</span> <span style="color: #FF8000">=</span> []
-        <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">coord</span> <span style="color: #FF8000">=</span> {}
-
-    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">tree</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">node</span> ) :
-        <span style="color: #DD0000"># Retrieving parent coordinate</span>
-        <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">node</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">parent</span> :
-            <span style="color: #FFFFFF">xp</span>, <span style="color: #FFFFFF">yp</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">coord</span>[ <span style="color: #FFFFFF">node</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">parent</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">number</span> ]
-        <span style="color: #FF8000">else</span> :
-            <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">coord</span>[ <span style="color: #FF00FF">0</span> ] <span style="color: #FF8000">=</span> ( <span style="color: #FF00FF">0</span>, <span style="color: #FF00FF">0</span> )
-            <span style="color: #FF8000">return</span>
-        <span style="color: #DD0000"># Generating child coordinate</span>
-        <span style="color: #FFFFFF">breadth</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">node</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">parent</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">children</span>
-        <span style="color: #FFFFFF">yc</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">yp</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>
-        <span style="color: #FFFFFF">xc</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">node</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">count</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">0.5</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">breadth</span> <span style="color: #FF8000">/</span> <span style="color: #FF00FF">2</span> \
-             <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">breadth</span> <span style="color: #FF8000">%</span> <span style="color: #FF00FF">2</span> <span style="color: #FF8000">==</span> <span style="color: #FF00FF">0</span> \
-             <span style="color: #FF8000">else</span> <span style="color: #FFFFFF">node</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">count</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">breadth</span> <span style="color: #FF8000">//</span> <span style="color: #FF00FF">2</span>
-        <span style="color: #FFFFFF">xc</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">xp</span> <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">xc</span> <span style="color: #FF8000">/</span> <span style="color: #FFFFFF">node</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">lineage</span>( <span style="color: #FFFFFF">node</span> )
-        <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">coord</span>[ <span style="color: #FFFFFF">node</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">number</span> ] <span style="color: #FF8000">=</span> ( <span style="color: #FFFFFF">xc</span>, <span style="color: #FFFFFF">yc</span> )
-        <span style="color: #DD0000"># Retrieving path coordinates</span>
-        <span style="color: #FFFFFF">path</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">node</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">path</span>( <span style="color: #FFFFFF">node</span> )
-        <span style="color: #FFFFFF">lbls</span> <span style="color: #FF8000">=</span> [ <span style="color: #FF69B4">str</span>( <span style="color: #FFFFFF">state</span>[ <span style="color: #FF00FF">0</span> ] ) 
-                 <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">state</span> <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">path</span>[ <span style="color: #02FF02">&#39;path&#39;</span> ] ]
-        <span style="color: #FFFFFF">path</span> <span style="color: #FF8000">=</span> [ <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">coord</span>[ <span style="color: #FFFFFF">num</span> ] 
-                 <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">num</span> <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">path</span>[ <span style="color: #02FF02">&#39;number&#39;</span> ] ]
-        <span style="color: #FFFFFF">pack</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">list</span>( <span style="color: #FF69B4">zip</span>( <span style="color: #FF8000">*</span><span style="color: #FFFFFF">path</span> ) )
-        <span style="color: #DD0000"># Plotting the tree</span>
-        <span style="color: #FFFFFF">effect</span> <span style="color: #FF8000">=</span> [ <span style="color: #FFFFFF">pe</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">Stroke</span>( <span style="color: #FFFFFF">linewidth</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">5</span>, 
-                              <span style="color: #FFFFFF">foreground</span> <span style="color: #FF8000">=</span> <span style="color: #02FF02">&#39;#ffffff&#39;</span> ), 
-                   <span style="color: #FFFFFF">pe</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">Normal</span>() ]
-        <span style="color: #DD0000"># Generating branch</span>
-        <span style="color: #FFFFFF">branch</span> <span style="color: #FF8000">=</span> [ ( <span style="color: #FFFFFF">xp</span>, <span style="color: #FFFFFF">yp</span> ), ( <span style="color: #FFFFFF">xc</span>, <span style="color: #FFFFFF">yc</span> ) ]
-        <span style="color: #FFFFFF">branch</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">list</span>( <span style="color: #FF69B4">zip</span>( <span style="color: #FF8000">*</span><span style="color: #FFFFFF">branch</span> ) )
-        <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">graph</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">extend</span>( <span style="color: #FFFFFF">branch</span> )
-        <span style="color: #FFFFFF">plt</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">clf</span>() <span style="color: #DD0000"># Clear current figure</span>
-        <span style="color: #FFFFFF">plt</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">plot</span>( <span style="color: #FF8000">*</span><span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">graph</span>,
-                  <span style="color: #FFFFFF">color</span> <span style="color: #FF8000">=</span> <span style="color: #02FF02">&#39;#02FF02&#39;</span>,
-                  <span style="color: #FFFFFF">marker</span> <span style="color: #FF8000">=</span> <span style="color: #02FF02">&#39;o&#39;</span>, 
-                  <span style="color: #FFFFFF">linewidth</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">2</span>, 
-                  <span style="color: #FFFFFF">markersize</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">10</span>,
-                  <span style="color: #FFFFFF">path_effects</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">effect</span> )
-        <span style="color: #DD0000"># Highlighting path</span>
-        <span style="color: #FFFFFF">plt</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">plot</span>( <span style="color: #FF8000">*</span><span style="color: #FFFFFF">pack</span>,
-                  <span style="color: #FFFFFF">color</span> <span style="color: #FF8000">=</span> <span style="color: #02FF02">&#39;#FF00FF&#39;</span>,
-                  <span style="color: #FFFFFF">marker</span> <span style="color: #FF8000">=</span> <span style="color: #02FF02">&#39;o&#39;</span>, 
-                  <span style="color: #FFFFFF">linewidth</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">2</span>, 
-                  <span style="color: #FFFFFF">markersize</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">10</span>,
-                  <span style="color: #FFFFFF">path_effects</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">effect</span> )
-        <span style="color: #DD0000"># Generating text</span>
-        <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">i</span> <span style="color: #FF8000">in</span> <span style="color: #FF69B4">range</span>( <span style="color: #FF69B4">len</span>( <span style="color: #FFFFFF">path</span> ) ):
-            <span style="color: #FFFFFF">xl</span>, <span style="color: #FFFFFF">yl</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">path</span>[ <span style="color: #FFFFFF">i</span> ] 
-            <span style="color: #FFFFFF">plt</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">text</span>( <span style="color: #FFFFFF">xl</span>, <span style="color: #FFFFFF">yl</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">0.5</span>, 
-                      <span style="color: #FFFFFF">lbls</span>[ <span style="color: #FFFFFF">i</span> ],
-                      <span style="color: #FFFFFF">color</span> <span style="color: #FF8000">=</span> <span style="color: #02FF02">&#39;white&#39;</span>,
-                      <span style="color: #FFFFFF">fontsize</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">15</span>,
-                      <span style="color: #FFFFFF">bbox</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">dict</span>( <span style="color: #FFFFFF">alpha</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0.9</span>,
-                                   <span style="color: #FFFFFF">facecolor</span> <span style="color: #FF8000">=</span> <span style="color: #02FF02">&#39;#454545&#39;</span>,
-                                   <span style="color: #FFFFFF">edgecolor</span> <span style="color: #FF8000">=</span>    <span style="color: #02FF02">&#39;none&#39;</span>,
-                                   <span style="color: #FFFFFF">boxstyle</span>  <span style="color: #FF8000">=</span>   <span style="color: #02FF02">&#39;round&#39;</span> ),
-                      <span style="color: #FFFFFF">verticalalignment</span> <span style="color: #FF8000">=</span> <span style="color: #02FF02">&#39;center&#39;</span>,
-                      <span style="color: #FFFFFF">horizontalalignment</span> <span style="color: #FF8000">=</span> <span style="color: #02FF02">&#39;center&#39;</span> )
-        <span style="color: #FFFFFF">plt</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">axis</span>( <span style="color: #02FF02">&#39;off&#39;</span> )
-        <span style="color: #FFFFFF">plt</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">grid</span>( <span style="color: #FFFFFF">b</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">None</span> )
-        <span style="color: #FFFFFF">plt</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">savefig</span>( <span style="color: #02FF02">&#39;frame{}.png&#39;</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">format</span>( <span style="color: #FFFFFF">node</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">number</span> ),
-                     <span style="color: #FFFFFF">dpi</span> <span style="color: #FF8000">=</span> <span style="color: #02FF02">&#39;figure&#39;</span>, <span style="color: #FFFFFF">orientation</span> <span style="color: #FF8000">=</span> <span style="color: #02FF02">&#39;landscape&#39;</span>,
-                     <span style="color: #FFFFFF">transparent</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">True</span> )
-</pre></div>
-</td></tr></table>
-    </div>
   </body>
 </html>
