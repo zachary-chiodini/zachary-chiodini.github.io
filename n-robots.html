@@ -814,7 +814,7 @@
     between a given state and the goal state.
   </p>
   <div style="height:300px; overflow:auto; font-family:courier">
- <table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%"> 1
+<table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%"> 1
  2
  3
  4
@@ -889,10 +889,10 @@
                 <span style="color: #FFFFFF">child</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">number</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">identity</span>
                 <span style="color: #FFFFFF">fringe</span>[ <span style="color: #FFFFFF">child</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">pathcost</span> ] <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">child</span>
                 <span style="color: #FFFFFF">count</span> <span style="color: #FF8000">+=</span> <span style="color: #FF00FF">1</span>
+        <span style="color: #FFFFFF">count</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0</span>
         <span style="color: #DD0000"># Prioritize nodes by pathcost in descending order</span>
         <span style="color: #FFFFFF">frontier</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">extend</span>( <span style="color: #FF69B4">dict</span>( <span style="color: #FF69B4">sorted</span>( <span style="color: #FFFFFF">fringe</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">items</span>(), 
                                        <span style="color: #FFFFFF">reverse</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">True</span> ) )<span style="color: #FF8000">.</span><span style="color: #FFFFFF">values</span>() )
-        <span style="color: #FFFFFF">count</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0</span>
 </pre></div>
 </td></tr></table>
   </div>
