@@ -702,7 +702,72 @@
   <p style="text-align:center"><img src="2x3_2r.gif"/><img src="2x3_2r_grid.gif"/></p>
   <h1 style="color:#02FF02">Depth-First Search</h1>
   <p style="text-align:justify">
-  
+    This alogirthm explores the deepest level of the tree first. When the search hits a leaf node, it backtracks up the tree and
+    expands a shallower level node to the deepest level, and so on. Depth-first search has an exponential time complexity bound but
+    may be faster than breadth-first search if the correct node is chosen at the start of the search, or if there are many solutions
+    in the tree. Depth-first search is not complete, because it may not find a solution if the node it chooses to expand leads 
+    to an infinite or very deep leaf node. It is also not optimal, because it does not garantee the shallowest goal state.
   </p>
+  <h1 style="color:#02FF02">Depth-First Search in Python</h1>
+  <p style="text-align:justify">
+    The script is identical to breadth-fist search except the frontier is last-in-first-out (LIFO) queue.
+  </p>
+  <div style="height:300px; overflow:auto; font-family:courier">
+ <table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FFFFFF">ef</span> <span style="color: #FFFFFF">depth_first_search</span>( <span style="color: #FFFFFF">init</span>, <span style="color: #FFFFFF">goal</span>, <span style="color: #FFFFFF">m</span>, <span style="color: #FFFFFF">n</span> ) :
+    <span style="color: #FFFFFF">graph</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">Graph</span>()
+    <span style="color: #FFFFFF">problem</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">Problem</span>( <span style="color: #FFFFFF">init</span>, <span style="color: #FFFFFF">goal</span>, <span style="color: #FFFFFF">m</span>, <span style="color: #FFFFFF">n</span> )
+    <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">problem</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">goal_test</span>( <span style="color: #FFFFFF">init</span> ) : 
+        <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">init</span>
+    <span style="color: #FFFFFF">count</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0</span>
+    <span style="color: #FFFFFF">identity</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0</span>
+    <span style="color: #FFFFFF">frontier</span> <span style="color: #FF8000">=</span> [ <span style="color: #FFFFFF">Node</span>( <span style="color: #FFFFFF">init</span> ) ]
+    <span style="color: #FFFFFF">explored</span> <span style="color: #FF8000">=</span> []
+    <span style="color: #FF8000">while</span> <span style="color: #FF69B4">True</span> :
+        <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">frontier</span> <span style="color: #FF8000">==</span> [] : <span style="color: #FF8000">return</span> <span style="color: #02FF02">&#39;Failure&#39;</span>
+        <span style="color: #FFFFFF">node</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">frontier</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">pop</span>( <span style="color: #FF8000">-</span><span style="color: #FF00FF">1</span> ) <span style="color: #DD0000"># LIFO queue</span>
+        <span style="color: #FFFFFF">graph</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">tree</span>( <span style="color: #FFFFFF">node</span> )
+        <span style="color: #FFFFFF">graph</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">grid</span>( <span style="color: #FFFFFF">node</span>, <span style="color: #FFFFFF">m</span>, <span style="color: #FFFFFF">n</span> )
+        <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">problem</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">goal_test</span>( <span style="color: #FFFFFF">node</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">state</span> ) :
+            <span style="color: #FF8000">return</span> <span style="color: #DD0000"># We&#39;re done</span>
+        <span style="color: #FFFFFF">explored</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">append</span>( <span style="color: #FFFFFF">node</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">state</span> )
+        <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">state</span> <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">problem</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">successor</span>( <span style="color: #FFFFFF">node</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">state</span> ) :
+            <span style="color: #FFFFFF">child</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">Node</span>( <span style="color: #FFFFFF">state</span>, <span style="color: #FFFFFF">parent</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">node</span> )
+            <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">child</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">state</span> <span style="color: #FF8000">not</span> <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">explored</span> :
+                <span style="color: #FFFFFF">identity</span> <span style="color: #FF8000">+=</span> <span style="color: #FF00FF">1</span>
+                <span style="color: #FFFFFF">node</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">children</span> <span style="color: #FF8000">+=</span> <span style="color: #FF00FF">1</span>
+                <span style="color: #FFFFFF">child</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">count</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">count</span>
+                <span style="color: #FFFFFF">child</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">number</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">identity</span>
+                <span style="color: #FFFFFF">frontier</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">append</span>( <span style="color: #FFFFFF">child</span> )
+                <span style="color: #FFFFFF">count</span> <span style="color: #FF8000">+=</span> <span style="color: #FF00FF">1</span>
+        <span style="color: #FFFFFF">count</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0</span>
+</pre></div>
+</td></tr></table>
+  </div>
   </body>
 </html>
