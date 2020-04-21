@@ -783,5 +783,21 @@
     which makes depth-first search the faster algorithm with 1 robot.
   </p>
   <p style="text-align:center"><img src="DFS_1r.gif"/><img src="DFS_1r_grid.gif"/></p>
+  <p style="text-align:justify">
+    With 2 robots on a 2 by 3 grid with an initial state [ ( 1, 1 ), ( 2, 1 ) ] and a goal state [ ( 2, 3 ), ( 1, 3 ) ],
+    depth-first search finds the path <br/>
+    [ ( 1, 1 ), ( 2, 1 ) ] → [ ( 1, 2 ), ( 2, 2 ) ) → [ ( 1, 1 ), ( 2, 2 ) ] → [ ( 2, 1 ), ( 2, 2 ) ] → [ ( 2, 1 ), ( 2, 3 ) ] 
+    → [ ( 2, 1 ), ( 1, 3 ) ] → [ ( 1, 1 ), ( 1, 3 ) ] → [ ( 1, 2 ), ( 1, 3 ) ] → [ ( 2, 2 ), ( 1, 2 ) ] → [ ( 2, 1 ), ( 1, 1 ) ] 
+    → [ ( 2, 1 ), ( 1, 2 ) ] → [ ( 2, 2 ), ( 1, 3 ) ] → [ ( 2, 2 ), ( 2, 3 ) ] → [ ( 1, 2 ), ( 2, 3 ) ] → [ ( 1, 3 ), ( 2, 3 ) ] 
+    → [ ( 1, 3 ), ( 2, 2 ) ] → [ ( 2, 3 ), ( 2, 1 ) ] → [ ( 1, 3 ), ( 2, 1 ) ] → [ ( 1, 2 ), ( 1, 1 ) ] → [ ( 1, 3 ), ( 1, 1 ) ] 
+    → [ ( 2, 3 ), ( 1, 1 ) ] → [ ( 2, 2 ), ( 2, 1 ) ] → [ ( 2, 2 ), ( 1, 1 ) ] → [ ( 2, 3 ), ( 1, 2 ) ] → [ ( 1, 3 ), ( 1, 2 ) ] 
+    → [ ( 2, 3 ), ( 1, 3 ) ].
+  </p>
+  <p style="text-align:center"><img src="solution4.png"/></p>
+  <p style="text-align:justify">
+    The search process and path is animated below. Although only 26 nodes were generated to find a solution, the path is far from
+    optimal.
+  </p>
+  <p style="text-align:center"><img src="DFS_2x3_2r.gif"/><img src="DFS_2x3_2r_grid.gif"/></p>
   </body>
 </html>
