@@ -778,9 +778,9 @@
   </p>
   <p style="text-align:center"><img src="solution3.png"/></p>
   <p style="text-align:justify">
-    The search process and path is animated below. The tree generates a depth of 6 and only 7 nodes before finding a solution.
-    This solution is also optimal, because it is at the same depth as shallowest goal state. The tree has many optimal solutions, 
-    which makes depth-first search the faster algorithm with 1 robot.
+    The search process and path is animated below. The search explored only 7 nodes before finding a solution.
+    This solution is also optimal, because it is at the same depth as the shallowest goal state. The tree has many optimal solutions, 
+    which makes depth-first search a good algorithm with 1 robot.
   </p>
   <p style="text-align:center"><img src="DFS_1r.gif"/><img src="DFS_1r_grid.gif"/></p>
   <p style="text-align:justify">
@@ -891,5 +891,29 @@
 </td></tr></table>
   </div>
   <h1 style="color:#02FF02">Examples</h1>
+  <p style="text-align:justify">
+    With only 1 robot on a 4 by 4 grid with an initial state [ ( 1, 1 ) ] and a goal state [ ( 4, 4 ) ],
+    greedy search finds the path <br/> 
+    [ ( 1, 1 ) ] → [ ( 1, 2 ) ] → [ ( 2, 2 ) ] → [ ( 3, 2 ) ] → [ ( 3, 3 ) ] → [ ( 4, 3 ) ] → [ ( 4, 4 ) ].
+  </p>
+  <p style="text-align:center"><img src="solution4.png"/></p>
+  <p style="text-align:justify">
+    The search process and path is animated below. Like depth-first search the algorithm 
+    finds an optimal solution after exploring only 7 nodes.
+  </p>
+  <p style="text-align:center"><img src="greedy_1r.gif"/><img src="greedy_1r_grid.gif"/></p>
+  <p style="text-align:justify">
+    With 2 robots on a 2 by 3 grid with an initial state [ ( 1, 1 ), ( 2, 1 ) ] and a goal state [ ( 2, 3 ), ( 1, 3 ) ],
+    greedy search finds the path <br/>
+    [ ( 1, 1 ), ( 2, 1 ) ] → [ ( 1, 2 ), ( 2, 2 ) ] → [ ( 1, 3 ), ( 1, 2 ) ] → [ ( 2, 3 ), ( 1, 3 ) ].
+    <p style="text-align:center"><img src="solution5.png"/></p>
+  </p>
+  <p style="text-align:justify">
+    The search process and path is animated below. Unlike depth-first search, the greedy search
+    finds an optimal solution after exploring only 4 nodes. 
+    Because of the speed of this algorithm, more complex examples can be entertained.
+    <p style="text-align:center"><img src="greedy_2x3_2r.gif"/><img src="greedy_2x3_2r_grid.gif"/></p>
+  </p>
+  <h1 style="color:#02FF02">More Complex Examples Using Greedy Search</h1>
   </body>
 </html>
