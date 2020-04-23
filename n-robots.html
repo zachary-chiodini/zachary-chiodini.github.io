@@ -881,8 +881,8 @@ print( highlight( code, PythonLexer(), formatter ).replace( '#f0f0f0', '#454545'
   </p>
   <h1 style="color:#02FF02">Greedy Search in Python</h1>
   <p style="text-align:justify">
-    The script is identical to depth-fist search except the frontier is populated by nodes ordered by pathcost in descending order.
-    The pathcost is determined by a heuristic function that calculates the modulus of the difference 
+    The script is identical to depth-fist search except the frontier is populated by nodes ordered by a heuristic in descending order.
+    The heuristic is determined by a function that calculates the modulus of the difference 
     between a given state and the goal state.
   </p>
   <div style="height:300px; overflow:auto; font-family:courier">
@@ -951,7 +951,7 @@ print( highlight( code, PythonLexer(), formatter ).replace( '#f0f0f0', '#454545'
     <span style="color: #FF8000">while</span> <span style="color: #FF69B4">True</span> :
         <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">frontier</span> <span style="color: #FF8000">==</span> [] : <span style="color: #FF8000">return</span> <span style="color: #02FF02">&#39;Failure&#39;</span>
         <span style="color: #FFFFFF">node</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">frontier</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">pop</span>( <span style="color: #FF8000">-</span><span style="color: #FF00FF">1</span> ) <span style="color: #DD0000"># LIFO queue</span>
-        <span style="color: #FFFFFF">graph</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">tree</span>( <span style="color: #FFFFFF">node</span> )
+        <span style="color: #DD0000">#graph.tree( node )</span>
         <span style="color: #FFFFFF">graph</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">grid</span>( <span style="color: #FFFFFF">node</span>, <span style="color: #FFFFFF">m</span>, <span style="color: #FFFFFF">n</span> )
         <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">problem</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">goal_test</span>( <span style="color: #FFFFFF">node</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">state</span> ) :
             <span style="color: #FF8000">return</span> <span style="color: #DD0000"># We&#39;re done</span>
@@ -973,12 +973,14 @@ print( highlight( code, PythonLexer(), formatter ).replace( '#f0f0f0', '#454545'
         <span style="color: #FFFFFF">count</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0</span>
         <span style="color: #FFFFFF">graph</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">tree</span>( <span style="color: #FFFFFF">node</span>, <span style="color: #FF69B4">sum</span>( <span style="color: #FFFFFF">expanded</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">values</span>(), [] ) )
         <span style="color: #FFFFFF">graph</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">grid</span>( <span style="color: #FFFFFF">node</span>, <span style="color: #FFFFFF">m</span>, <span style="color: #FFFFFF">n</span>, <span style="color: #FF69B4">sum</span>( <span style="color: #FFFFFF">expanded</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">values</span>(), [] ) )
-        <span style="color: #DD0000"># Prioritize nodes by pathcost in descending order</span>
+        <span style="color: #DD0000"># Prioritize nodes by the heuristic in descending order</span>
         <span style="color: #FFFFFF">frontier</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">extend</span>( <span style="color: #FF69B4">sum</span>( <span style="color: #FF69B4">dict</span>( 
             <span style="color: #FF69B4">sorted</span>( <span style="color: #FFFFFF">expanded</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">items</span>(), <span style="color: #FFFFFF">reverse</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">True</span> ) 
         )<span style="color: #FF8000">.</span><span style="color: #FFFFFF">values</span>(), [] ) )
 </pre></div>
 </td></tr></table>
+1
+​
   </div>
   <h1 style="color:#02FF02">Examples</h1>
   <p style="text-align:justify">
