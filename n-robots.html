@@ -741,7 +741,7 @@
     The current path of the robot is also animated on the grid to the right of the tree. Even for a simple example
     like this, the tree generates a depth of 6 and 50 nodes before finding a solution.
   </p>
-  <p style="text-align:center"><img src="BFS_1r.gif"/><img src="BFS_1r_grid.gif"/></p>
+  <p style="text-align:center"><img src="BFS_1r.png"/><img src="BFS_1r_grid.png"/></p>
   <p style="text-align:justify">
     With 2 robots on a 2 by 3 grid with an initial state [ ( 1, 1 ), ( 2, 1 ) ] and a goal state [ ( 2, 3 ), ( 1, 3 ) ],
     breadth-first search finds the path <br/>
@@ -754,7 +754,7 @@
     containing both robots. The tree is shallower due to a shorter path length, but generates 94 nodes before finding a solution. 
     Due to the exponential time and space complexity of breadth-fist search, more complicated examples will not be entertained.
   </p>
-  <p style="text-align:center"><img src="2x3_2r.gif"/><img src="2x3_2r_grid.gif"/></p>
+  <p style="text-align:center"><img src="BFS_2x3_2r.png"/><img src="BFS_2x3_2r_grid.png"/></p>
   <h1 style="color:#02FF02">Depth-First Search</h1>
   <p style="text-align:justify">
     This alogirthm explores the deepest level of the tree first. When the search hits a leaf node, it backtracks up the tree and
@@ -837,7 +837,7 @@
     This solution is also optimal, because it is at the same depth as the shallowest goal state. The tree has many optimal solutions, 
     which makes depth-first search a good algorithm with 1 robot.
   </p>
-  <p style="text-align:center"><img src="DFS_1r.gif"/><img src="DFS_1r_grid.gif"/></p>
+  <p style="text-align:center"><img src="DFS_1r.png"/><img src="DFS_1r_grid.png"/></p>
   <p style="text-align:justify">
     With 2 robots on a 2 by 3 grid with an initial state [ ( 1, 1 ), ( 2, 1 ) ] and a goal state [ ( 2, 3 ), ( 1, 3 ) ],
     depth-first search finds the path <br/>
@@ -852,7 +852,7 @@
     The search process and path is animated below. Although only 26 nodes were generated to find a solution, the path is far from
     optimal.
   </p>
-  <p style="text-align:center"><img src="DFS_2x3_2r.gif"/><img src="DFS_2x3_2r_grid.gif"/></p>
+  <p style="text-align:center"><img src="DFS_2x3_2r.png"/><img src="DFS_2x3_2r_grid.png"/></p>
   <h1 style="color:#02FF02">Greedy Search</h1>
   <p style="text-align:justify">
     This algorithm chooses nodes that are determined to be closest to the goal state by a heuristic to expand first.
@@ -963,7 +963,7 @@
     The search process and path is animated below. Like depth-first search the algorithm 
     finds an optimal solution after exploring only 7 nodes.
   </p>
-  <p style="text-align:center"><img src="greedy_1r.gif"/><img src="greedy_1r_grid.gif"/></p>
+  <p style="text-align:center"><img src="greedy_1r.png"/><img src="greedy_1r_grid.png"/></p>
   <p style="text-align:justify">
     With 2 robots on a 2 by 3 grid with an initial state [ ( 1, 1 ), ( 2, 1 ) ] and a goal state [ ( 2, 3 ), ( 1, 3 ) ],
     greedy search finds the path <br/>
@@ -974,7 +974,7 @@
     The search process and path is animated below. Greedy search
     finds an optimal solution after exploring only 4 nodes and, unlike depth-first search, this solution is optimal. 
     Because of the speed of this algorithm, more complex examples can be entertained.
-    <p style="text-align:center"><img src="greedy_2x3_2r.gif"/><img src="greedy_2x3_2r_grid.gif"/></p>
+    <p style="text-align:center"><img src="greedy_2x3_2r.png"/><img src="greedy_2x3_2r_grid.png"/></p>
   </p>
   <p style="text-align:justify">
     With 8 robots on a 10 by 10 grid with an initial state
@@ -986,7 +986,7 @@
     The four robots starting at the edges of the grid seem to become momentarily befuddled when they
     enounter one another at the center of the gird. This path is not optimal.
   </p>
-    <p style="text-align:center"><img src="solution6.gif"/></p>
+    <p style="text-align:center"><img src="solution6.png"/></p>
   <h1 style="color:#02FF02">A* Search</h1>
   <p style="text-align:justify">
     This algorithm
