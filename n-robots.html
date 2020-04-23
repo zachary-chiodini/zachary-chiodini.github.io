@@ -805,7 +805,8 @@
     This algorithm finds solutions quickly, but does not always find the optimal solution. Like depth-first search, the algorithm
     tends to follow a single path all the way to the goal and backtracks up the tree and expands shallower nodes when it hits a
     dead end. Additionally, like depth-first search, greedy search is not complete or optimal for the same reasons. 
-    Greedy search tends to significantly prune the search tree but has an exponential time and space complexity bound.
+    Greedy search has, in the worst-case, an exponential time and space complexity bound, but with a good heuristic function,
+    this time and space complexity can be significantly reduced.
   </p>
   <h1 style="color:#02FF02">Greedy Search in Python</h1>
   <p style="text-align:justify">
@@ -868,7 +869,7 @@
         <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">init</span>
     <span style="color: #FFFFFF">count</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0</span>
     <span style="color: #FFFFFF">identity</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0</span>
-    <span style="color: #FFFFFF">frontier</span> <span style="color: #FF8000">=</span> [ <span style="color: #FFFFFF">Node</span>( <span style="color: #FFFFFF">init</span>, <span style="color: #FFFFFF">pathcost</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">heuristic</span>( <span style="color: #FFFFFF">init</span>, <span style="color: #FFFFFF">goal</span> ) ) ]
+    <span style="color: #FFFFFF">frontier</span> <span style="color: #FF8000">=</span> [ <span style="color: #FFFFFF">Node</span>( <span style="color: #FFFFFF">init</span> ) ]
     <span style="color: #FFFFFF">explored</span> <span style="color: #FF8000">=</span> []
     <span style="color: #FF8000">while</span> <span style="color: #FF69B4">True</span> :
         <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">frontier</span> <span style="color: #FF8000">==</span> [] : <span style="color: #FF8000">return</span> <span style="color: #02FF02">&#39;Failure&#39;</span>
@@ -915,8 +916,8 @@
     <p style="text-align:center"><img src="solution5.png"/></p>
   </p>
   <p style="text-align:justify">
-    The search process and path is animated below. Unlike depth-first search, the greedy search
-    finds an optimal solution after exploring only 4 nodes. 
+    The search process and path is animated below. Greedy search
+    finds an optimal solution after exploring only 4 nodes and, unlike depth-first search, this solution is optimal. 
     Because of the speed of this algorithm, more complex examples can be entertained.
     <p style="text-align:center"><img src="greedy_2x3_2r.gif"/><img src="greedy_2x3_2r_grid.gif"/></p>
   </p>
@@ -933,6 +934,7 @@
     <p style="text-align:center"><img src="solution6.gif"/></p>
   <h1 style="color:#02FF02">A* Search</h1>
   <p style="text-align:justify">
+    This algorithm
   </p>
   </body>
 </html>
