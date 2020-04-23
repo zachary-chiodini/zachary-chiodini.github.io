@@ -520,8 +520,8 @@
         <span style="color: #FFFFFF">plt</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">clf</span>() <span style="color: #DD0000"># Clear current figure</span>
         <span style="color: #DD0000"># Robot colors</span>
         <span style="color: #FFFFFF">color</span> <span style="color: #FF8000">=</span> [ <span style="color: #02FF02">&#39;#FF00FF&#39;</span>, <span style="color: #02FF02">&#39;#FF8000&#39;</span>, 
-                  <span style="color: #02FF02">&#39;#DD0000&#39;</span>, <span style="color: #02FF02">&#39;#02FF02&#39;</span>,
-                  <span style="color: #02FF02">&#39;#5E5EFF&#39;</span>, <span style="color: #02FF02">&#39;#FF69B4&#39;</span> ]
+                  <span style="color: #02FF02">&#39;#DD0000&#39;</span>, <span style="color: #02FF02">&#39;#FF69B4&#39;</span>,
+                  <span style="color: #02FF02">&#39;#5E5EFF&#39;</span>, <span style="color: #02FF02">&#39;#454545&#39;</span> ]
         <span style="color: #DD0000"># Plotting the path to state</span>
         <span style="color: #FFFFFF">j</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0</span>
         <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">rj</span> <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">coords</span> :
@@ -540,7 +540,7 @@
                 <span style="color: #FFFFFF">xp</span>, <span style="color: #FFFFFF">yp</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">parent</span>[ <span style="color: #FF00FF">0</span> ], <span style="color: #FFFFFF">n</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">parent</span>[ <span style="color: #FF00FF">1</span> ]
                 <span style="color: #FFFFFF">xc</span>, <span style="color: #FFFFFF">yc</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">rc_loc</span>[ <span style="color: #FF00FF">0</span> ], <span style="color: #FFFFFF">n</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">rc_loc</span>[ <span style="color: #FF00FF">1</span> ]
                 <span style="color: #FFFFFF">plt</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">plot</span>( [ <span style="color: #FFFFFF">xp</span>, <span style="color: #FFFFFF">xc</span> ], [ <span style="color: #FFFFFF">yp</span>, <span style="color: #FFFFFF">yc</span> ], <span style="color: #FFFFFF">marker</span> <span style="color: #FF8000">=</span> <span style="color: #02FF02">&#39;o&#39;</span>, 
-                          <span style="color: #FFFFFF">color</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">color</span>[ ( <span style="color: #FFFFFF">j</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">3</span> ) <span style="color: #FF8000">%</span> <span style="color: #FF00FF">6</span> ], <span style="color: #FFFFFF">alpha</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0.5</span>, 
+                          <span style="color: #FFFFFF">color</span> <span style="color: #FF8000">=</span> <span style="color: #02FF02">&#39;#02FF02&#39;</span>, <span style="color: #FFFFFF">alpha</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0.5</span>, 
                           <span style="color: #FFFFFF">linewidth</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">10</span>, <span style="color: #FFFFFF">markersize</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">rsize</span> )
                 <span style="color: #FFFFFF">j</span> <span style="color: #FF8000">+=</span> <span style="color: #FF00FF">1</span>
         <span style="color: #DD0000"># Plotting each robot&#39;s location</span>
