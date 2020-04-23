@@ -741,7 +741,10 @@
     If you are using a browser that does not support animated png files, please switch to one that does.</span>
     The violet portion of the search tree shows the current path.
     The current path of the robot is also animated on the grid to the right of the tree. Even for a simple example
-    like this, the tree generates a depth of 6 and 50 nodes before finding a solution.
+    like this, the tree generates a depth of 6 and expands 49 nodes before finding a solution.
+    The animation shows each node generating one or two child nodes instead of three or four, which one might expect
+    if each node represents the robot moving up, down, left or right. This is because the algorithm does not allow
+    the robot to revisit any state twice. Otherwise, the tree would be more complex and potentially infinite.
   </p>
   <p style="text-align:center"><img src="BFS_1r.png"/><img src="BFS_1r_grid.png"/></p>
   <p style="text-align:justify">
