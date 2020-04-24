@@ -954,7 +954,7 @@ print( highlight( code, PythonLexer(), formatter ).replace( '#f0f0f0', '#454545'
         <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">init</span>
     <span style="color: #FFFFFF">count</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0</span>
     <span style="color: #FFFFFF">identity</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0</span>
-    <span style="color: #FFFFFF">frontier</span> <span style="color: #FF8000">=</span> { <span style="color: #FF00FF">0</span> : [ <span style="color: #FFFFFF">Node</span>( <span style="color: #FFFFFF">init</span> ) ] }
+    <span style="color: #FFFFFF">frontier</span> <span style="color: #FF8000">=</span> { <span style="color: #FFFFFF">heuristic</span>( <span style="color: #FFFFFF">init</span>, <span style="color: #FFFFFF">goal</span> ) : [ <span style="color: #FFFFFF">Node</span>( <span style="color: #FFFFFF">init</span> ) ] }
     <span style="color: #FFFFFF">explored</span> <span style="color: #FF8000">=</span> []
     <span style="color: #FF8000">while</span> <span style="color: #FF69B4">True</span> :
         <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">frontier</span> <span style="color: #FF8000">==</span> [] : <span style="color: #FF8000">return</span> <span style="color: #02FF02">&#39;Failure&#39;</span>
