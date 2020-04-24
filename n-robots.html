@@ -24,13 +24,13 @@
     Each robot is given an integer identifier j. The cell in which the jth robot is located is called a substate. 
     The state of N robots is a list of all substates indexed by j in ascending order.
     Each robot j has a set of available actions which contain reachable or final substates after moving left, right, up or down 
-    by one unit on the grid, given its current or initial substate.
+    by one unit on the grid or diagonal, given its current or initial substate.
     The reachable states of N robots is a set of all valid states containing all possible combinations of reachable substates,
     given the current or initial state. This is called the successor set.
   </p>
   <p style="text-align:center"><img style="width:450px; height:110px" src="defs.png"/></p>
   <p style="text-align:justify">
-    Not all substates and states are valid. The following restrictions apply: (1) robots move by one grid unit,
+    Not all substates and states are valid. The following restrictions apply: (1) robots move by one grid unit or diagonal,
     (2) robots cannot exit the grid, (3) robots cannot collide or share position and (4) robots cannot swap places.
   </p>
   <p style="text-align:center"><img style="width:514px; height:272px" src="conditions.png"/></p>
@@ -126,7 +126,10 @@
 84
 85
 86
-87</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">class</span> <span style="color: #5E5EFF">Problem</span> :
+87
+88
+89
+90</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">class</span> <span style="color: #5E5EFF">Problem</span> :
     <span style="color: #02FF02">&#39;&#39;&#39;</span>
 <span style="color: #02FF02">    +------------------------------------------------------------+</span>
 <span style="color: #02FF02">    |                 N Robots on an m x n Grid                  |</span>
@@ -139,7 +142,7 @@
 <span style="color: #02FF02">    +------------+-----------------------------------------------+</span>
 <span style="color: #02FF02">    | Successor  | { State Nf1, State Nf2, ... }                 |</span>
 <span style="color: #02FF02">    +------------+-----------------------------------------------+</span>
-<span style="color: #02FF02">    | Conditions | (1) Robots move by one grid unit:             |</span>
+<span style="color: #02FF02">    | Conditions | (1) Robots move by one grid unit or diagonal: |</span>
 <span style="color: #02FF02">    |            |     (a) xi - 1 &lt;= xf &lt;= xi + 1                |</span>
 <span style="color: #02FF02">    |            |     (b) yi - 1 &lt;= yf &lt;= yi + 1                |</span>
 <span style="color: #02FF02">    |            | (2) Robots cannot exit the grid:              |</span>
@@ -184,6 +187,9 @@
                     <span style="color: #FFFFFF">acts_j</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( <span style="color: #FFFFFF">xf</span>, <span style="color: #FFFFFF">yi</span> ) )
                 <span style="color: #FF8000">if</span> <span style="color: #FF00FF">1</span> <span style="color: #FF8000">&lt;=</span> <span style="color: #FFFFFF">xi</span> <span style="color: #FF8000">&lt;=</span> <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">m</span> <span style="color: #FF8000">and</span> <span style="color: #FF00FF">1</span> <span style="color: #FF8000">&lt;=</span> <span style="color: #FFFFFF">yf</span> <span style="color: #FF8000">&lt;=</span> <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">n</span> : 
                     <span style="color: #FFFFFF">acts_j</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( <span style="color: #FFFFFF">xi</span>, <span style="color: #FFFFFF">yf</span> ) )
+                <span style="color: #DD0000"># Allows for diagonal movement</span>
+                <span style="color: #FF8000">if</span> <span style="color: #FF00FF">1</span> <span style="color: #FF8000">&lt;=</span> <span style="color: #FFFFFF">xf</span> <span style="color: #FF8000">&lt;=</span> <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">m</span> <span style="color: #FF8000">and</span> <span style="color: #FF00FF">1</span> <span style="color: #FF8000">&lt;=</span> <span style="color: #FFFFFF">yf</span> <span style="color: #FF8000">&lt;=</span> <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">n</span> :
+                    <span style="color: #FFFFFF">acts_j</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( <span style="color: #FFFFFF">xf</span>, <span style="color: #FFFFFF">yf</span> ) )
             <span style="color: #FFFFFF">acts</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">append</span>( <span style="color: #FFFFFF">acts_j</span> )
         <span style="color: #FFFFFF">succ</span> <span style="color: #FF8000">=</span> []
         <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">combine</span>( <span style="color: #FFFFFF">acts</span>, <span style="color: #FFFFFF">j</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0</span>, <span style="color: #FFFFFF">state_jf</span> <span style="color: #FF8000">=</span> [] ) :
