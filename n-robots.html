@@ -1023,7 +1023,7 @@ print( highlight( code, PythonLexer(), formatter ).replace( '#f0f0f0', '#454545'
     The four robots starting at the edges of the grid seem to become momentarily befuddled when they
     enounter one another at the center of the gird. The reason this happens is because at least one of the four robots
     has to increase its distance from its goal substate to maneuver around the other three. This means accessing a 
-    node with a higher heuristic value, which they will not do until all lower valued nodes are explored.
+    node with a higher heuristic value, which they will not do until all lower valued nodes along the current path are explored.
     The path is not optimal.
   </p>
     <p style="text-align:center"><img src="solution6.png"/></p>
