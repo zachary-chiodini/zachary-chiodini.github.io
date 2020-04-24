@@ -1024,7 +1024,8 @@ print( highlight( code, PythonLexer(), formatter ).replace( '#f0f0f0', '#454545'
     enounter one another at the center of the gird. The reason this happens is because at least one of the four robots
     has to increase its distance from its goal substate to maneuver around the other three. This means accessing a 
     node with a higher heuristic value, which they will not do until all lower valued nodes along the current path are explored.
-    The path is not optimal.
+    Number of steps taken to reach the goal state is not part of the heuristic, but it is related to the depth of the goal state.
+    This is not the shallowest goal state and therefore is not an optimal solution.
   </p>
     <p style="text-align:center"><img src="solution6.png"/></p>
   <h1 style="color:#02FF02">A* Search</h1>
