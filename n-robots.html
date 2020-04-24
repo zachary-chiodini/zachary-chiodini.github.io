@@ -747,19 +747,15 @@
   <h1 style="color:#02FF02">Examples</h1>
   <p style="text-align:justify">
     With only 1 robot on a 4 by 4 grid with an initial state [ ( 1, 1 ) ] and a goal state [ ( 4, 4 ) ],
-    breadth-first search finds the path <br/> 
-    [ ( 1, 1 ) ] → [ ( 1, 2 ) ] → [ ( 2, 2 ) ] → [ ( 3, 2 ) ] → [ ( 3, 3 ) ] → [ ( 4, 3 ) ] → [ ( 4, 4 ) ].
+    breadth-first search finds the path below.<br/>
   </p>
   <p style="text-align:center"><img src="solution1.png"/></p>
   <p style="text-align:justify">
     The search process and path is animated below. <span style="color: #DD0000">The animations are animated png files.
     If you are using a browser that does not support animated png files, please switch to one that does.</span>
     The violet portion of the search tree shows the current path.
-    The current path of the robot is also animated on the grid to the right of the tree. Even for a simple example
-    like this, the tree generates a depth of 6 and expands 49 nodes before finding a solution.
-    The animation shows each node generating one or two child nodes instead of three or four, which one might expect
-    if each node represents the robot moving up, down, left or right. This is because the algorithm does not allow
-    the robot to revisit any state twice.
+    The current path of the robot is also animated on the grid to the right of the tree. 
+    The tree expands 21 nodes before finding a solution.
   </p>
   <p style="text-align:center"><img src="BFS_1r.png"/><img src="BFS_1r_grid.png"/></p>
   <p style="text-align:justify">
