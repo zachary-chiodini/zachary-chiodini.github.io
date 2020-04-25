@@ -834,7 +834,9 @@
 28
 29
 30
-31</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">def</span> <span style="color: #5E5EFF">breadth_first_search</span>( <span style="color: #FFFFFF">init</span>, <span style="color: #FFFFFF">goal</span>, <span style="color: #FFFFFF">m</span>, <span style="color: #FFFFFF">n</span> ) :
+31
+32</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">def</span> <span style="color: #5E5EFF">breadth_first_search</span>( <span style="color: #FFFFFF">init</span>, <span style="color: #FFFFFF">goal</span>, <span style="color: #FFFFFF">m</span>, <span style="color: #FFFFFF">n</span> ) :
+    <span style="color: #FFFFFF">init</span>, <span style="color: #FFFFFF">goal</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">tuple</span>( <span style="color: #FFFFFF">init</span> ), <span style="color: #FF69B4">tuple</span>( <span style="color: #FFFFFF">goal</span> )
     <span style="color: #FFFFFF">graph</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">Graph</span>()
     <span style="color: #FFFFFF">problem</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">Problem</span>( <span style="color: #FFFFFF">init</span>, <span style="color: #FFFFFF">goal</span>, <span style="color: #FFFFFF">m</span>, <span style="color: #FFFFFF">n</span> )
     <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">problem</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">goal_test</span>( <span style="color: #FFFFFF">init</span> ) : 
@@ -866,7 +868,6 @@
         <span style="color: #FFFFFF">graph</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">grid</span>( <span style="color: #FFFFFF">node</span>, <span style="color: #FFFFFF">m</span>, <span style="color: #FFFFFF">n</span>, <span style="color: #FFFFFF">expanded</span> )
         <span style="color: #FFFFFF">frontier</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">extend</span>( <span style="color: #FFFFFF">expanded</span> )
 </pre></div>
-</td></tr></table>
 </td></tr></table>
   </div>
   <h1 style="color:#02FF02">Examples</h1>
