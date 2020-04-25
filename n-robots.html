@@ -178,7 +178,19 @@
 135
 136
 137
-138</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">class</span> <span style="color: #5E5EFF">Problem</span> :
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">class</span> <span style="color: #5E5EFF">Problem</span> :
     <span style="color: #02FF02">&#39;&#39;&#39;</span>
 <span style="color: #02FF02">    +------------------------------------------------------------+</span>
 <span style="color: #02FF02">    |                 N Robots on an m x n Grid                  |</span>
@@ -202,15 +214,27 @@
 <span style="color: #02FF02">    |            | (3) Robots cannot share position:             |</span>
 <span style="color: #02FF02">    |            |     (a) Count( Substate j ) = 1.              |</span>
 <span style="color: #02FF02">    |            | (4) Robots cannot collide (diagonally):       |</span>
-<span style="color: #02FF02">    |            |     (a) xji == xki +- 1; yji == yki           |</span>
-<span style="color: #02FF02">    |            |     (b) xji == xki     ; yji == yki +- 1      |</span>
-<span style="color: #02FF02">    |            |     (c) ( Substate jf, Substate kf )          |</span>
-<span style="color: #02FF02">    |            |         != ( ( xji +- 1, yji +- 1 ),          |</span>
-<span style="color: #02FF02">    |            |              ( xki +- 1, yki +- 1 ) ) )       |</span>
+<span style="color: #02FF02">    |            |     (a) when xji = xki + 1 and yji = yki,     |</span>
+<span style="color: #02FF02">    |            |         ( Substate jf, Substate kf )          |</span>
+<span style="color: #02FF02">    |            |         != ( ( xji - 1, yji +- 1 ),           |</span>
+<span style="color: #02FF02">    |            |              ( xki + 1, yki +- 1 ) ) )        |</span>
+<span style="color: #02FF02">    |            |     (b) when xji = xki - 1 and yji = yki,     |</span>
+<span style="color: #02FF02">    |            |         ( Substate jf, Substate kf )          |</span>
+<span style="color: #02FF02">    |            |         != ( ( xji + 1, yji +- 1 ),           |</span>
+<span style="color: #02FF02">    |            |              ( xki - 1, yki +- 1 ) ) )        |</span>
+<span style="color: #02FF02">    |            |     (c) when xji = xki and yji == yki + 1,    |</span>
+<span style="color: #02FF02">    |            |         ( Substate jf, Substate kf )          |</span>
+<span style="color: #02FF02">    |            |         != ( ( xji +- 1, yji + 1 ),           |</span>
+<span style="color: #02FF02">    |            |              ( xki +- 1, yki - 1 ) ) )        |</span>
+<span style="color: #02FF02">    |            |     (d) when xji = xki and yji == yki - 1,    |</span>
+<span style="color: #02FF02">    |            |         ( Substate jf, Substate kf )          |</span>
+<span style="color: #02FF02">    |            |         != ( ( xji +- 1, yji - 1 ),           |</span>
+<span style="color: #02FF02">    |            |              ( xki +- 1, yki + 1 ) ) )        |</span>
+<span style="color: #02FF02">    |            |     (e) j &lt; k                                 |</span>
 <span style="color: #02FF02">    |            | (5) Robots cannot swap places:                |</span>
 <span style="color: #02FF02">    |            |     (a) ( Substate ji, Substate ki )          |</span>
 <span style="color: #02FF02">    |            |         != ( Substate kf, Substate jf )       |</span>
-<span style="color: #02FF02">    |            |     (b) j &lt; k.                                |</span>
+<span style="color: #02FF02">    |            |     (b) j &lt; k                                 |</span>
 <span style="color: #02FF02">    +------------+-----------------------------------------------+</span>
 <span style="color: #02FF02">    &#39;&#39;&#39;</span>
     <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">__init__</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">init</span>, <span style="color: #FFFFFF">goal</span>, <span style="color: #FFFFFF">m</span>, <span style="color: #FFFFFF">n</span> ) :
