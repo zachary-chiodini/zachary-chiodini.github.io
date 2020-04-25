@@ -892,14 +892,14 @@
   <p style="text-align:justify">
     With 2 robots on a 2 by 3 grid with an initial state [ ( 1, 1 ), ( 2, 1 ) ] and a goal state [ ( 2, 3 ), ( 1, 3 ) ],
     breadth-first search finds the path <br/>
-    [ ( 1, 1 ), ( 2, 1 ) ] → [ ( 2, 1 ), ( 2, 2 ) ] → [ ( 2, 2 ), ( 2, 3 ) ] → [ ( 2, 3 ), ( 1, 3 ) ].
+    [ ( 1, 1 ), ( 2, 1 ) ] → [ ( 1, 2 ), ( 2, 1 ) ] → [ ( 2, 3 ), ( 1, 2 ) ] → [ ( 2, 3 ), ( 1, 3 ) ].
   </p>
   <p style="text-align:center"><img src="solution2.png"/></p>
   <p style="text-align:justify">
     The search process and path is animated below. On the grid to the right of the tree, the path of robot 1 is
     highlighted in violet and the path of robot 2 is highlighted in orange. However, the solution is a single path
-    containing both robots. The tree is shallower due to a shorter path length, but generates 94 nodes before finding a solution. 
-    Due to the exponential time and space complexity of breadth-fist search, more complicated examples will not be entertained.
+    containing both robots. The tree expands 146 nodes before finding a solution. This is one of many optimal solutions.
+    Due to the exponential time and space complexity of breadth-fist search, more complicated examples cannot be explored.
   </p>
   <p style="text-align:center"><img src="BFS_2x3_2r.png"/><img src="BFS_2x3_2r_grid.png"/></p>
   <h1 style="color:#02FF02">Depth-First Search</h1>
