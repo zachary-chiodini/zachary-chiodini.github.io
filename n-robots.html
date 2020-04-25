@@ -208,16 +208,16 @@
 <span style="color: #02FF02">    +------------+-----------------------------------------------+</span>
 <span style="color: #02FF02">    | Successor  | { State Nf1, State Nf2, ... }                 |</span>
 <span style="color: #02FF02">    +------------+-----------------------------------------------+</span>
-<span style="color: #02FF02">    | Conditions | (1) Robots move by one grid unit if moving    |</span>
+<span style="color: #02FF02">    | Conditions | (1) Robots move by one grid unit if           |</span>
 <span style="color: #02FF02">    |            |     vertically or horizontally and by two     |</span>
-<span style="color: #02FF02">    |            |     grid units if moving diagonally:          |</span>
+<span style="color: #02FF02">    |            |     grid units if diagonally:                 |</span>
 <span style="color: #02FF02">    |            |     (a) xi - 1 &lt;= xf &lt;= xi + 1                |</span>
 <span style="color: #02FF02">    |            |     (b) yi - 1 &lt;= yf &lt;= yi + 1                |</span>
 <span style="color: #02FF02">    |            | (2) Robots cannot exit the grid:              |</span>
 <span style="color: #02FF02">    |            |     (a) 1 &lt;= xj &lt;= m                          |</span>
 <span style="color: #02FF02">    |            |     (b) 1 &lt;= yj &lt;= n                          |</span>
 <span style="color: #02FF02">    |            | (3) Robots cannot share position:             |</span>
-<span style="color: #02FF02">    |            |     (a) Count( Substate j ) = 1.              |</span>
+<span style="color: #02FF02">    |            |     (a) Count( Substate j ) = 1               |</span>
 <span style="color: #02FF02">    |            | (4) Robots cannot collide (diagonally):       |</span>
 <span style="color: #02FF02">    |            |     (a) when xji = xki + 1 and yji = yki,     |</span>
 <span style="color: #02FF02">    |            |         ( Substate jf, Substate kf )          |</span>
