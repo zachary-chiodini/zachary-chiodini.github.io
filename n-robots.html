@@ -947,7 +947,9 @@
 28
 29
 30
-31</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">def</span> <span style="color: #5E5EFF">depth_first_search</span>( <span style="color: #FFFFFF">init</span>, <span style="color: #FFFFFF">goal</span>, <span style="color: #FFFFFF">m</span>, <span style="color: #FFFFFF">n</span> ) :
+31
+32</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">def</span> <span style="color: #5E5EFF">depth_first_search</span>( <span style="color: #FFFFFF">init</span>, <span style="color: #FFFFFF">goal</span>, <span style="color: #FFFFFF">m</span>, <span style="color: #FFFFFF">n</span> ) :
+    <span style="color: #FFFFFF">init</span>, <span style="color: #FFFFFF">goal</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">tuple</span>( <span style="color: #FFFFFF">init</span> ), <span style="color: #FF69B4">tuple</span>( <span style="color: #FFFFFF">goal</span> )
     <span style="color: #FFFFFF">graph</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">Graph</span>()
     <span style="color: #FFFFFF">problem</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">Problem</span>( <span style="color: #FFFFFF">init</span>, <span style="color: #FFFFFF">goal</span>, <span style="color: #FFFFFF">m</span>, <span style="color: #FFFFFF">n</span> )
     <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">problem</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">goal_test</span>( <span style="color: #FFFFFF">init</span> ) : 
@@ -984,25 +986,17 @@
   <h1 style="color:#02FF02">Examples</h1>
   <p style="text-align:justify">
     With only 1 robot on a 4 by 4 grid with an initial state [ ( 1, 1 ) ] and a goal state [ ( 4, 4 ) ],
-    depth-first search finds the path <br/> 
-    [ ( 1, 1 ) ] → [ ( 2, 1 ) ] → [ ( 3, 1 ) ] → [ ( 4, 1 ) ] → [ ( 4, 2 ) ] → [ ( 4, 3 ) ] → [ ( 4, 4 ) ].
+    depth-first search finds the path below.
   </p>
   <p style="text-align:center"><img src="solution3.png"/></p>
   <p style="text-align:justify">
-    The search process and path is animated below. The search explored only 7 nodes before finding a solution.
-    This solution is also optimal, because it is at the same depth as the shallowest goal state. The tree has many optimal solutions, 
-    which makes depth-first search a good algorithm with 1 robot.
+    The search process and path is animated below. The search expanded 10 nodes before finding a solution.
+    Although depth-first search found a solution after expanded less nodes, the solution is far from optimal.
   </p>
   <p style="text-align:center"><img src="DFS_1r.png"/><img src="DFS_1r_grid.png"/></p>
   <p style="text-align:justify">
     With 2 robots on a 2 by 3 grid with an initial state [ ( 1, 1 ), ( 2, 1 ) ] and a goal state [ ( 2, 3 ), ( 1, 3 ) ],
-    depth-first search finds the path <br/>
-    [ ( 1, 1 ), ( 2, 1 ) ] → [ ( 1, 2 ), ( 2, 2 ) ) → [ ( 1, 1 ), ( 2, 2 ) ] → [ ( 2, 1 ), ( 2, 2 ) ] → [ ( 2, 1 ), ( 2, 3 ) ] 
-    → [ ( 2, 1 ), ( 1, 3 ) ] → [ ( 1, 1 ), ( 1, 3 ) ] → [ ( 1, 2 ), ( 1, 3 ) ] → [ ( 2, 2 ), ( 1, 2 ) ] → [ ( 2, 1 ), ( 1, 1 ) ] 
-    → [ ( 2, 1 ), ( 1, 2 ) ] → [ ( 2, 2 ), ( 1, 3 ) ] → [ ( 2, 2 ), ( 2, 3 ) ] → [ ( 1, 2 ), ( 2, 3 ) ] → [ ( 1, 3 ), ( 2, 3 ) ] 
-    → [ ( 1, 3 ), ( 2, 2 ) ] → [ ( 2, 3 ), ( 2, 1 ) ] → [ ( 1, 3 ), ( 2, 1 ) ] → [ ( 1, 2 ), ( 1, 1 ) ] → [ ( 1, 3 ), ( 1, 1 ) ] 
-    → [ ( 2, 3 ), ( 1, 1 ) ] → [ ( 2, 2 ), ( 2, 1 ) ] → [ ( 2, 2 ), ( 1, 1 ) ] → [ ( 2, 3 ), ( 1, 2 ) ] → [ ( 1, 3 ), ( 1, 2 ) ] 
-    → [ ( 2, 3 ), ( 1, 3 ) ].
+    depth-first search finds the path.
   </p>
   <p style="text-align:justify">
     The search process and path is animated below. Although only 26 nodes were generated to find a solution, the path is far from
