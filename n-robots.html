@@ -1152,22 +1152,20 @@
     <p style="text-align:center"><img src="greedy_2x3_2r.png"/><img src="greedy_2x3_2r_grid.png"/></p>
   </p>
   <p style="text-align:justify">
-    With 8 robots on a 10 by 10 grid with an initial state
-    [ (  1,  1 ), ( 10, 10 ), (  1, 10 ), ( 10,  1 ), (  1,  4 ), ( 10,  7 ), (  1,  7 ), ( 10,  4 ) ]
+    However, due to the size of the successor set, which is at worst 9<span style="font-size:xx-small; vertical-align:super">N</span>,
+    problems involving many robots spaced far apart are still infeasible.
+    With 8 robots spaced far part and away from the boundary of the grid, the successor set will return 
+    9<span style="font-size:xx-small; vertical-align:super">8</span>, or approximately 43 million nodes.
+    To reduce the size of the succesor set, the robots are put closer together. This reduces the number of avilable actions
+    for each robot, because they are not allowed to collide or swap places.
+    On a 5 by 5 grid with an initial state
+    [ ( 1, 1 ), ( 5, 5 ), ( 1, 5 ), ( 5, 1 ), ( 1, 2 ), ( 5, 4 ), ( 1, 4 ), ( 5, 2 ) ]
     and a goal state
-    [ ( 10, 10 ), (  1,  1 ), ( 10,  1 ), (  1, 10 ), ( 10,  7 ), (  1,  4 ), ( 10,  4 ), (  1,  7 ) ],
-    greedy search finds the path animated below after exploring 27 nodes. The tree has been ommitted because
-    it is too complex and not readable.
-    The four robots starting at the edges of the grid seem to become momentarily befuddled when they
-    enounter one another at the center of the gird. 
+    [ ( 5, 5 ), ( 1, 1 ), ( 5, 1 ), ( 1, 5 ), ( 5, 4 ), ( 1, 2 ), ( 5, 2 ), ( 1, 4 ) ],
+    greedy search finds the path animated below after expanding 8 nodes. The search process generated a total of 2,678,436 nodes.
+    The tree has been ommitted, because it is not readable.
   </p>  
   <p style="text-align:justify">
-    The reason this happens is because at least one of the four robots
-    has to increase its distance from its goal substate to maneuver around the other three. This means accessing a 
-    node with a higher heuristic value, which will not happen until all lower valued nodes along the current path are explored.
-    Number of steps taken to reach the goal state is not part of the heuristic, but it is related to the depth of the goal state.
-    Thefore this is not the shallowest goal state and is not an optimal solution.
-  </p>
     <p style="text-align:center"><img src="solution6.png"/></p>
   <h1 style="color:#02FF02">A* Search</h1>
   <p style="text-align:justify">
