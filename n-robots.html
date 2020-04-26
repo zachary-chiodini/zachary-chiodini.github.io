@@ -1152,12 +1152,14 @@
     <p style="text-align:center"><img src="greedy_2x3_2r.png"/><img src="greedy_2x3_2r_grid.png"/></p>
   </p>
   <p style="text-align:justify">
-    However, due to the size of the successor set, which is at worst 9<span style="font-size:xx-small; vertical-align:super">N</span>,
+    Due to the size of the successor set, which is at worst 9<span style="font-size:xx-small; vertical-align:super">N</span>,
     problems involving many robots spaced far apart are still infeasible.
     With 8 robots spaced far part and away from the boundary of the grid, the successor set will return 
     9<span style="font-size:xx-small; vertical-align:super">8</span>, or approximately 43 million nodes.
     To reduce the size of the succesor set, the robots are put closer together. This reduces the number of avilable actions
     for each robot, because they are not allowed to collide or swap places.
+  </p>
+  <p style="text-align:justify">
     On a 5 by 5 grid with an initial state
     [ ( 1, 1 ), ( 5, 5 ), ( 1, 5 ), ( 5, 1 ), ( 1, 2 ), ( 5, 4 ), ( 1, 4 ), ( 5, 2 ) ]
     and a goal state
