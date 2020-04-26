@@ -1166,9 +1166,25 @@
     [ ( 5, 5 ), ( 1, 1 ), ( 5, 1 ), ( 1, 5 ), ( 5, 4 ), ( 1, 2 ), ( 5, 2 ), ( 1, 4 ) ],
     greedy search finds the path animated below after expanding 8 nodes. The search process generated a total of 2,678,436 nodes.
     The tree has been ommitted, because it is not readable. It is not known whether this solution is optimal.
-  </p>  
+  </p>
+  <p style="text-align:center"><img src="solution6.png"/></p>
   <p style="text-align:justify">
-    <p style="text-align:center"><img src="solution6.png"/></p>
+    We can also eliminate diagonal movement, which will reduce the size of the successor set to 
+    5<span style="font-size:xx-small; vertical-align:super">8</span> or 390,625, at worst.
+  </p>
+  <p style="text-align:justify">
+    On a 10 by 10 grid with an initial state
+    [ ( 1, 1 ), ( 10, 10 ), ( 1, 10 ), ( 10, 1 ), ( 1, 4 ), ( 1, 7 ), ( 10, 4 ), ( 10, 7 ) ]
+    and a goal state
+    [ ( 10, 10 ), ( 1, 1 ), ( 10, 1 ), ( 1, 10 ), ( 10, 7 ), ( 10, 4 ), ( 1, 7 ), ( 1, 4 ) ],
+    greedy search find the path animated below after expanding 24 nodes.
+    The four robots that start in the corners of the grid become momentarily befuddled when they meet in the center of the grid.
+    This is because one of the four robots has to move further away from its goal substate to move around the other three.
+    This means accessing a state with a higher heuritic value, which will not happen until all lower valued nodes are explored
+    in the frontier. Number of steps taken to reach the goal state is not part of the heuristic, but it is equal to the
+    depth of the goal state. This is not an optimal solution.
+  </p>
+  <p style="text-align:center"><img src="solution7.png"/></p>
   <h1 style="color:#02FF02">A* Search</h1>
   <p style="text-align:justify">
     This algorithm
