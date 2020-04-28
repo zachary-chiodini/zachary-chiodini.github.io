@@ -1156,20 +1156,7 @@
     problems involving many robots spaced far apart are still infeasible.
     With 8 robots spaced far part and away from the boundary of the grid, the successor set will return 
     9<span style="font-size:xx-small; vertical-align:super">8</span>, or approximately 43 million nodes.
-    To reduce the size of the succesor set, the robots are put closer together. This reduces the number of avilable actions
-    for each robot, because they are not allowed to collide or swap places.
-  </p>
-  <p style="text-align:justify">
-    On a 5 by 5 grid with an initial state
-    [ ( 1, 1 ), ( 5, 5 ), ( 1, 5 ), ( 5, 1 ), ( 1, 2 ), ( 5, 4 ), ( 1, 4 ), ( 5, 2 ) ]
-    and a goal state
-    [ ( 5, 5 ), ( 1, 1 ), ( 5, 1 ), ( 1, 5 ), ( 5, 4 ), ( 1, 2 ), ( 5, 2 ), ( 1, 4 ) ],
-    greedy search finds the path animated below after expanding 8 nodes. The search process generated a total of 2,678,436 nodes.
-    The tree has been ommitted, because it is not readable. It is not known whether this solution is optimal.
-  </p>
-  <p style="text-align:center"><img src="solution6.png"/></p>
-  <p style="text-align:justify">
-    We can also eliminate diagonal movement, which will reduce the size of the successor set to 
+    Eliminating diagonal movement reduces the size of the successor set to 
     5<span style="font-size:xx-small; vertical-align:super">8</span> or 390,625 at worst.
   </p>
   <p style="text-align:justify">
