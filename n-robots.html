@@ -1152,6 +1152,30 @@
     <p style="text-align:center"><img src="greedy_2x3_2r.png"/><img src="greedy_2x3_2r_grid.png"/></p>
   </p>
   <p style="text-align:justify">
+    With 2 robots on a 7 by 7 grid with an initial state [ ( 2, 2 ), ( 6, 6 ) ] and a goal state [ ( 6, 6 ), ( 2, 2 ) ],
+    greedy search findes the path below.
+  </p>
+  <p style="text-align:center"><img src="solution8.png"/></p>
+  <p style="text-align:justify">
+    The search process and path is animated below. Greedy search finds an optimal solution after expanding 5 nodes.
+    Just by separating the 2 robots and increasing the dimensions of the grid
+    so that the number of actions available to each is not significantly restricted by the other or the boundary of the grid,
+    the search tree becomes too complex to read. This seemingly simple problem is too complex for breadth-first or depth-first search.
+    The reason is because the root node expands into 80 states, or 9<span style="font-size:xx-small; vertical-align:super">2</span> 
+    minus the state in which both robots are idle, and each of these 80 nodes can be expanded into roughly 80 more states.
+    The number of nodes increases approximately exponentially with depth, 
+    like 80<span style="font-size:xx-small; vertical-align:super">d</span>, where d is the depth.
+    The shallowest goal state is found at a depth of 5, which means breadth-first search would have to explore (at worst) roughly 
+    80<span style="font-size:xx-small; vertical-align:super">5</span>, or 3 billion nodes, before finding a solution.
+    Depth-first search would meander aimlessly down a very deep and random path.
+    The maximum depth of the tree is a path in which one of the robots traverses the full area of the grid
+    each time the other robot moves to also traverse the full area of the grid:
+    ( n<span style="font-size:xx-small; vertical-align:super">2</span> - 1 )<span style="font-size:xx-small; vertical-align:super">2</span>
+    + 7<span style="font-size:xx-small; vertical-align:super">2</span> - 1, for m = n, which gives a maximum depth of 2352
+    when m = n = 7.
+    <p style="text-align:center"><img src="greedy_7x7_2r.png"/><img src="greedy_7x7_2r_grid.png"/></p>
+  </p>
+  <p style="text-align:justify">
     Due to the size of the successor set, which is at worst 9<span style="font-size:xx-small; vertical-align:super">N</span>,
     problems involving many robots spaced far apart are still infeasible.
     With 8 robots spaced far part and away from the boundary of the grid, the successor set will return 
