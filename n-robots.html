@@ -19,8 +19,8 @@
   <h1 style="color:#02FF02">Formalization</h1>
   <p style="text-align:justify">
   The grid is represented by an m by n matrix in which each element is the x-y coordinate location of each cell in the grid.
-  </P>
-  <p style="text-align:center"> <img style="width:372px; height:343px" src="grid.png"/></p>
+  </P> <p style="text-align:center"> <img style="width:372px; height:343px" src="grid.png"/></p>
+  
   <p style="text-align:justify">
     Each robot is given a unique integer identifier j. The cell in which the jth robot is located is called a substate. 
     The state of N robots is a list of each substate indexed by j in ascending order.
@@ -34,14 +34,29 @@
   </p>
   <p style="text-align:center"><img style="width:450px; height:110px" src="defs.png"/></p>
   <p style="text-align:justify">
+    Robot diameters are allowed to be the length of the cells in the grid but no longer. 
+    The speed of the robots must be identical. Additionally, if robots move horizontally and vertically
+    with speed {\displaystyle \nu }\nu, they must move diagonally by {\displaystyle \nu }\nu√2.
+  <p style="text-align:justify">
     Not all actions and states are valid. The following restrictions apply:
     (1) robots move by one grid unit if horizontally or vertically or two grid units if diagonally,
     (2) robots cannot exit the grid, 
     (3) robots cannot share position, 
     (4) robots connat swap places, and
-    (5) robots cannot collide when moving diagonally (complicated to represent mathematically).
+    (5) robots cannot collide (complicated to represent mathematically).
   </p>
-  <p style="text-align:center"><img style="width:774px; height:705px" src="conditions.png"/></p>
+  <p style="text-align:justify">
+    Types of illegal moves are animated on the left below. This is difficult to define mathematically, 
+    but nevertheless I've included a mathematical description to the right.
+    <span style="color:#DD0000">The animation are animated png files. 
+      If you are using a browser that does not support animated png files, please switch to one that does.
+    </span>
+  </p>
+  <p style="text-align:center">
+    <img style="width:774px; height:705px" src="illegal_moves.png"/>
+    <img style="width:774px; height:705px" src="conditions.png"/>
+  </p>
+  
   <h1 style="color:#02FF02">Writing the Problem in Python</h1>
   <p>
     The problem is defined below in Python given an initial state, a goal state, m and n.
@@ -1095,8 +1110,7 @@
   </p>
   <p style="text-align:center"><img src="solution1.png"/></p>
   <p style="text-align:justify">
-    The search process and path is animated below. <span style="color: #DD0000">The animations are animated png files.
-    If you are using a browser that does not support animated png files, please switch to one that does.</span>
+    The search process and path is animated below.
     The violet portion of the search tree shows the current path.
     The current path is also animated on the grid to the right of the tree.
     Available actions are highlighted in green on the grid.
