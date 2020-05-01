@@ -1273,9 +1273,9 @@
   <p style="text-align:justify">
     The search process and path is animated below. On the grid to the right of the tree, the path of robot 1 is
     highlighted in violet and the path of robot 2 is highlighted in orange. However, the solution is a single path
-    containing both robots. The tree expands 85 nodes before finding a solution. This is one of many optimal solutions.
+    containing both robots. The tree expands 85 nodes before finding an optimal solution.
     You can see how breadth-first exhausts every possible path of a certain length before moving on to the next, until
-    it reaches the goal state.
+    it reaches the goal state. 
     Due to the exponential time and space complexity of breadth-fist search, more complicated examples cannot be explored.
   </p>
   <p style="text-align:center"><img src="BFS_2x3_2r.png"/><img src="BFS_2x3_2r_grid.png"/></p>
@@ -1519,11 +1519,16 @@
     <p style="text-align:center"><img src="solution5.png"/></p>
   </p>
   <p style="text-align:justify">
-    The search process and path is animated below. Greedy search finds an optimal solution after expanding only 3 nodes. 
-    Because of the speed of this algorithm, more complex examples can be explored.
-    <p style="text-align:center"><img src="greedy_2x3_2r.png"/><img src="greedy_2x3_2r_grid.png"/></p>
+    The search process and path is animated below. Greedy search finds a solution after expanding only 5 nodes, but it is suboptimal.
+    The two robots rush to the their goal substates, but find out they have to turn around to avoid a collision. 
+    The algorithm then finds that a new path is cheaper then continuing down the current path.
+    However, this new path is still under a suboptimal first move, which involves both robots rushing to the goal state.
+    The optimal solution involves one of the robots remaining idle for the first move (see breadth-first search).
+    Though greedy search often significantly reduces the time taken to find a solution, the solution is often suboptimal.
   </p>
+   <p style="text-align:center"><img src="greedy_2x3_2r.png"/><img src="greedy_2x3_2r_grid.png"/></p>
   <p style="text-align:justify">
+    Due to the speed of this algorithm, more complex examples can be explored.
     With 2 robots on a 7 by 7 grid with an initial state [ ( 2, 2 ), ( 6, 6 ) ] and a goal state [ ( 6, 6 ), ( 2, 2 ) ],
     greedy search findes the path below.
   </p>
