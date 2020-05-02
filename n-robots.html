@@ -1132,7 +1132,8 @@
     The maximum depth of the tree is a path in which one of the robots traverses the full area of the grid
     each time the other robot moves to also traverse the full area of the grid, or
     ( n<span style="font-size:xx-small; vertical-align:super">2</span> - 1 )<span style="font-size:xx-small; vertical-align:super">2</span>
-    + n<span style="font-size:xx-small; vertical-align:super">2</span> - 1, for m = n, which gives a maximum depth of 2,352 for m = n = 7.
+    + n<span style="font-size:xx-small; vertical-align:super">2</span> - 1 = n<span style="font-size:xx-small; vertical-align:super">4</span> - n<span style="font-size:xx-small; vertical-align:super">2</span>,
+    for m = n, which gives a maximum depth of 2,352 for m = n = 7.
   </p>
   <p style="text-align:center"><img src="greedy_7x7_2r.png"/><img src="greedy_7x7_2r_grid.png"/></p>
   <p style="text-align:justify">
@@ -1142,7 +1143,7 @@
     9<span style="font-size:xx-small; vertical-align:super">8</span>, or approximately 43 million nodes.
     Eliminating diagonal movement reduces the size of the successor set to 
     5<span style="font-size:xx-small; vertical-align:super">8</span> or 390,625 at worst.
-  </p>
+  </p> 
   <p style="text-align:justify">
     On a 10 by 10 grid with an initial state
     [ ( 1, 1 ), ( 10, 10 ), ( 1, 10 ), ( 10, 1 ), ( 1, 4 ), ( 1, 7 ), ( 10, 4 ), ( 10, 7 ) ]
