@@ -1148,14 +1148,14 @@
     [ ( 1, 1 ), ( 10, 10 ), ( 1, 10 ), ( 10, 1 ), ( 1, 4 ), ( 1, 7 ), ( 10, 4 ), ( 10, 7 ) ]
     and a goal state
     [ ( 10, 10 ), ( 1, 1 ), ( 10, 1 ), ( 1, 10 ), ( 10, 7 ), ( 10, 4 ), ( 1, 7 ), ( 1, 4 ) ],
-    greedy search finds the path animated below after expanding 24 nodes.
+    greedy search finds the path animated below after expanding 189 nodes.
   </p>
   <p style="text-align:justify">
-    The four robots that start in the corners of the grid become momentarily befuddled when they meet in the center of the grid.
-    This is because one of the four robots has to move further away from its goal substate to move around the other three.
-    This means accessing a state with a higher heuristic value, which will not happen until all lower valued nodes are explored
-    in the frontier. Number of steps taken to reach the goal state is not part of the heuristic, but it is equal to the
-    depth of the goal state. This is not an optimal solution.
+    Unfortunately, the drawback of greedy search is clearly demonstrated. When the robots encounter, due to their greed,
+    they initially resist going around each other, because that means accessing a state with a higher heuristic value,
+    , which will not happen until all lower valued nodes are explored in the frontier. 
+    Although greedy search makes it possible to find a solution in a massive tree such as this, the solution is not satisfying.
+    If only there is a way to combine the speed of greedy search with the optimality of breadth-first search.
   </p>
   <p style="text-align:center"><img src="solution7.png"/></p>
   <h1 style="color:#02FF02">A* Search</h1>
