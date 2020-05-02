@@ -41,21 +41,17 @@
     Not all actions and states are valid. The following restrictions apply:
     (1) robots move by one grid unit if horizontally or vertically or two grid units if diagonally,
     (2) robots cannot exit the grid, 
-    (3) robots cannot share position, 
-    (4) robots connat swap places, and
-    (5) robots cannot collide (complicated to represent mathematically).
+    (3) robots cannot collide.
   </p>
   <p style="text-align:justify">
-    Types of illegal moves are animated below. These are difficult to define mathematically.
-    The mathematics are written in the code but will be excluded from this summary for simplicity's sake.
-    <span style="color:#DD0000">
-      This site uses animated png files to illustrate how the algorithms work. 
-      If you are using a browser that does not support animated png files, please switch to one that does.
-    </span>
+    Restrictions (1) and (2) are straight forward and summarized below.
   </p>
-  
-  <p style="text-align:center"><img style="width:25%; height:25%" src="illegal_moves.png"/></p>
-  
+  <p style="text-align:center"><img style="width:1209; height:420" src="conditions.png"/></p>
+  <p style="text-align:justify">
+    For restriction (3), simple kinematics can be used to determine whether an action leads to a collision. 
+    The derivation of how this is done is summarized below.
+  </p>
+  <p style="text-align:center"><img style="width:; height:" src="kinematics.png"/></p>
   <h1 style="color:#02FF02">Writing the Problem in Python</h1>
   <p>
     The problem is defined below in Python given an initial state, a goal state, m and n.
@@ -1271,7 +1267,12 @@
   </p>
   <p style="text-align:center"><img src="solution2.png"/></p>
   <p style="text-align:justify">
-    The search process and path is animated below. On the grid to the right of the tree, the path of robot 1 is
+    The search process and path is animated below. 
+    <span style="color:#DD0000">
+      This site uses animated png files to illustrate how the algorithms work. 
+      If you are using a browser that does not support animated png files, please switch to one that does.
+    </span>
+    On the grid to the right of the tree, the path of robot 1 is
     highlighted in violet and the path of robot 2 is highlighted in orange. However, the solution is a single path
     containing both robots. The tree expands 85 nodes before finding an optimal solution.
     You can see how breadth-first exhausts every possible path of a certain length before moving on to the next, until
