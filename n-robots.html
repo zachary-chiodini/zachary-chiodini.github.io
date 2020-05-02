@@ -34,17 +34,19 @@
   </p>
   <p style="text-align:center"><img style="width:450px; height:110px" src="defs.png"/></p>
   <p style="text-align:justify">
-    Robot diameters are allowed to be the length of the cells in the grid but no longer. 
-    The speed of the robots must be identical. Additionally, if robots move horizontally and vertically
-    with speed v, they must move diagonally by √2v.
+    Robot diameters are a parameter used to calculate collisions and are allowed to be any length. 
+    The speed of the robots v must be identical moving horizontally and vertically and √2v when moving diagonally.
+    There is a vague concept of velocity in the program. 
+    However, transitions from one state to another occur instantaneously. 
+    Therefore, all robots must arrive at their subsequent substates at the same time.
   <p style="text-align:justify">
-    Not all actions and states are valid. The following restrictions apply:
+    The following restrictions on the successor set apply:
     (1) robots move by one grid unit if horizontally or vertically or two grid units if diagonally,
     (2) robots cannot exit the grid, 
     (3) robots cannot collide.
   </p>
   <p style="text-align:justify">
-    Restrictions (1) and (2) are straight forward and summarized below.
+    Restrictions (1) and (2) are straight forward and are summarized below.
   </p>
   <p style="text-align:center"><img style="width:783px; height:156px" src="conditions.png"/></p>
   <p style="text-align:justify">
