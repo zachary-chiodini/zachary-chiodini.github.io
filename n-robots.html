@@ -1102,23 +1102,25 @@
   <p style="text-align:justify">
     The search process and path is animated below. Greedy search finds a solution after expanding only 5 nodes, but it is suboptimal.
     The two robots rush to the their goal substates, but find out they have to turn around to avoid a collision. 
-    The algorithm then finds that a new path is cheaper then continuing down the current path.
-    However, this new path is still under a suboptimal first move, which involves both robots rushing to the goal state.
-    The optimal solution involves one of the robots remaining idle for the first move (see breadth-first search).
+    The optimal solution involves one of the robots remaining idle for the first move (see breadth-first search),
+    which greedy search will never find (it's too greedy).
     Though greedy search often significantly reduces the time taken to find a solution, the solution is often suboptimal.
   </p>
    <p style="text-align:center"><img src="greedy_2x3_2r.png"/><img src="greedy_2x3_2r_grid.png"/></p>
   <p style="text-align:justify">
     Due to the speed of this algorithm, more complex examples can be explored.
     With 2 robots on a 7 by 7 grid with an initial state [ ( 2, 2 ), ( 6, 6 ) ] and a goal state [ ( 6, 6 ), ( 2, 2 ) ],
-    greedy search findes the path below.
+    greedy search finds the path below.
   </p>
   <p style="text-align:center"><img src="solution8.png"/></p>
   <p style="text-align:justify">
-    The search process and path is animated below. Greedy search finds an optimal solution after expanding 5 nodes.
+    The search process and path is animated below. Greedy search finds a solution after expanding 6 nodes.
     Just by separating the 2 robots and increasing the dimensions of the grid
-    so that the number of actions available to each is not significantly restricted by the other or the boundary of the grid,
-    the search tree becomes too complex to read. This seemingly simple problem is too complex for breadth-first or depth-first search.
+    so that the number of actions available to each robot is not significantly restricted by the other or the boundary of the grid,
+    the search tree becomes too complex to read.
+  </p>
+  <p style="text-align:justify">
+    This seemingly simple problem is too difficult for breadth-first or depth-first search.
     The reason is because the root node expands into 80 states, or 9<span style="font-size:xx-small; vertical-align:super">2</span> 
     minus the state in which both robots are idle, and each of these 80 nodes can be expanded into roughly 80 more states.
     The number of nodes increases approximately exponentially with depth, 
@@ -1127,12 +1129,11 @@
     80<span style="font-size:xx-small; vertical-align:super">5</span>, or 3 billion nodes, before finding a solution.
     Depth-first search would meander aimlessly down a very deep and random path.
     The maximum depth of the tree is a path in which one of the robots traverses the full area of the grid
-    each time the other robot moves to also traverse the full area of the grid:
+    each time the other robot moves to also traverse the full area of the grid, or
     ( n<span style="font-size:xx-small; vertical-align:super">2</span> - 1 )<span style="font-size:xx-small; vertical-align:super">2</span>
-    + 7<span style="font-size:xx-small; vertical-align:super">2</span> - 1, for m = n, which gives a maximum depth of 2352
-    when m = n = 7.
-    <p style="text-align:center"><img src="greedy_7x7_2r.png"/><img src="greedy_7x7_2r_grid.png"/></p>
+    + n<span style="font-size:xx-small; vertical-align:super">2</span> - 1, for m = n, which gives a maximum depth of 2,352 when m = n = 7.
   </p>
+  <p style="text-align:center"><img src="greedy_7x7_2r.png"/><img src="greedy_7x7_2r_grid.png"/></p>
   <p style="text-align:justify">
     Due to the size of the successor set, which is at worst 9<span style="font-size:xx-small; vertical-align:super">N</span>,
     problems involving many robots spaced far apart are still infeasible.
