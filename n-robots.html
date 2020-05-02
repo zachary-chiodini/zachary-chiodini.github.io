@@ -54,7 +54,8 @@
   <p style="text-align:center"><img style="width:1209; height:420" src="kinematics.png"/></p>
   <h1 style="color:#02FF02">Writing the Problem in Python</h1>
   <p>
-    The problem is defined below in Python given an initial state, a goal state, m and n.
+    The problem is defined below in Python given an initial state, a goal state, the radius of the robots r, m and n.
+    The diameter of the robots will be set to 90% the length of a grid cell for all examples on this page.
   </p>
   
   <div style="height:300px; overflow:auto; font-family:courier">
@@ -176,226 +177,14 @@
 116
 117
 118
-119
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
-191
-192
-193
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
-206
-207
-208
-209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240
-241
-242
-243
-244
-245
-246
-247
-248
-249
-250
-251
-252
-253
-254
-255
-256
-257
-258
-259
-260
-261
-262
-263
-264
-265
-266
-267
-268
-269
-270
-271
-272
-273
-274
-275
-276
-277
-278
-279
-280
-281
-282
-283
-284
-285
-286
-287
-288
-289
-290
-291
-292
-293
-294
-295
-296
-297
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308
-309
-310
-311
-312
-313
-314
-315
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
-326
-327
-328
-329
-330
-331</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">class</span> <span style="color: #5E5EFF">Problem</span> :
+119</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">class</span> <span style="color: #5E5EFF">Problem</span> :
     <span style="color: #02FF02">&#39;&#39;&#39;</span>
 <span style="color: #02FF02">    +------------------------------------------------------------+</span>
 <span style="color: #02FF02">    |                 N Robots on an m x n Grid                  |</span>
 <span style="color: #02FF02">    +------------+-----------------------------------------------+</span>
 <span style="color: #02FF02">    | Substate j | Position of Robot j: ( xj, yj )               |</span>
 <span style="color: #02FF02">    +------------+-----------------------------------------------+</span>
-<span style="color: #02FF02">    | State N    | [ Substate 1, Substate 2, ..., Substate N ]   |</span>
+<span style="color: #02FF02">    | State N    | [ Substate 1, Substate  2, ..., Substate N ]   |</span>
 <span style="color: #02FF02">    +------------+-----------------------------------------------+</span>
 <span style="color: #02FF02">    | Actions ji | { Substate jf1, Substate jf2, ... }           |</span>
 <span style="color: #02FF02">    +------------+-----------------------------------------------+</span>
@@ -409,260 +198,46 @@
 <span style="color: #02FF02">    |            | (2) Robots cannot exit the grid:              |</span>
 <span style="color: #02FF02">    |            |     (a) 1 &lt;= xj &lt;= m                          |</span>
 <span style="color: #02FF02">    |            |     (b) 1 &lt;= yj &lt;= n                          |</span>
-<span style="color: #02FF02">    |            | (3) Robots cannot share position:             |</span>
-<span style="color: #02FF02">    |            |     (a) Count( Substate j ) = 1               |</span>
-<span style="color: #02FF02">    |            | (4) Robots cannot swap places:                |</span>
-<span style="color: #02FF02">    |            |     (a) ( Substate ji, Substate ki )          |</span>
-<span style="color: #02FF02">    |            |         != ( Substate kf, Substate jf )       |</span>
-<span style="color: #02FF02">    |            |     (b) j &lt; k                                 |</span>
-<span style="color: #02FF02">    |            | (5) Robots cannot collide:                    |</span>
-<span style="color: #02FF02">    |            |     (a) See code*                             |</span>
+<span style="color: #02FF02">    |            | (3) Robots cannot collide:                    |</span>
+<span style="color: #02FF02">    |            |     (a) See function &quot;collision&quot;              |</span>
 <span style="color: #02FF02">    +------------+-----------------------------------------------+</span>
 <span style="color: #02FF02">    &#39;&#39;&#39;</span>
-    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">__init__</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">init</span>, <span style="color: #FFFFFF">goal</span>, <span style="color: #FFFFFF">m</span>, <span style="color: #FFFFFF">n</span> ) :
+    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">__init__</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">init</span>, <span style="color: #FFFFFF">goal</span>, <span style="color: #FFFFFF">r</span>, <span style="color: #FFFFFF">m</span>, <span style="color: #FFFFFF">n</span> ) :
+        <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">r</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">r</span>
         <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">m</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">m</span>
         <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">n</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">n</span>
         <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">init</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">init</span>
         <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">goal</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">goal</span>
         <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">robots</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">len</span>( <span style="color: #FFFFFF">init</span> )
+        
+    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">collision</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">rj</span>, <span style="color: #FFFFFF">sub_ji</span>, <span style="color: #FFFFFF">sub_jf</span>, <span style="color: #FFFFFF">rk</span>, <span style="color: #FFFFFF">sub_ki</span>, <span style="color: #FFFFFF">sub_kf</span> ) :
+        <span style="color: #02FF02">&#39;&#39;&#39; </span>
+<span style="color: #02FF02">        Calculates the time at which a collision occurs, if a collision occurs. </span>
+<span style="color: #02FF02">        You can imagine the velocity calculations for vji, vjy, vkx and vky to </span>
+<span style="color: #02FF02">        be divided by 1 second. Therefore, if a collision occurs, it must occur</span>
+<span style="color: #02FF02">        within 1 second. This is an arbitrary time given to the robots to move </span>
+<span style="color: #02FF02">        from the initial to final substates, even though it is instantaneous.</span>
+<span style="color: #02FF02">        &#39;&#39;&#39;</span>
+        <span style="color: #FFFFFF">xji</span>, <span style="color: #FFFFFF">xjf</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">sub_ji</span>[ <span style="color: #FF00FF">0</span> ], <span style="color: #FFFFFF">sub_jf</span>[ <span style="color: #FF00FF">0</span> ]
+        <span style="color: #FFFFFF">yji</span>, <span style="color: #FFFFFF">yjf</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">sub_ji</span>[ <span style="color: #FF00FF">1</span> ], <span style="color: #FFFFFF">sub_jf</span>[ <span style="color: #FF00FF">1</span> ]
+        <span style="color: #FFFFFF">xki</span>, <span style="color: #FFFFFF">xkf</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">sub_ki</span>[ <span style="color: #FF00FF">0</span> ], <span style="color: #FFFFFF">sub_kf</span>[ <span style="color: #FF00FF">0</span> ]
+        <span style="color: #FFFFFF">yki</span>, <span style="color: #FFFFFF">ykf</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">sub_ki</span>[ <span style="color: #FF00FF">1</span> ], <span style="color: #FFFFFF">sub_kf</span>[ <span style="color: #FF00FF">1</span> ]
+        <span style="color: #FFFFFF">vjx</span>, <span style="color: #FFFFFF">vjy</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">xjf</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">xji</span>, <span style="color: #FFFFFF">yjf</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">yji</span>
+        <span style="color: #FFFFFF">vkx</span>, <span style="color: #FFFFFF">vky</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">xkf</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">xki</span>, <span style="color: #FFFFFF">ykf</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">yki</span>
+        <span style="color: #FFFFFF">a</span> <span style="color: #FF8000">=</span> ( <span style="color: #FFFFFF">vjx</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">vkx</span> )<span style="color: #FF8000">**</span><span style="color: #FF00FF">2</span> <span style="color: #FF8000">+</span> ( <span style="color: #FFFFFF">vjy</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">vky</span> )<span style="color: #FF8000">**</span><span style="color: #FF00FF">2</span>
+        <span style="color: #FFFFFF">b</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">2</span><span style="color: #FF8000">*</span>( <span style="color: #FFFFFF">vjx</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">vkx</span> )<span style="color: #FF8000">*</span>( <span style="color: #FFFFFF">xji</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">xki</span> ) <span style="color: #FF8000">+</span> <span style="color: #FF00FF">2</span><span style="color: #FF8000">*</span>( <span style="color: #FFFFFF">vjy</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">vky</span> )<span style="color: #FF8000">*</span>( <span style="color: #FFFFFF">yji</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">yki</span> )
+        <span style="color: #FFFFFF">c</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">xji</span><span style="color: #FF8000">**</span><span style="color: #FF00FF">2</span> <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">xki</span><span style="color: #FF8000">**</span><span style="color: #FF00FF">2</span> <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">yji</span><span style="color: #FF8000">**</span><span style="color: #FF00FF">2</span> <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">yki</span><span style="color: #FF8000">**</span><span style="color: #FF00FF">2</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">2</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">xji</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">xki</span> <span style="color: #FF8000">-</span><span style="color: #FF00FF">2</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">yji</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">yki</span> <span style="color: #FF8000">-</span> ( <span style="color: #FFFFFF">rj</span> <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">rk</span> )<span style="color: #FF8000">**</span><span style="color: #FF00FF">2</span>
+        <span style="color: #FFFFFF">root</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">b</span><span style="color: #FF8000">**</span><span style="color: #FF00FF">2</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">4</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">a</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">c</span>
+        <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">a</span> <span style="color: #FF8000">==</span> <span style="color: #FF00FF">0</span> <span style="color: #FF8000">or</span> <span style="color: #FFFFFF">root</span> <span style="color: #FF8000">&lt;</span> <span style="color: #FF00FF">0</span> :
+            <span style="color: #FF8000">return</span> <span style="color: #FF69B4">False</span>
+        <span style="color: #FFFFFF">t1</span> <span style="color: #FF8000">=</span> ( <span style="color: #FF8000">-</span><span style="color: #FFFFFF">b</span> <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">root</span><span style="color: #FF8000">**</span><span style="color: #FF00FF">0.5</span> ) <span style="color: #FF8000">/</span> ( <span style="color: #FF00FF">2</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">a</span> )
+        <span style="color: #FFFFFF">t2</span> <span style="color: #FF8000">=</span> ( <span style="color: #FF8000">-</span><span style="color: #FFFFFF">b</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">root</span><span style="color: #FF8000">**</span><span style="color: #FF00FF">0.5</span> ) <span style="color: #FF8000">/</span> ( <span style="color: #FF00FF">2</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">a</span> )
+        <span style="color: #FF8000">if</span> <span style="color: #FF00FF">0</span> <span style="color: #FF8000">&lt;=</span> <span style="color: #FFFFFF">t1</span> <span style="color: #FF8000">&lt;=</span> <span style="color: #FF00FF">1</span> <span style="color: #FF8000">or</span> <span style="color: #FF00FF">0</span> <span style="color: #FF8000">&lt;=</span> <span style="color: #FFFFFF">t2</span> <span style="color: #FF8000">&lt;=</span> <span style="color: #FF00FF">1</span> :
+            <span style="color: #FF8000">return</span> <span style="color: #FF69B4">True</span>
+        <span style="color: #FF8000">return</span> <span style="color: #FF69B4">False</span>
     
     <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">successor</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">state</span> ) :
-        <span style="color: #02FF02">&#39;&#39;&#39; </span>
-<span style="color: #02FF02">        Generates set of reachable states from the current state </span>
-<span style="color: #02FF02">        &#39;&#39;&#39;</span>
-        <span style="color: #FFFFFF">swap</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">set</span>()
-        <span style="color: #FFFFFF">coll</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">set</span>()
-        <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">j</span> <span style="color: #FF8000">in</span> <span style="color: #FF69B4">range</span>( <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">robots</span> ) :
-            <span style="color: #FFFFFF">sub_j</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">state</span>[ <span style="color: #FFFFFF">j</span> ]
-            <span style="color: #FFFFFF">xj</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">sub_j</span>[ <span style="color: #FF00FF">0</span> ], <span style="color: #FFFFFF">sub_j</span>[ <span style="color: #FF00FF">1</span> ]
-            <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">sub_k</span> <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">state</span>[ <span style="color: #FFFFFF">j</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> : ] :
-                <span style="color: #FFFFFF">xk</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">sub_k</span>[ <span style="color: #FF00FF">0</span> ], <span style="color: #FFFFFF">sub_k</span>[ <span style="color: #FF00FF">1</span> ]
-                <span style="color: #DD0000"># Substate tuples that result in a swap</span>
-                <span style="color: #FFFFFF">swap</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( <span style="color: #FFFFFF">sub_j</span>, <span style="color: #FFFFFF">sub_k</span> ) )
-                <span style="color: #DD0000"># *( sub_jf, sub_kf ) !=</span>
-                <span style="color: #DD0000"># substate tuples that result in a collision</span>
-                <span style="color: #DD0000"># for adjacent robots [ k, j ]</span>
-                <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">==</span> <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> <span style="color: #FF8000">and</span> <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">==</span> <span style="color: #FFFFFF">yk</span> :
-                    <span style="color: #DD0000"># from both robots moving diagonally</span>
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #DD0000"># from moving horizontally and vertically</span>
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span>     ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span>     ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span>     ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span>     ) ) )
-                    <span style="color: #DD0000"># from robot j moving diagonally</span>
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span>     ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span>     ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span>     ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span>     ) ) )
-                    <span style="color: #DD0000"># from robot k moving diagonally</span>
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span>     ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span>     ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span>     ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span>     ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                <span style="color: #DD0000"># for adjacent robots [ j, k ] </span>
-                <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">==</span> <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> <span style="color: #FF8000">and</span> <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">==</span> <span style="color: #FFFFFF">yk</span> :
-                    <span style="color: #DD0000"># from both robots moving diagonally</span>
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #DD0000"># from moving horizontally and vertically</span>
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span>     ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span>     ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span>     ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span>     ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #DD0000"># from robot j moving diagonally</span>
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span>     ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span>     ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span>     ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span>     ) ) )
-                    <span style="color: #DD0000"># from robot k moving diagonally</span>
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span>     ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span>     ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span>     ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span>     ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                <span style="color: #DD0000"># for adjacent robots [ k ]</span>
-                <span style="color: #DD0000">#                     [ j ] </span>
-                <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">==</span> <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">and</span> <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">==</span> <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> :
-                    <span style="color: #DD0000"># from both robots moving diagonally</span>
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #DD0000"># from moving horizontally and vertically</span>
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span>     ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span>     ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span>     ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span>     ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #DD0000"># from robot j moving diagonally</span>
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span>     ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span>     ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #DD0000"># from robot k moving diagonally</span>
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span>     ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span>     ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>  ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                <span style="color: #DD0000"># for adjacent robots [ j ]</span>
-                <span style="color: #DD0000">#                     [ k ]</span>
-                <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">==</span> <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">and</span> <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">==</span> <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> :
-                    <span style="color: #DD0000"># from horizontal diagonal movement</span>
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #DD0000"># from moving horizontally and vertically</span>
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span>     ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span>     ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span>     ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span>     ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #DD0000"># from robot j moving diagonally</span>
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span>     ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span>     ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #DD0000"># from robot k moving diagonally</span>
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span>     ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span>     ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>  ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                <span style="color: #DD0000"># for adjacent robots [ j ][   ]</span>
-                <span style="color: #DD0000">#                     [   ][ k ]</span>
-                <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">==</span> <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> <span style="color: #FF8000">and</span> <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">==</span> <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> :
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span>     ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span>     ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                <span style="color: #DD0000"># for adjacent robots [ k ][   ]</span>
-                <span style="color: #DD0000">#                     [   ][ j ]</span>
-                <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">==</span> <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> <span style="color: #FF8000">and</span> <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">==</span> <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> :
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span>     ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span>     ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                <span style="color: #DD0000"># for adjacent robots [   ][ k ]</span>
-                <span style="color: #DD0000">#                     [ j ][   ]</span>
-                <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">==</span> <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> <span style="color: #FF8000">and</span> <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">==</span> <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> :
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span>     ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>  ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span>     ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                <span style="color: #DD0000"># for adjacent robots [   ][ j ]</span>
-                <span style="color: #DD0000">#                     [ k ][   ]</span>
-                <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">==</span> <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> <span style="color: #FF8000">and</span> <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">==</span> <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> :
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span>     ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>  ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span>     ) ) )
-                <span style="color: #DD0000"># for adjacent robots [ j ]</span>
-                <span style="color: #DD0000">#                     [   ]</span>
-                <span style="color: #DD0000">#                     [ k ]</span>
-                <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">==</span> <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">and</span> <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">==</span> <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">2</span> :
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ) ) )
-                <span style="color: #DD0000"># for adjacent robots [ k ]</span>
-                <span style="color: #DD0000">#                     [   ]</span>
-                <span style="color: #DD0000">#                     [ j ]</span>
-                <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">==</span> <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">and</span> <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">==</span> <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">2</span> :
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span>    , <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
-                    <span style="color: #FFFFFF">coll</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( ( <span style="color: #FFFFFF">xj</span>    , <span style="color: #FFFFFF">yj</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span> ),
-                                ( <span style="color: #FFFFFF">xk</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">yk</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> ) ) )
+        <span style="color: #02FF02">&#39;&#39;&#39; Generate set of reachable states from current state &#39;&#39;&#39;</span>
         <span style="color: #FFFFFF">acts</span> <span style="color: #FF8000">=</span> [] <span style="color: #DD0000"># Substates reachable to each</span>
                   <span style="color: #DD0000"># robot j, indexed by robot</span>
         <span style="color: #DD0000"># Generating actions for each robot j</span>
@@ -692,26 +267,28 @@
                     <span style="color: #FFFFFF">acts_j</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">add</span>( ( <span style="color: #FFFFFF">xd</span>, <span style="color: #FFFFFF">yd</span> ) )
             <span style="color: #FFFFFF">acts</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">append</span>( <span style="color: #FFFFFF">acts_j</span> )
         <span style="color: #FFFFFF">succ</span> <span style="color: #FF8000">=</span> []
-        <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">combine</span>( <span style="color: #FFFFFF">acts</span>, <span style="color: #FFFFFF">j</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0</span>, <span style="color: #FFFFFF">state_jf</span> <span style="color: #FF8000">=</span> [] ) :
+        <span style="color: #FFFFFF">ini_state</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">state</span> <span style="color: #DD0000"># name change to avoid confusion</span>
+        <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">combine</span>( <span style="color: #FFFFFF">acts</span>, <span style="color: #FFFFFF">N</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0</span>, <span style="color: #FFFFFF">new_state</span> <span style="color: #FF8000">=</span> [] ) :
             <span style="color: #02FF02">&#39;&#39;&#39; </span>
 <span style="color: #02FF02">            Generates N nested for loops to</span>
-<span style="color: #02FF02">            combine all possible actions</span>
+<span style="color: #02FF02">            combine all possible actions.</span>
+<span style="color: #02FF02">            It must be a recursive function.</span>
 <span style="color: #02FF02">            &#39;&#39;&#39;</span>
-            <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">j</span> <span style="color: #FF8000">==</span> <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">robots</span> :
-                <span style="color: #DD0000"># (4) Robots cannot swap places</span>
-                <span style="color: #DD0000"># (5) *Robots cannot collide</span>
-                <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">j</span> <span style="color: #FF8000">in</span> <span style="color: #FF69B4">range</span>( <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">robots</span> ) :
-                    <span style="color: #FFFFFF">sub_jf</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">state_jf</span>[ <span style="color: #FFFFFF">j</span> ]
-                    <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">sub_kf</span> <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">state_jf</span>[ <span style="color: #FFFFFF">j</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> : ] :
-                        <span style="color: #FF8000">if</span> ( ( <span style="color: #FFFFFF">sub_kf</span>, <span style="color: #FFFFFF">sub_jf</span> ) <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">swap</span> <span style="color: #FF8000">or</span>
-                             ( <span style="color: #FFFFFF">sub_jf</span>, <span style="color: #FFFFFF">sub_kf</span> ) <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">coll</span> ) :
+            <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">N</span> <span style="color: #FF8000">==</span> <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">robots</span> :
+                <span style="color: #DD0000"># (3) Robots cannot collide</span>
+                <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">j</span> <span style="color: #FF8000">in</span> <span style="color: #FF69B4">range</span>( <span style="color: #FFFFFF">N</span> ) :
+                    <span style="color: #FFFFFF">sub_ji</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">ini_state</span>[ <span style="color: #FFFFFF">j</span> ]
+                    <span style="color: #FFFFFF">sub_jf</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">new_state</span>[ <span style="color: #FFFFFF">j</span> ]
+                    <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">sub_ki</span>, <span style="color: #FFFFFF">sub_kf</span> <span style="color: #FF8000">in</span> <span style="color: #FF69B4">zip</span>( <span style="color: #FFFFFF">ini_state</span>[ <span style="color: #FFFFFF">j</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> : ], 
+                                               <span style="color: #FFFFFF">new_state</span>[ <span style="color: #FFFFFF">j</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span> : ] ) :
+                        <span style="color: #FF8000">if</span> <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">collision</span>( <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">r</span>, <span style="color: #FFFFFF">sub_ji</span>, <span style="color: #FFFFFF">sub_jf</span>, 
+                                           <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">r</span>, <span style="color: #FFFFFF">sub_ki</span>, <span style="color: #FFFFFF">sub_kf</span> ) :
                             <span style="color: #FF8000">return</span> <span style="color: #DD0000"># Break all loops</span>
-                <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">succ</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">append</span>( <span style="color: #FF69B4">tuple</span>( <span style="color: #FFFFFF">state_jf</span> ) )
-            <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">sub_kf</span> <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">acts</span>[ <span style="color: #FFFFFF">j</span> ] : 
-                <span style="color: #DD0000"># (3) Robots cannot share position</span>
-                <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">sub_kf</span> <span style="color: #FF8000">not</span> <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">state_jf</span> :
-                    <span style="color: #FFFFFF">combine</span>( <span style="color: #FFFFFF">acts</span>, <span style="color: #FFFFFF">j</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">state_jf</span> <span style="color: #FF8000">+</span> [ <span style="color: #FFFFFF">sub_kf</span> ] )
-        <span style="color: #FFFFFF">combine</span>( <span style="color: #FFFFFF">acts</span> )
+                <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">succ</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">append</span>( <span style="color: #FF69B4">tuple</span>( <span style="color: #FFFFFF">new_state</span> ) )
+            <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">sub_jf</span> <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">acts</span>[ <span style="color: #FFFFFF">N</span> ] : 
+                <span style="color: #FF8000">if</span> <span style="color: #FFFFFF">sub_jf</span> <span style="color: #FF8000">not</span> <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">new_state</span> :
+                    <span style="color: #FFFFFF">combine</span>( <span style="color: #FFFFFF">acts</span>, <span style="color: #FFFFFF">N</span> <span style="color: #FF8000">+</span> <span style="color: #FF00FF">1</span>, <span style="color: #FFFFFF">new_state</span> <span style="color: #FF8000">+</span> [ <span style="color: #FFFFFF">sub_jf</span> ] )
+        <span style="color: #FFFFFF">combine</span>( <span style="color: #FFFFFF">acts</span> ) <span style="color: #DD0000"># recursion</span>
         <span style="color: #FF8000">return</span> <span style="color: #FF69B4">set</span>( <span style="color: #FFFFFF">succ</span> )
 
     <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">goal_test</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">state</span> ) :
