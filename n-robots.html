@@ -1117,22 +1117,22 @@
   <p style="text-align:justify">
     The search process and path is animated below. Greedy search finds a solution after expanding 6 nodes.
     Just by separating the 2 robots and increasing the dimensions of the grid
-    so that the number of actions available to each robot is not significantly restricted by the other or the boundary of the grid,
-    the search tree becomes too complex to read.
+    so that the number of actions available to each robot is not restricted, 
+    the search tree becomes too large to read after expanding the root node.
   </p>
   <p style="text-align:justify">
     This seemingly simple problem is too difficult for breadth-first or depth-first search.
-    The reason is because the root node expands into 80 states, or 9<span style="font-size:xx-small; vertical-align:super">2</span> 
-    minus the state in which both robots are idle, and each of these 80 nodes can be expanded into roughly 80 more states.
+    The reason is the following: The root node expands into 80 states, or 9<span style="font-size:xx-small; vertical-align:super">2</span> 
+    minus the state in which both robots are idle. Each of these 80 nodes can be expanded into roughly 80 more states.
     The number of nodes increases approximately exponentially with depth, 
     like 80<span style="font-size:xx-small; vertical-align:super">d</span>, where d is the depth.
-    The shallowest goal state is found at a depth of 5, which means breadth-first search would have to explore (at worst) roughly 
-    80<span style="font-size:xx-small; vertical-align:super">5</span>, or 3 billion nodes, before finding a solution.
+    The shallowest goal state is found at a depth of 6, which means breadth-first search would have to explore (at worst) roughly 
+    80<span style="font-size:xx-small; vertical-align:super">6</span>, or 200 billion nodes, before finding a solution.
     Depth-first search would meander aimlessly down a very deep and random path.
     The maximum depth of the tree is a path in which one of the robots traverses the full area of the grid
     each time the other robot moves to also traverse the full area of the grid, or
     ( n<span style="font-size:xx-small; vertical-align:super">2</span> - 1 )<span style="font-size:xx-small; vertical-align:super">2</span>
-    + n<span style="font-size:xx-small; vertical-align:super">2</span> - 1, for m = n, which gives a maximum depth of 2,352 when m = n = 7.
+    + n<span style="font-size:xx-small; vertical-align:super">2</span> - 1, for m = n, which gives a maximum depth of 2,352 for m = n = 7.
   </p>
   <p style="text-align:center"><img src="greedy_7x7_2r.png"/><img src="greedy_7x7_2r_grid.png"/></p>
   <p style="text-align:justify">
