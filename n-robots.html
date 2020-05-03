@@ -1125,8 +1125,7 @@
   <p style="text-align:justify">
     Just by separating the 2 robots and increasing the dimensions of the grid
     so that the number of actions available to each robot is not restricted, 
-    the search tree becomes too large to read after expanding the root node.
-    This seemingly simple problem is too difficult for breadth-first or depth-first search.
+    the problem becomes impossible to solve using breadth-first or depth-first search.
     The reason is the following: The root node expands into 80 child nodes, or 9<span style="font-size:xx-small; vertical-align:super">2</span> 
     minus the state in which both robots are idle. Each of these 80 nodes can be expanded into roughly 80 more child nodes,
     which gives about 80<span style="font-size:xx-small; vertical-align:super">2</span> total.
