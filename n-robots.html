@@ -1134,12 +1134,15 @@
     like 80<span style="font-size:xx-small; vertical-align:super">d</span>, where d is the depth.
     The shallowest goal state is found at a depth of 5, which means breadth-first search would have to explore (at worst) roughly 
     80<span style="font-size:xx-small; vertical-align:super">5</span>, or 3 billion nodes, before finding a solution.
-    Depth-first search would meander aimlessly down a very deep and random path.
+    Comparatively, depth-first search would meander aimlessly down a very deep and random path.
     The maximum depth of the tree is a path in which one of the robots traverses the full area of the grid
     each time the other robot moves to also traverse the full area of the grid, or
     ( n<span style="font-size:xx-small; vertical-align:super">2</span> - 1 )<span style="font-size:xx-small; vertical-align:super">2</span>
     + n<span style="font-size:xx-small; vertical-align:super">2</span> - 1 = n<span style="font-size:xx-small; vertical-align:super">4</span> - n<span style="font-size:xx-small; vertical-align:super">2</span>,
     for m = n, which gives a maximum depth of 2,352 for m = n = 7.
+    That means the search tree in its entirety consists of about 80<span style="font-size:xx-small; vertical-align:super">2352</span> nodes.
+    Try plugging that into a calculator. That's more than the number of atoms that exist in the observable universe, by more than just a lot!
+    Imagine traversing a depth of 2352 in this massive tree. It's a miracle any solution was found.
   </p>
   <p style="text-align:center"><img src="greedy_7x7_2r.png"/><img src="greedy_7x7_2r_grid.png"/></p>
   <p style="text-align:justify">
@@ -1162,7 +1165,8 @@
     they initially resist going around each other, because that means accessing a state with a higher heuristic value,
     which will not happen until all lower valued nodes are explored in the frontier.
     It actually looks as though they are fighting each other.
-    Although greedy search made it possible to find a solution in a massive tree such as this, like a needle in a haystack,
+    Although greedy search made it possible to find a solution in a massive tree such as this, 
+    like finding a needle in a galaxy cluster,
     the solution it found is far from satisfying.
     If only there is a way to combine the speed of greedy search with the optimality of breadth-first search.
     Can these robots ever get along?
