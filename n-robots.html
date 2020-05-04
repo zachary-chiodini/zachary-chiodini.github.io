@@ -965,7 +965,9 @@
   <h1 style="color:#02FF02">Greedy Search</h1>
   <p style="text-align:justify">
     This algorithm chooses nodes based on their heuristic value in ascending order.
-    The goal state should have a heuristic value of zero.
+    The heuristic value of a node is an estimate of the "cost" to reach the goal from that node.
+    In this problem, the heuristic value of a node or state is the sum of the straight line distaces from each substate
+    to their respective goal substates. Therefore, the goal state should have a cost of zero.
     This algorithm finds solutions quickly, but does not always find the optimal solution. Like depth-first search, the algorithm
     tends to follow a single path all the way to the goal and backtracks up the tree and expands shallower nodes when it hits a
     dead end. Additionally, like depth-first search, greedy search is not complete or optimal for the same reasons. 
@@ -976,8 +978,7 @@
   <h1 style="color:#02FF02">Greedy Search in Python</h1>
   <p style="text-align:justify">
     The script is identical to breadth-first and depth-fist search except the frontier is not a FIFO or LIFO queue but a priority
-    queue in which nodes are prioritized by their heuristic values in ascending order.
-    Heuristic values are determined by a function that calculates the straight line distance from a given state to the goal state.
+    queue in which nodes are prioritized by their heuristic value in ascending order.
   </p>
   <div style="height:300px; overflow:auto; font-family:courier">
 <table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%"> 1
