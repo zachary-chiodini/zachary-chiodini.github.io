@@ -1193,9 +1193,11 @@
     the parent substate with a magnitude also equal to the heuristic value of the child substate.
     If the child substate is idle, or equal to the parent substate, 
     the step cost vector is given a value opposite of the hueristic vector.
+    The magnitude of the difference of these two vectors is zero if the robot moves directly toward its goal substate
+    and maximum when the robot is idle or moves directly opposite its goal substate.
+    The straight line distance from the parent to child substate is added to provide consistency.
     The total step cost for the state is the sum of the step costs of all substates.
-    In this way, all N robots are directed toward their goal substates, the hueristic function is admissible and consistent and an
-    optimal solution will be found.
+    In this way, all N robots are directed toward their goal substates and an optimal solution will be found.
   </p>
   <div style="height:300px; overflow:auto; font-family:courier">
  <table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%">  1
