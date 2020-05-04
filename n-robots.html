@@ -1146,29 +1146,18 @@
   </p>
   <p style="text-align:center"><img src="greedy_7x7_2r.png"/><img src="greedy_7x7_2r_grid.png"/></p>
   <p style="text-align:justify">
-    Due to the size of the successor set, which is at worst 9<span style="font-size:xx-small; vertical-align:super">N</span>,
-    problems involving many robots spaced far apart are still infeasible.
-    With 8 robots spaced far part and away from the boundary of the grid, the successor set will return 
-    9<span style="font-size:xx-small; vertical-align:super">8</span>, or approximately 43 million nodes.
-    Eliminating diagonal movement reduces the size of the successor set to 
-    5<span style="font-size:xx-small; vertical-align:super">8</span> or 390,625 at worst.
-  </p> 
-  <p style="text-align:justify">
-    On a 10 by 10 grid with an initial state
-    [ ( 1, 1 ), ( 10, 10 ), ( 1, 10 ), ( 10, 1 ), ( 1, 4 ), ( 1, 7 ), ( 10, 4 ), ( 10, 7 ) ]
+    for 4 robots On a 10 by 10 grid with an initial state
+    [ ( 1, 1 ), ( 10, 10 ), ( 1, 10 ), ( 10, 1 ) ]
     and a goal state
-    [ ( 10, 10 ), ( 1, 1 ), ( 10, 1 ), ( 1, 10 ), ( 10, 7 ), ( 10, 4 ), ( 1, 7 ), ( 1, 4 ) ],
-    greedy search finds the path animated below after expanding 189 nodes.
+    [ ( 10, 10 ), ( 1, 1 ), ( 10, 1 ), ( 1, 10 ) ],
+    greedy search finds the path animated below after expanding 14 nodes.
   </p>
   <p style="text-align:justify">
-    Unfortunately, the drawback of greedy search is clearly demonstrated. When the robots encounter, due to their greed,
+    Unfortunately, the drawback of greedy search is again demonstrated. It's just too greedy.
+    The robots run directly at eachother in persuit of the goal state until they are forced to turn around to avoid a collision.
     they initially resist going around each other, because that means accessing a state with a higher heuristic value,
-    which will not happen until all lower valued nodes are explored in the frontier.
-    It actually looks as though the robots are fighting each other.
-    Although greedy search made it possible to find a solution in a massive tree such as this,
-    the solution it found is far from satisfying.
-    If only there is a way to combine the speed of greedy search with the optimality of breadth-first search.
-    Can these robots ever get along?
+    Although greedy search made it possible to find a solution very quickly in a massive tree such as this,
+    the solution is not satisfying. Can these robots ever just get along?
   </p>
   <p style="text-align:center"><img src="solution7.png"/></p>
   <h1 style="color:#02FF02">A* Search</h1>
