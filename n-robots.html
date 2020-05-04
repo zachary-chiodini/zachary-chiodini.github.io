@@ -1324,13 +1324,6 @@
 <span style="color: #02FF02">        Straight line distance from substate i to f </span>
 <span style="color: #02FF02">        &#39;&#39;&#39;</span>
         <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">magnitude</span>( <span style="color: #FFFFFF">difference</span>( <span style="color: #FFFFFF">sub_f</span>, <span style="color: #FFFFFF">sub_i</span> ) )
-    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">h_score</span>( <span style="color: #FFFFFF">state</span>, <span style="color: #FFFFFF">goal</span> ) :
-        <span style="color: #02FF02">&#39;&#39;&#39; </span>
-<span style="color: #02FF02">        Sum of estimated distance each robot j has to</span>
-<span style="color: #02FF02">        travel from substate j to the goal substate j</span>
-<span style="color: #02FF02">        &#39;&#39;&#39;</span>
-        <span style="color: #FF8000">return</span> <span style="color: #FF69B4">sum</span>( <span style="color: #FFFFFF">distance</span>( <span style="color: #FFFFFF">state</span>[ <span style="color: #FFFFFF">j</span> ], <span style="color: #FFFFFF">goal</span>[ <span style="color: #FFFFFF">j</span> ] ) 
-                    <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">j</span> <span style="color: #FF8000">in</span> <span style="color: #FF69B4">range</span>( <span style="color: #FFFFFF">problem</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">robots</span> ) )
     <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">set_mag</span>( <span style="color: #FFFFFF">m</span>, <span style="color: #FFFFFF">v</span> ) :
         <span style="color: #02FF02">&#39;&#39;&#39; </span>
 <span style="color: #02FF02">        Change the mangitude of vector v to the value m </span>
@@ -1341,6 +1334,13 @@
             <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">m</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">nx</span>, <span style="color: #FFFFFF">m</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">ny</span>
         <span style="color: #FF8000">else</span> : 
             <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">v</span>
+    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">h_score</span>( <span style="color: #FFFFFF">state</span>, <span style="color: #FFFFFF">goal</span> ) :
+        <span style="color: #02FF02">&#39;&#39;&#39; </span>
+<span style="color: #02FF02">        Sum of estimated distance each robot j has to</span>
+<span style="color: #02FF02">        travel from substate j to the goal substate j</span>
+<span style="color: #02FF02">        &#39;&#39;&#39;</span>
+        <span style="color: #FF8000">return</span> <span style="color: #FF69B4">sum</span>( <span style="color: #FFFFFF">distance</span>( <span style="color: #FFFFFF">state</span>[ <span style="color: #FFFFFF">j</span> ], <span style="color: #FFFFFF">goal</span>[ <span style="color: #FFFFFF">j</span> ] ) 
+                    <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">j</span> <span style="color: #FF8000">in</span> <span style="color: #FF69B4">range</span>( <span style="color: #FFFFFF">problem</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">robots</span> ) )
     <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">g_score</span>( <span style="color: #FFFFFF">child</span>, <span style="color: #FFFFFF">goal</span> ) :
         <span style="color: #02FF02">&#39;&#39;&#39;</span>
 <span style="color: #02FF02">        The g score is the path cost function, which is</span>
