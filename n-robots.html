@@ -1168,9 +1168,8 @@
     A* search is optimal and complete, as long as the heuristic function is admissable and consistent.
     An admissible heuristic function is one that never overestimates the cost to reach the goal.
     If the heuristic value of a parent node is not greater than the step cost plus the heuristic value of its child node,
-    the heuristic function is consistent. Like greedy search, A* search has an exponential space complexity bound and an
-    exponential time complexity bound, but with a good heuristic function,
-    the time complexity can be significantly reduced.
+    the heuristic function is consistent. Like greedy search, A* search has an exponential space and time complexity bound, 
+    but with a good heuristic and path cost function, these can be significantly reduced.
   </p>
   <h1 style="color:#02FF02">A* Search in Python</h1>
   <p style="text-align:justify">
