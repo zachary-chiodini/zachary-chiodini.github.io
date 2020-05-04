@@ -967,7 +967,8 @@
     This algorithm chooses nodes based on their heuristic value in ascending order.
     The heuristic value of a node is an estimate of the "cost" to reach the goal from that node.
     In this problem, the heuristic value of a node or state is the sum of the straight line distaces from each substate
-    to their respective goal substates. Therefore, the goal state should have a cost of zero.
+    to their respective goal substates. Therefore, the goal state has a heuristic value of zero, 
+    which is a condition all heuristics must have.
     This algorithm finds solutions quickly, but does not always find the optimal solution. Like depth-first search, the algorithm
     tends to follow a single path all the way to the goal and backtracks up the tree and expands shallower nodes when it hits a
     dead end. Additionally, like depth-first search, greedy search is not complete or optimal for the same reasons. 
