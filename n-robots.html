@@ -1183,8 +1183,8 @@
     This problem is not a typical path finding problem. The description above fails with multiple robots. The reason is that the path cost
     plus the heuristic value does not consider solutions having idle states as suboptimal. 
     The optimal solution here is the quickest solution, not necessarily the solution in which the robots travel the least distance.
-    Careful consideration went into designing the path cost function so that an optimal solution will be found while
-    the admissibility and consistency of the heuristic function is preserved.
+    Careful consideration went into designing the path cost function so that all robots will be directed toward their goal substates
+    while the admissibility and consistency of the heuristic function is preserved.
   </p>
   <p style="text-align:justify">
     The path cost function gives actions directed toward the goal state a lower step cost.
