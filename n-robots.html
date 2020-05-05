@@ -21,7 +21,7 @@
     </p>
     <p style="text-align:justify">
       This problem of simple robot navigation involves N simple circular robots of radius R on a 2D m by n grid, 
-      an initial state specifying the initial position of the robots and a goal state specifying the final position of the robots.
+      an initial state specifying the initial positions of the robots and a goal state specifying the final positions of the robots.
       A solution to this problem is a path from the initial to goal state in which no robot exits the grid or smashes into another.
       The aforementioned searching algorithms will be used to find these solutions. 
       Furthermore, the optimality, completeness, time complexity and space complexity of each algorithm will be compared.
@@ -50,11 +50,11 @@
   </p>
   <p style="text-align:center"><img style="width:450px; height:110px" src="defs.png"/></p>
   <p style="text-align:justify">
-    Robot diameters are a parameter used to calculate collisions and are allowed to be any length. 
-    The speed of the robots v must be identical moving horizontally and vertically and √2v when moving diagonally.
+    Robot radii are a parameter used to calculate collisions and are allowed to be any length. 
     There is a vague concept of velocity in the program. 
+    The speed v of the robots must be identical moving horizontally and vertically and √2v when moving diagonally.
     However, transitions from one state to another occur instantaneously. 
-    Therefore, all robots must arrive at their subsequent substates at the same time, but that time is arbitrary.
+    All robots must arrive at their subsequent substates at the same time, but that time is arbitrary.
   <p style="text-align:justify">
     The following restrictions on the successor set apply:
     (1) robots move by one grid unit if horizontally or vertically and two grid units if diagonally,
