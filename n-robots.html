@@ -1493,7 +1493,8 @@
     It's as though they are attempting to reach a consensus on the best coarse of action.
     Our robots have matured and become productive citizens of their simple but surprisingly intricate 2D world.
     You can see how our A* search does not need to exhaust all possible paths at lower depths to find the shallowest
-    goal state. It was able to prune billions of leaves from the tree, which were predicted to be suboptimal by the f score.
+    goal state. It pruned 67 of the 80 branches at the first depth and did not need to explote all 1040 nodes generated at the second depth (80 x 13).
+    This eliminated tens of billions of nodes from the search, which were predicted to lead to suboptimal solutions by the f score.
   </p>
   <p style="text-align:center"><img src="astar_7x7_2r.png"/><img src="astar_7x7_2r_grid.png"/></p>
   <h1 style="color:#02FF02">Conclusion</h1>
