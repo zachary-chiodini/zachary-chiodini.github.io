@@ -355,27 +355,35 @@
         </div>
         </td></tr>
     </table>
-    <h1 style="color:#02FF02">Helix Class</h1>
+    <h1 style="color:#02FF02">Algorithm</h1>
     <p>
-      The Helix class is a subclass of the Vector and Plot class. The mathematical formula for a nested helix defines a curve.
+      The mathematical formula for a nested helix defines a curve.
       It does not define a cylindrical surface or the orientation of polygons used to construct such a surface.
       Therefore, a simple mathematical formula was not used. Instead, the helices are contructed algorithmically.
-    </p>
-    <p>
       This algoirthm is explained below in excruciating detail. 
       After each iteration of the nested helix angle, 
       the set of points represented by a cursive "L" is added to a total, 
       which defines the entire surface of a cylindrical nested helix.
+      If the mathematics are overwhelming, skip to the video and simply observe how it works.
+    </p>
+    <p>
       These 5 steps can be summarized as (1) Plotting a Circle, (2) Rotating the Circle, (3) Translating the Circle, 
       (4) Rotating the Circle, again, and (5) Translating the Circle, again.
-      Due to the intensity of the details in the algorithm, the process is animated in a video to aid in understanding.
-      If your browser does not support mp4 files, please switch to one that does.
     </p>
     <p align="center"><img style="width:75%; height:75%" src="helix_algorithm.png" /></p>
+    <h1 style="color:#02FF02">Algorithm in Action</h1>
+    <p>
+      Due to the intensity of the details in the algorithm, the process is animated in a video below to aid in understanding.
+      If your browser does not support mp4 files, please switch to one that does.
+    </p>
     <p align="center">
       <video controls>
         <source src="helix_construction.mp4" type="video/mp4">
       </video>
+    </p>
+    <h1 style="color:#02FF02">Helix Class</h1>
+    <p>
+      The Helix class is a subclass of the Vector and Plot class.
     </p>
     <table align="center">
       <tr><td><img src="sextuple_helix.png" /></td></tr>
