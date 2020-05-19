@@ -440,11 +440,13 @@
     </p>
     <h1 style="color:#02FF02">Helix Class</h1>
     <p>
-      The Helix class is a subclass of the Vector and Plot class.
+      The Helix class is a subclass of the Ops and Plot class.
       This class can create regular cylindrical helices, double cylindrical helices, 
-      nested cylindrical helices and the cylindrical sextuple helix (double double cylindrical nested helix) 
+      nested cylindrical helices, double nested cylindrical helices and 
+      the cylindrical sextuple helix (double double cylindrical nested helix) 
       using the aforementioned algorithm.
       Additional parameters have been added to provide more control over the shape of each structure.
+      The functions can be edited for further control over the structures.
       A few functions are imported from numpy to make calculations easier.
     </p>
     <table align="center">
@@ -554,32 +556,9 @@
 102
 103
 104
-105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127
-128</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">from</span> <span style="color: #FFFFFF">numpy</span> <span style="color: #FF8000">import</span> <span style="color: #FFFFFF">arctan</span>, <span style="color: #FFFFFF">cos</span>, <span style="color: #FFFFFF">linspace</span>, <span style="color: #FFFFFF">pi</span>, <span style="color: #FFFFFF">sin</span>
-  
-<span style="color: #FF8000">class</span> <span style="color: #5E5EFF">Helix</span>( <span style="color: #FFFFFF">Plot</span>, <span style="color: #FFFFFF">Vector</span> ) :
+105</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">from</span> <span style="color: #FFFFFF">numpy</span> <span style="color: #FF8000">import</span> <span style="color: #FFFFFF">arctan</span>, <span style="color: #FFFFFF">linspace</span>, <span style="color: #FFFFFF">pi</span>
+
+<span style="color: #FF8000">class</span> <span style="color: #5E5EFF">Helix</span>( <span style="color: #FFFFFF">Plot</span>, <span style="color: #FFFFFF">Ops</span> ) :
     <span style="color: #02FF02">&#39;&#39;&#39;</span>
 <span style="color: #02FF02">    Plot a Helix, Cylindrical Helix or Nested Cylindrical Helix</span>
 <span style="color: #02FF02">    +-----------+------------------------------+--------------+</span>
@@ -608,31 +587,16 @@
 <span style="color: #02FF02">    |     n     | number of circles in helix   | Integers &gt; 0 |</span>
 <span style="color: #02FF02">    +-----------+------------------------------+--------------+</span>
 <span style="color: #02FF02">    &#39;&#39;&#39;</span>
-    
     <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">cylindrical</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">rh1</span>, <span style="color: #FFFFFF">rc</span>, <span style="color: #FFFFFF">dc</span>, <span style="color: #FFFFFF">p</span>, <span style="color: #FFFFFF">t1</span>, <span style="color: #FFFFFF">m</span>, <span style="color: #FFFFFF">n</span> ) :
         <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">m</span>, <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">n</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">m</span>, <span style="color: #FFFFFF">n</span>
-        <span style="color: #DD0000"># helical angle</span>
-        <span style="color: #FFFFFF">pitch_angle</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">arctan</span>( <span style="color: #FFFFFF">p</span><span style="color: #FF8000">/</span>(<span style="color: #FF00FF">2</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">pi</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">rh1</span>) )
-        <span style="color: #FFFFFF">circle</span> <span style="color: #FF8000">=</span> <span style="color: #FF8000">lambda</span> <span style="color: #FFFFFF">r</span>, <span style="color: #FFFFFF">t</span> : (
-            <span style="color: #FFFFFF">r</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ), <span style="color: #FFFFFF">r</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">sin</span>( <span style="color: #FFFFFF">t</span> ), <span style="color: #FF00FF">0</span>
-            )
-        <span style="color: #FFFFFF">vector</span> <span style="color: #FF8000">=</span> <span style="color: #FF8000">lambda</span> <span style="color: #FFFFFF">r</span>, <span style="color: #FFFFFF">t</span> : (
-            <span style="color: #FFFFFF">r</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ), <span style="color: #FFFFFF">r</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">sin</span>( <span style="color: #FFFFFF">t</span> ), <span style="color: #FF00FF">0</span>
-            )
-        <span style="color: #FFFFFF">zenith</span> <span style="color: #FF8000">=</span> <span style="color: #FF8000">lambda</span> <span style="color: #FFFFFF">p</span>, <span style="color: #FFFFFF">t</span> : <span style="color: #FFFFFF">p</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">t</span><span style="color: #FF8000">/</span>(<span style="color: #FF00FF">2</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">pi</span>)
-        <span style="color: #FFFFFF">translate</span> <span style="color: #FF8000">=</span> <span style="color: #FF8000">lambda</span> <span style="color: #FFFFFF">v</span>, <span style="color: #FFFFFF">x</span>, <span style="color: #FFFFFF">y</span>, <span style="color: #FFFFFF">z</span> : (
-            <span style="color: #FFFFFF">v</span>[ <span style="color: #FF00FF">0</span> ] <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">x</span>, <span style="color: #FFFFFF">v</span>[ <span style="color: #FF00FF">1</span> ] <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">y</span>, <span style="color: #FFFFFF">v</span>[ <span style="color: #FF00FF">2</span> ] <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">z</span>
-            )
         <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">x</span>, <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">y</span>, <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">z</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">zip</span>(
-            <span style="color: #FF8000">*</span>[ <span style="color: #FFFFFF">translate</span>(
+            <span style="color: #FF8000">*</span>[ <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">translate</span>(
                 <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">rotate</span>(
-                    <span style="color: #FFFFFF">circle</span>( <span style="color: #FFFFFF">rc</span>, <span style="color: #FFFFFF">tc</span> ),
-                    <span style="color: #FFFFFF">circle</span>( <span style="color: #FFFFFF">rh1</span>, <span style="color: #FFFFFF">th</span> ),
-                    <span style="color: #FF8000">-</span><span style="color: #FFFFFF">dc</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">pi</span><span style="color: #FF8000">/</span><span style="color: #FF00FF">2</span> <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">pitch_angle</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">rh1</span><span style="color: #FF8000">/</span><span style="color: #FF69B4">abs</span>( <span style="color: #FFFFFF">rh1</span> )
+                    <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">circle</span>( <span style="color: #FFFFFF">rc</span>, <span style="color: #FFFFFF">tc</span> ),
+                    <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">vector</span>( <span style="color: #FFFFFF">rh1</span>, <span style="color: #FFFFFF">th</span> ),
+                    <span style="color: #FF8000">-</span><span style="color: #FFFFFF">dc</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">pi</span><span style="color: #FF8000">/</span><span style="color: #FF00FF">2</span> <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">arctan</span>( <span style="color: #FFFFFF">p</span><span style="color: #FF8000">/</span>(<span style="color: #FF00FF">2</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">pi</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">rh1</span>) )<span style="color: #FF8000">*</span><span style="color: #FFFFFF">rh1</span><span style="color: #FF8000">/</span><span style="color: #FF69B4">abs</span>( <span style="color: #FFFFFF">rh1</span> )
                     ),
-                <span style="color: #FFFFFF">rh1</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">th</span> ),
-                <span style="color: #FFFFFF">rh1</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">sin</span>( <span style="color: #FFFFFF">th</span> ),
-                <span style="color: #FFFFFF">zenith</span>( <span style="color: #FFFFFF">p</span>, <span style="color: #FFFFFF">th</span> )
+                <span style="color: #FF8000">*</span><span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">helix</span>( <span style="color: #FFFFFF">rh1</span>, <span style="color: #FFFFFF">th</span> )
                 )
                <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">th</span> <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">linspace</span>( <span style="color: #FF00FF">0</span>, <span style="color: #FF00FF">2</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">pi</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">t1</span>, <span style="color: #FFFFFF">n</span> )
                <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">tc</span> <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">linspace</span>( <span style="color: #FF00FF">0</span>, <span style="color: #FF00FF">2</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">pi</span><span style="color: #FF8000">*</span>( <span style="color: #FF00FF">1</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span><span style="color: #FF8000">/</span><span style="color: #FFFFFF">m</span> ), <span style="color: #FFFFFF">m</span> ) ]
@@ -648,31 +612,23 @@
     <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">cylindrical_nested</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">rh1</span>, <span style="color: #FFFFFF">rh2</span>, <span style="color: #FFFFFF">rc</span>, <span style="color: #FFFFFF">dc</span>, <span style="color: #FFFFFF">p</span>,
                               <span style="color: #FFFFFF">d1</span>,  <span style="color: #FFFFFF">d2</span>,  <span style="color: #FFFFFF">t1</span>, <span style="color: #FFFFFF">t2</span>,  <span style="color: #FFFFFF">m</span>, <span style="color: #FFFFFF">n</span> ) :
         <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">m</span>, <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">n</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">m</span>, <span style="color: #FFFFFF">n</span>
+        <span style="color: #DD0000"># nested helix pitch</span>
         <span style="color: #FFFFFF">p2</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">t1</span><span style="color: #FF8000">*</span>( <span style="color: #FFFFFF">p</span><span style="color: #FF8000">**</span><span style="color: #FF00FF">2</span> <span style="color: #FF8000">+</span> (<span style="color: #FF00FF">2</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">pi</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">rh1</span>)<span style="color: #FF8000">**</span><span style="color: #FF00FF">2</span> )<span style="color: #FF8000">**</span><span style="color: #FF00FF">0.5</span><span style="color: #FF8000">/</span><span style="color: #FFFFFF">t2</span>
-        <span style="color: #FFFFFF">vector</span> <span style="color: #FF8000">=</span> <span style="color: #FF8000">lambda</span> <span style="color: #FFFFFF">r</span>, <span style="color: #FFFFFF">t</span> : (
-            <span style="color: #FFFFFF">d2</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">r</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ), <span style="color: #FFFFFF">d2</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">r</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">sin</span>( <span style="color: #FFFFFF">t</span> ), <span style="color: #FF00FF">0</span>
-            )
-        <span style="color: #FFFFFF">zenith</span> <span style="color: #FF8000">=</span> <span style="color: #FF8000">lambda</span> <span style="color: #FFFFFF">p</span>, <span style="color: #FFFFFF">t</span> : <span style="color: #FFFFFF">p</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">t</span><span style="color: #FF8000">/</span>(<span style="color: #FF00FF">2</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">pi</span>)
-        <span style="color: #FFFFFF">translate</span> <span style="color: #FF8000">=</span> <span style="color: #FF8000">lambda</span> <span style="color: #FFFFFF">v</span>, <span style="color: #FFFFFF">x</span>, <span style="color: #FFFFFF">y</span>, <span style="color: #FFFFFF">z</span> : (
-            <span style="color: #FFFFFF">v</span>[ <span style="color: #FF00FF">0</span> ] <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">x</span>, <span style="color: #FFFFFF">v</span>[ <span style="color: #FF00FF">1</span> ] <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">y</span>, <span style="color: #FFFFFF">v</span>[ <span style="color: #FF00FF">2</span> ] <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">z</span>
-            )
         <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">x</span>, <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">y</span>, <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">z</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">zip</span>(
-            <span style="color: #FF8000">*</span>[ <span style="color: #FFFFFF">translate</span>(
+            <span style="color: #FF8000">*</span>[ <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">translate</span>(
                 <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">rotate</span>(
-                    <span style="color: #FFFFFF">translate</span>(
+                    <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">translate</span>(
                         <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">rotate</span>(
-                            <span style="color: #FFFFFF">vector</span>( <span style="color: #FFFFFF">rc</span>, <span style="color: #FFFFFF">tc</span> ),
-                            <span style="color: #FFFFFF">vector</span>( <span style="color: #FFFFFF">rh2</span>, <span style="color: #FFFFFF">th</span> ),
+                            <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">circle</span>( <span style="color: #FFFFFF">rc</span>, <span style="color: #FFFFFF">tc</span> ),
+                            <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">vector</span>( <span style="color: #FFFFFF">d2</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">rh2</span>, <span style="color: #FFFFFF">th</span> ),
                             <span style="color: #FFFFFF">d2</span><span style="color: #FF8000">*</span>( <span style="color: #FFFFFF">dc</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">pi</span><span style="color: #FF8000">/</span><span style="color: #FF00FF">2</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">arctan</span>( <span style="color: #FFFFFF">p2</span><span style="color: #FF8000">/</span>(<span style="color: #FF00FF">2</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">pi</span><span style="color: #FF8000">*</span><span style="color: #FF69B4">abs</span>( <span style="color: #FFFFFF">rh2</span> )) ) )
                             ),
-                        <span style="color: #FF8000">*</span><span style="color: #FFFFFF">vector</span>( <span style="color: #FFFFFF">rh2</span>, <span style="color: #FFFFFF">th</span> )
+                        <span style="color: #FF8000">*</span><span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">vector</span>( <span style="color: #FFFFFF">d2</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">rh2</span>, <span style="color: #FFFFFF">th</span> )
                         ),
-                    <span style="color: #FFFFFF">vector</span>( <span style="color: #FFFFFF">rh1</span>, <span style="color: #FFFFFF">th</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">t1</span><span style="color: #FF8000">/</span><span style="color: #FFFFFF">t2</span>  ),
+                    <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">vector</span>( <span style="color: #FFFFFF">d2</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">rh1</span>, <span style="color: #FFFFFF">th</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">t1</span><span style="color: #FF8000">/</span><span style="color: #FFFFFF">t2</span>  ),
                     <span style="color: #FFFFFF">d1</span><span style="color: #FF8000">*</span>( <span style="color: #FFFFFF">pi</span><span style="color: #FF8000">/</span><span style="color: #FF00FF">2</span> <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">arctan</span>(  <span style="color: #FFFFFF">d2</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">p</span><span style="color: #FF8000">/</span>(<span style="color: #FF00FF">2</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">pi</span><span style="color: #FF8000">*</span><span style="color: #FF69B4">abs</span>( <span style="color: #FFFFFF">rh1</span> )) ) )
                     ),
-                <span style="color: #FFFFFF">d1</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">rh1</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">th</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">t1</span><span style="color: #FF8000">/</span><span style="color: #FFFFFF">t2</span> ),
-                <span style="color: #FFFFFF">d1</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">rh1</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">sin</span>( <span style="color: #FFFFFF">th</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">t1</span><span style="color: #FF8000">/</span><span style="color: #FFFFFF">t2</span> ),
-                <span style="color: #FFFFFF">zenith</span>( <span style="color: #FFFFFF">p</span>, <span style="color: #FFFFFF">th</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">t1</span><span style="color: #FF8000">/</span><span style="color: #FFFFFF">t2</span> )
+                <span style="color: #FF8000">*</span><span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">helix</span>( <span style="color: #FFFFFF">d1</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">rh1</span>, <span style="color: #FFFFFF">p</span>, <span style="color: #FFFFFF">th</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">t1</span><span style="color: #FF8000">/</span><span style="color: #FFFFFF">t2</span> )
                 )
                <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">th</span> <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">linspace</span>( <span style="color: #FF00FF">0</span>, <span style="color: #FF00FF">2</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">pi</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">t2</span>, <span style="color: #FFFFFF">n</span> )
                <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">tc</span> <span style="color: #FF8000">in</span> <span style="color: #FFFFFF">linspace</span>( <span style="color: #FF00FF">0</span>, <span style="color: #FF00FF">2</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">pi</span><span style="color: #FF8000">*</span>( <span style="color: #FF00FF">1</span> <span style="color: #FF8000">-</span> <span style="color: #FF00FF">1</span><span style="color: #FF8000">/</span><span style="color: #FFFFFF">m</span> ), <span style="color: #FFFFFF">m</span> ) ]
