@@ -18,10 +18,10 @@
       The points generated to create these structures can be converted to STL files and 3D printed, but that is not shown here.
       The code used to produce the video and animations on this page is not shown, either.
     </p>
-    <h1 style="color:#02FF02">Vector Class</h1>
+    <h1 style="color:#02FF02">Ops Class</h1>
     <p>
       To begin, some simple mathematical operations must be defined in order to create the geometric structures.
-      All that is needed are some trigonometric functions and some simple vector math.
+      All that is needed is a circle, a helix, the generalized rotation matrix and a translation function.
     </p>
     <table align="center">
       <tr><td>
@@ -60,41 +60,83 @@
 32
 33
 34
-35</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">from</span> <span style="color: #FFFFFF">math</span> <span style="color: #FF8000">import</span> <span style="color: #FFFFFF">cos</span>, <span style="color: #FFFFFF">sin</span>
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">from</span> <span style="color: #FFFFFF">math</span> <span style="color: #FF8000">import</span> <span style="color: #FFFFFF">cos</span>, <span style="color: #FFFFFF">sin</span>, <span style="color: #FFFFFF">pi</span>
 
-<span style="color: #FF8000">class</span> <span style="color: #5E5EFF">Vector</span>() :
+<span style="color: #FF8000">class</span> <span style="color: #5E5EFF">Ops</span> :
     <span style="color: #02FF02">&#39;&#39;&#39;</span>
-<span style="color: #02FF02">    Vector algebra to be used by the Helix class</span>
-<span style="color: #02FF02">    &#39;&#39;&#39;</span>
+<span style="color: #02FF02">    Mathematical operations to be used by the Helix class</span>
+<span style="color: #02FF02">    &#39;&#39;&#39;</span> 
     <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">magnitude</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">v</span> ) :
-        <span style="color: #02FF02">&#39;&#39;&#39; Mangitude of vector v(x,y,z) &#39;&#39;&#39;</span>
+        <span style="color: #02FF02">&#39;&#39;&#39;</span>
+<span style="color: #02FF02">        Mangitude of vector v(x,y,z)</span>
+<span style="color: #02FF02">        &#39;&#39;&#39;</span>
         <span style="color: #FF8000">return</span> ( <span style="color: #FFFFFF">v</span>[ <span style="color: #FF00FF">0</span> ]<span style="color: #FF8000">**</span><span style="color: #FF00FF">2</span> <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">v</span>[ <span style="color: #FF00FF">1</span> ]<span style="color: #FF8000">**</span><span style="color: #FF00FF">2</span> <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">v</span>[ <span style="color: #FF00FF">2</span> ]<span style="color: #FF8000">**</span><span style="color: #FF00FF">2</span> )<span style="color: #FF8000">**</span><span style="color: #FF00FF">0.5</span>
 
     <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">normalize</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">v</span> ) :
-        <span style="color: #02FF02">&#39;&#39;&#39; Normalize vector v &#39;&#39;&#39;</span>
+        <span style="color: #02FF02">&#39;&#39;&#39;</span>
+<span style="color: #02FF02">        Normalize vector v</span>
+<span style="color: #02FF02">        &#39;&#39;&#39;</span>
         <span style="color: #FFFFFF">m</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">magnitude</span>( <span style="color: #FFFFFF">v</span> )
         <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">v</span>[ <span style="color: #FF00FF">0</span> ] <span style="color: #FF8000">/</span> <span style="color: #FFFFFF">m</span>, <span style="color: #FFFFFF">v</span>[ <span style="color: #FF00FF">1</span> ] <span style="color: #FF8000">/</span> <span style="color: #FFFFFF">m</span>, <span style="color: #FFFFFF">v</span>[ <span style="color: #FF00FF">2</span> ] <span style="color: #FF8000">/</span> <span style="color: #FFFFFF">m</span>
-
-    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">transform</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">p</span>, <span style="color: #FFFFFF">x</span>, <span style="color: #FFFFFF">y</span>, <span style="color: #FFFFFF">z</span> ) :
-        <span style="color: #02FF02">&#39;&#39;&#39; Linear transformation of point p &#39;&#39;&#39;</span>
-        <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">p</span>[ <span style="color: #FF00FF">0</span> ] <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">x</span>, <span style="color: #FFFFFF">p</span>[ <span style="color: #FF00FF">1</span> ] <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">y</span>, <span style="color: #FFFFFF">p</span>[ <span style="color: #FF00FF">2</span> ] <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">z</span>
     
     <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">rotate</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">p</span>, <span style="color: #FFFFFF">u</span>, <span style="color: #FFFFFF">t</span> ) :
         <span style="color: #02FF02">&#39;&#39;&#39;</span>
-<span style="color: #02FF02">        Rotate point p(x,y,z) about vector u(x,y,z) by an angle t</span>
+<span style="color: #02FF02">        Rotate point p(x,y,z) about vector u(x,y,z) by angle t</span>
 <span style="color: #02FF02">        &#39;&#39;&#39;</span>
         <span style="color: #FFFFFF">px</span>, <span style="color: #FFFFFF">py</span>, <span style="color: #FFFFFF">pz</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">p</span>
         <span style="color: #FFFFFF">ux</span>, <span style="color: #FFFFFF">uy</span>, <span style="color: #FFFFFF">uz</span> <span style="color: #FF8000">=</span> <span style="color: #FF69B4">self</span><span style="color: #FF8000">.</span><span style="color: #FFFFFF">normalize</span>( <span style="color: #FFFFFF">u</span> )
-        <span style="color: #FFFFFF">x</span> <span style="color: #FF8000">=</span>   <span style="color: #FFFFFF">px</span><span style="color: #FF8000">*</span>( <span style="color: #FFFFFF">ux</span><span style="color: #FF8000">**</span><span style="color: #FF00FF">2</span><span style="color: #FF8000">*</span>( <span style="color: #FF00FF">1</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ) ) <span style="color: #FF8000">+</span>    <span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ) ) \
-            <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">py</span><span style="color: #FF8000">*</span>( <span style="color: #FFFFFF">ux</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">uy</span><span style="color: #FF8000">*</span>( <span style="color: #FF00FF">1</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ) ) <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">uz</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">sin</span>( <span style="color: #FFFFFF">t</span> ) ) \
-            <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">pz</span><span style="color: #FF8000">*</span>( <span style="color: #FFFFFF">ux</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">uz</span><span style="color: #FF8000">*</span>( <span style="color: #FF00FF">1</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ) ) <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">uy</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">sin</span>( <span style="color: #FFFFFF">t</span> ) )
-        <span style="color: #FFFFFF">y</span> <span style="color: #FF8000">=</span>   <span style="color: #FFFFFF">px</span><span style="color: #FF8000">*</span>( <span style="color: #FFFFFF">uy</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">ux</span><span style="color: #FF8000">*</span>( <span style="color: #FF00FF">1</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ) ) <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">uz</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">sin</span>( <span style="color: #FFFFFF">t</span> ) ) \
-            <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">py</span><span style="color: #FF8000">*</span>( <span style="color: #FFFFFF">uy</span><span style="color: #FF8000">**</span><span style="color: #FF00FF">2</span><span style="color: #FF8000">*</span>( <span style="color: #FF00FF">1</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ) ) <span style="color: #FF8000">+</span>    <span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ) ) \
-            <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">pz</span><span style="color: #FF8000">*</span>( <span style="color: #FFFFFF">ux</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">uz</span><span style="color: #FF8000">*</span>( <span style="color: #FF00FF">1</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ) ) <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">ux</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">sin</span>( <span style="color: #FFFFFF">t</span> ) )
-        <span style="color: #FFFFFF">z</span> <span style="color: #FF8000">=</span>   <span style="color: #FFFFFF">px</span><span style="color: #FF8000">*</span>( <span style="color: #FFFFFF">uz</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">ux</span><span style="color: #FF8000">*</span>( <span style="color: #FF00FF">1</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ) ) <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">uy</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">sin</span>( <span style="color: #FFFFFF">t</span> ) ) \
-            <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">py</span><span style="color: #FF8000">*</span>( <span style="color: #FFFFFF">uz</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">uy</span><span style="color: #FF8000">*</span>( <span style="color: #FF00FF">1</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ) ) <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">ux</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">sin</span>( <span style="color: #FFFFFF">t</span> ) ) \
-            <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">pz</span><span style="color: #FF8000">*</span>( <span style="color: #FFFFFF">uz</span><span style="color: #FF8000">**</span><span style="color: #FF00FF">2</span><span style="color: #FF8000">*</span>( <span style="color: #FF00FF">1</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ) ) <span style="color: #FF8000">+</span>    <span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ) )
+        <span style="color: #FFFFFF">x</span> <span style="color: #FF8000">=</span>   <span style="color: #FFFFFF">px</span><span style="color: #FF8000">*</span>( <span style="color: #FFFFFF">ux</span><span style="color: #FF8000">**</span><span style="color: #FF00FF">2</span><span style="color: #FF8000">*</span>( <span style="color: #FF00FF">1</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ) ) <span style="color: #FF8000">+</span>    <span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ) )             <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">py</span><span style="color: #FF8000">*</span>( <span style="color: #FFFFFF">ux</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">uy</span><span style="color: #FF8000">*</span>( <span style="color: #FF00FF">1</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ) ) <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">uz</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">sin</span>( <span style="color: #FFFFFF">t</span> ) )             <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">pz</span><span style="color: #FF8000">*</span>( <span style="color: #FFFFFF">ux</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">uz</span><span style="color: #FF8000">*</span>( <span style="color: #FF00FF">1</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ) ) <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">uy</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">sin</span>( <span style="color: #FFFFFF">t</span> ) )
+        <span style="color: #FFFFFF">y</span> <span style="color: #FF8000">=</span>   <span style="color: #FFFFFF">px</span><span style="color: #FF8000">*</span>( <span style="color: #FFFFFF">uy</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">ux</span><span style="color: #FF8000">*</span>( <span style="color: #FF00FF">1</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ) ) <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">uz</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">sin</span>( <span style="color: #FFFFFF">t</span> ) )             <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">py</span><span style="color: #FF8000">*</span>( <span style="color: #FFFFFF">uy</span><span style="color: #FF8000">**</span><span style="color: #FF00FF">2</span><span style="color: #FF8000">*</span>( <span style="color: #FF00FF">1</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ) ) <span style="color: #FF8000">+</span>    <span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ) )             <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">pz</span><span style="color: #FF8000">*</span>( <span style="color: #FFFFFF">ux</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">uz</span><span style="color: #FF8000">*</span>( <span style="color: #FF00FF">1</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ) ) <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">ux</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">sin</span>( <span style="color: #FFFFFF">t</span> ) )
+        <span style="color: #FFFFFF">z</span> <span style="color: #FF8000">=</span>   <span style="color: #FFFFFF">px</span><span style="color: #FF8000">*</span>( <span style="color: #FFFFFF">uz</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">ux</span><span style="color: #FF8000">*</span>( <span style="color: #FF00FF">1</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ) ) <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">uy</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">sin</span>( <span style="color: #FFFFFF">t</span> ) )             <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">py</span><span style="color: #FF8000">*</span>( <span style="color: #FFFFFF">uz</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">uy</span><span style="color: #FF8000">*</span>( <span style="color: #FF00FF">1</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ) ) <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">ux</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">sin</span>( <span style="color: #FFFFFF">t</span> ) )             <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">pz</span><span style="color: #FF8000">*</span>( <span style="color: #FFFFFF">uz</span><span style="color: #FF8000">**</span><span style="color: #FF00FF">2</span><span style="color: #FF8000">*</span>( <span style="color: #FF00FF">1</span> <span style="color: #FF8000">-</span> <span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ) ) <span style="color: #FF8000">+</span>    <span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ) )
         <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">x</span>, <span style="color: #FFFFFF">y</span>, <span style="color: #FFFFFF">z</span>
+
+    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">circle</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">r</span>, <span style="color: #FFFFFF">t</span> ) :
+        <span style="color: #02FF02">&#39;&#39;&#39;</span>
+<span style="color: #02FF02">        The equation of a circle on the x-y plane centered</span>
+<span style="color: #02FF02">        at the origin in polar coordinates</span>
+<span style="color: #02FF02">        &#39;&#39;&#39;</span>
+        <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">r</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ), <span style="color: #FFFFFF">r</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">sin</span>( <span style="color: #FFFFFF">t</span> ), <span style="color: #FF00FF">0</span>
+
+    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">vector</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">r</span>, <span style="color: #FFFFFF">t</span> ) :
+        <span style="color: #02FF02">&#39;&#39;&#39;</span>
+<span style="color: #02FF02">        The helix vector of a helix on the x-y plane</span>
+<span style="color: #02FF02">        cetered at the origin</span>
+<span style="color: #02FF02">        &#39;&#39;&#39;</span>
+        <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">r</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ), <span style="color: #FFFFFF">r</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">sin</span>( <span style="color: #FFFFFF">t</span> ), <span style="color: #FF00FF">0</span>
+
+    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">helix</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">r</span>, <span style="color: #FFFFFF">p</span>, <span style="color: #FFFFFF">t</span> ) :
+        <span style="color: #02FF02">&#39;&#39;&#39;</span>
+<span style="color: #02FF02">        The equation of a helix on the x-y plane</span>
+<span style="color: #02FF02">        centered at the origin</span>
+<span style="color: #02FF02">        &#39;&#39;&#39;</span>
+        <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">r</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">cos</span>( <span style="color: #FFFFFF">t</span> ), <span style="color: #FFFFFF">r</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">sin</span>( <span style="color: #FFFFFF">t</span> ), <span style="color: #FFFFFF">p</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">t</span><span style="color: #FF8000">/</span>(<span style="color: #FF00FF">2</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">pi</span>)
+    
+    <span style="color: #FF8000">def</span> <span style="color: #5E5EFF">translate</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">p</span>, <span style="color: #FFFFFF">x</span>, <span style="color: #FFFFFF">y</span>, <span style="color: #FFFFFF">z</span> ) :
+        <span style="color: #02FF02">&#39;&#39;&#39;</span>
+<span style="color: #02FF02">        Move point p(x&#39;,y&#39;,z&#39;) by x, y and z</span>
+<span style="color: #02FF02">        &#39;&#39;&#39;</span>
+        <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">p</span>[ <span style="color: #FF00FF">0</span> ] <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">x</span>, <span style="color: #FFFFFF">p</span>[ <span style="color: #FF00FF">1</span> ] <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">y</span>, <span style="color: #FFFFFF">p</span>[ <span style="color: #FF00FF">2</span> ] <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">z</span>
 </pre></div>
 </td></tr></table>
         </div>
