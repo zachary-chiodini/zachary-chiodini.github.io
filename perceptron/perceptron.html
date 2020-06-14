@@ -746,8 +746,7 @@
 102
 103
 104
-105
-106</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #DD0000"># include &lt;iostream&gt;</span>
+105</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #DD0000"># include &lt;iostream&gt;</span>
 <span style="color: #DD0000"># include &lt;vector&gt;</span>
 <span style="color: #DD0000"># include &lt;random&gt;</span>
 <span style="color: #FF8000">using</span> <span style="color: #FF8000">namespace</span> <span style="color: #FFFFFF">std</span>;
@@ -778,8 +777,7 @@
 	<span style="color: #FF8000">if</span> ( <span style="color: #FFFFFF">cin</span>.<span style="color: #FFFFFF">fail</span>() ) {
 		<span style="color: #FFFFFF">cout</span> <span style="color: #FF8000">&lt;&lt;</span> <span style="color: #02FF02">&quot;Please choose an integer value.&quot;</span> <span style="color: #FF8000">&lt;&lt;</span> <span style="color: #FFFFFF">endl</span>;
 		<span style="color: #FFFFFF">cin</span>.<span style="color: #FFFFFF">clear</span>();
-		<span style="color: #FFFFFF">cin</span>.<span style="color: #FFFFFF">ignore</span>( <span style="color: #FFFFFF">numeric_limits</span><span style="color: #FF8000">&lt;</span><span style="color: #FFFFFF">streamsize</span><span style="color: #FF8000">&gt;::</span><span style="color: #FFFFFF">max</span>(), &#39;
-&#39; );
+		<span style="color: #FFFFFF">cin</span>.<span style="color: #FFFFFF">ignore</span>( <span style="color: #FFFFFF">numeric_limits</span><span style="color: #FF8000">&lt;</span><span style="color: #FFFFFF">streamsize</span><span style="color: #FF8000">&gt;::</span><span style="color: #FFFFFF">max</span>(), <span style="color: #02FF02">&#39;\n&#39;</span> );
 		<span style="color: #FF8000">return</span> <span style="color: #5E5EFF">choose_n</span>( <span style="color: #FFFFFF">s</span>, <span style="color: #FFFFFF">mn</span>, <span style="color: #FFFFFF">mx</span> );
 	}
 	<span style="color: #FF8000">if</span> ( <span style="color: #FFFFFF">n</span> <span style="color: #FF8000">&lt;</span> <span style="color: #FFFFFF">mn</span> <span style="color: #FFFFFF">or</span> <span style="color: #FFFFFF">n</span> <span style="color: #FF8000">&gt;</span> <span style="color: #FFFFFF">mx</span> ) {
