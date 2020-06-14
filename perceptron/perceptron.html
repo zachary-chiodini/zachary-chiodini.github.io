@@ -137,6 +137,12 @@
       The training algorithm is as follows:
     </p>
     <p align="center"><img style="width:60%; height:60%" src="training_algorithm.png" /></p>
+    <p>
+       This algorithm is slighly different than other perceptron learning algorithms in that the output vector 
+       is conditioned to exactly equal the target vector before stopping the loop.
+       This is always possible with the appropriate weights, as long as the data is linearly separable.
+       If the data is not linearly separable, an infinite loop may ensue.
+    </p>
     <h1 style="color:#02FF02">Network Class</h1>
     <p align="justify">
       A class Network is created in Python and C++ to store everything we need to start training and testing the perceptron.
