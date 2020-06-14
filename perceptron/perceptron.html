@@ -53,14 +53,25 @@
       To make things more compact, we can increase the size of both vectors to n + 1 and 
       force the first component of the input vector to be -1
       and the first component of the network vector to be the threshold τ,
-      so that the first product in the sum is -τ, or the bias b (4).
+      so that the first product in the sum is -τ. 
+      Alternatively, we can force the first component of the input vector to be 1 
+      and the first component of the network vector to be the bias b (4).
     </p>
     <p align="center"><img style="width:50%; height:50%" src="step_function_4.png" /></p>
+    <p align="justify">
+      A perceptron unit with specified weights can be used to make simple decisions. 
+      For example, a perceptron unit could be used to determine whether or not one should get up in the morning.
+      The input vector could hold boolean values for
+      good wheather, job duties, errands to run, hobbies to do, friends to vist, fitness goals, hungry and poor hygeine,
+      each being 0 or 1 for yes or no.
+      The weights of which correspond to their importance.
+      The bias could represent one's personal motivation. 
+      Since b = -τ, a greater bias lowers the threshold of the perceptron.
+      After feeding the data into the perceptron, if it outputs a 1, you should get up, otherwise stay inside.
+    </p>
     <h1 style="color:#02FF02">In Python and C++</h1>
     <p align="justify">
       Below is the code for a perceptron in Python (left) and C++ (right).
-      Both of these examples use -1 as the first component of the input vector 
-      and τ as the first component of the network vector.
       The C++ code is more in depth and shows more clearly what is going on.
       In general, C++ syntax is bulkier than Python, but allows for more control over the program.
       A lot of what is explicitly defined in C++ is done "behind the scenes" in Python.
@@ -75,7 +86,7 @@
         <div style="height:300px; width:600px; overflow:auto; font-family:courier">
 <table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%">1
 2</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">def</span> <span style="color: #5E5EFF">perceptron</span>( <span style="color: #FF69B4">self</span>, <span style="color: #FFFFFF">x</span>, <span style="color: #FFFFFF">n</span> ) :
-    <span style="color: #FF8000">return</span> <span style="color: #FF69B4">int</span>( <span style="color: #FF69B4">sum</span>( <span style="color: #FFFFFF">xi</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">wi</span> <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">xi</span>, <span style="color: #FFFFFF">wi</span> <span style="color: #FF8000">in</span> <span style="color: #FF69B4">zip</span>( [<span style="color: #FF8000">-</span><span style="color: #FF00FF">1</span>] <span style="color: #FF8000">+</span> <span style="color: #FFFFFF">x</span>, <span style="color: #FFFFFF">n</span> ) ) <span style="color: #FF8000">&gt;</span> <span style="color: #FF00FF">0</span> )
+    <span style="color: #FF8000">return</span> <span style="color: #FF69B4">int</span>( <span style="color: #FF69B4">sum</span>( <span style="color: #FFFFFF">xi</span><span style="color: #FF8000">*</span><span style="color: #FFFFFF">wi</span> <span style="color: #FF8000">for</span> <span style="color: #FFFFFF">xi</span>, <span style="color: #FFFFFF">wi</span> <span style="color: #FF8000">in</span> <span style="color: #FF69B4">zip</span>( <span style="color: #FFFFFF">x</span>, <span style="color: #FFFFFF">n</span> ) ) <span style="color: #FF8000">&gt;</span> <span style="color: #FF00FF">0</span> )
 </pre></div>
   </td></tr></table>
         </div>
@@ -88,9 +99,7 @@
 5
 6
 7
-8
-9</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">int</span> <span style="color: #5E5EFF">perceptron</span>( <span style="color: #FFFFFF">vector</span><span style="color: #FF8000">&lt;float&gt;</span> <span style="color: #FFFFFF">x</span>, <span style="color: #FF8000">const</span> <span style="color: #FFFFFF">vector</span><span style="color: #FF8000">&lt;float&gt;&amp;</span> <span style="color: #FFFFFF">n</span> ) {
-    <span style="color: #FFFFFF">x</span>.<span style="color: #FFFFFF">insert</span>( <span style="color: #FFFFFF">x</span>.<span style="color: #FFFFFF">begin</span>(), <span style="color: #FF8000">-</span><span style="color: #FF00FF">1</span> ); <span style="color: #DD0000">//threshold coefficient</span>
+8</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FF8000">int</span> <span style="color: #5E5EFF">perceptron</span>( <span style="color: #FFFFFF">vector</span><span style="color: #FF8000">&lt;float&gt;</span> <span style="color: #FFFFFF">x</span>, <span style="color: #FF8000">const</span> <span style="color: #FFFFFF">vector</span><span style="color: #FF8000">&lt;float&gt;&amp;</span> <span style="color: #FFFFFF">n</span> ) {
     <span style="color: #FF8000">float</span> <span style="color: #FFFFFF">dot_product</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0</span>;
     <span style="color: #FFFFFF">vector</span><span style="color: #FF8000">&lt;float&gt;::</span><span style="color: #FFFFFF">const_iterator</span> <span style="color: #FFFFFF">xi</span>, <span style="color: #FFFFFF">wi</span>;
     <span style="color: #FF8000">for</span> ( <span style="color: #FFFFFF">xi</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">x</span>.<span style="color: #FFFFFF">begin</span>(), <span style="color: #FFFFFF">wi</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">n</span>.<span style="color: #FFFFFF">begin</span>(); <span style="color: #FFFFFF">xi</span> <span style="color: #FF8000">!=</span> <span style="color: #FFFFFF">x</span>.<span style="color: #FFFFFF">end</span>(); <span style="color: #FF8000">++</span><span style="color: #FFFFFF">xi</span>, <span style="color: #FF8000">++</span><span style="color: #FFFFFF">wi</span> ) {
@@ -103,5 +112,6 @@
         </div>
         </td></tr>
     </table>
+    <h1 style="color:#02FF02">Perceptron Traing Algorithm</h1>
   </body>
 </html>
