@@ -28,8 +28,8 @@
       Let's describe a perceptron by a function f.
       The mathematical model for a typical perceptron is a simple step function (1), where τ is called the threshold.
       The function can be rewritten so that the inequalities are set to zero (2).
-      In this configuration, the threshold τ is often referred to as the bias b, where b = -τ.
-      This is also called a boolean function, because its output can only be either 1 or 0, which corresponds to true or false.
+      In this form, the threshold τ is often referred to as the bias b, where b = -τ.
+      This is called a boolean function, because its output can only be either 1 or 0, which corresponds to true or false.
       A graph of the step function is shown to the right. It's no coincidence that it looks like a step.
     </p>
     <table align="center" style="border-spacing:0px" >
@@ -43,8 +43,10 @@
     </table
     <p>
       The perceptron is really that simple, but the function is hiding some important details.
-      The input x for the perceptron is a weighted sum, which is given by the dot product of two vectors: 
+      The input for the perceptron is a weighted sum, which is given by the dot product of two vectors: 
       an inpute vector x and the network vector ω, each having n components (3).
+    </p>
+    <p>
       The input vector contains the data to be interpreted by the perceptron. 
       The network vector contains the weight or coefficient for each input vector component.
       To make things more compact, we can increase the size of both vectors to n + 1 and 
