@@ -44,15 +44,17 @@
     <p>
       The perceptron is really that simple, but the function is hiding some important details.
       The input for the perceptron is a weighted sum, which is given by the dot product of two vectors: 
-      an inpute vector x and the network vector ω, each having n components (3).
-    </p>
-    <p>
+      an inpute vector x and the network vector ω, each having n components (3). 
       The input vector contains the data to be interpreted by the perceptron. 
       The network vector contains the weight or coefficient for each input vector component.
+    </p>
+    <p align="center"><img style="width:75%; height:75%" src="step_function_3.png" /></p>
+    <p>
       To make things more compact, we can increase the size of both vectors to n + 1 and 
       force the first component of the input vector to be -1
       and the first component of the network vector to be the threshold τ,
-      so that the first product in the sum is -τ.
+      so that the first product in the sum is the bias b (4).
     </p>
+    <p align="center"><img style="width:75%; height:75%" src="step_function_4.png" /></p>
   </body>
 </html>
