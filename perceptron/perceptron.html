@@ -742,7 +742,17 @@
  98
  99
 100
-101</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #FFFFFF">vector</span><span style="color: #FF8000">&lt;</span><span style="color: #FFFFFF">vector</span><span style="color: #FF8000">&lt;float&gt;&gt;</span> <span style="color: #FFFFFF">sample</span>(<span style="color: #FFFFFF">vector</span><span style="color: #FF8000">&lt;</span><span style="color: #FFFFFF">vector</span><span style="color: #FF8000">&lt;float&gt;&gt;&amp;</span> <span style="color: #FFFFFF">data</span>, <span style="color: #FF8000">int&amp;</span> <span style="color: #FFFFFF">m</span>) {
+101
+102
+103
+104
+105
+106</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #DD0000"># include &lt;iostream&gt;</span>
+<span style="color: #DD0000"># include &lt;vector&gt;</span>
+<span style="color: #DD0000"># include &lt;random&gt;</span>
+<span style="color: #FF8000">using</span> <span style="color: #FF8000">namespace</span> <span style="color: #FFFFFF">std</span>;
+
+<span style="color: #FFFFFF">vector</span><span style="color: #FF8000">&lt;</span><span style="color: #FFFFFF">vector</span><span style="color: #FF8000">&lt;float&gt;&gt;</span> <span style="color: #FFFFFF">sample</span>(<span style="color: #FFFFFF">vector</span><span style="color: #FF8000">&lt;</span><span style="color: #FFFFFF">vector</span><span style="color: #FF8000">&lt;float&gt;&gt;&amp;</span> <span style="color: #FFFFFF">data</span>, <span style="color: #FF8000">int&amp;</span> <span style="color: #FFFFFF">m</span>) {
 	<span style="color: #FF8000">int</span> <span style="color: #FFFFFF">i</span> <span style="color: #FF8000">=</span> <span style="color: #FF00FF">0</span>;
 	<span style="color: #FFFFFF">vector</span><span style="color: #FF8000">&lt;int&gt;</span> <span style="color: #FFFFFF">js</span>;
 	<span style="color: #FF8000">int</span> <span style="color: #FFFFFF">n</span> <span style="color: #FF8000">=</span> <span style="color: #FFFFFF">data</span>.<span style="color: #FFFFFF">size</span>();
