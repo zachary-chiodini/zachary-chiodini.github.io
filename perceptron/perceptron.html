@@ -269,7 +269,7 @@
         </div>
           </td><td>
         <div style="height:300px; width:600px; overflow:auto; font-family:courier">
- <table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%"> 1
+<table class="table"><tr><td><div class="linenodiv" style="background-color: #454545; padding-right: 10px"><pre style="line-height: 125%"> 1
  2
  3
  4
@@ -370,25 +370,25 @@
 99</pre></div></td><td class="code"><div style="background: #002240"><pre style="line-height: 125%"><span></span><span style="color: #DD0000"># include &lt;iostream&gt;</span>
 <span style="color: #DD0000"># include &lt;vector&gt;</span>
 <span style="color: #DD0000"># include &lt;random&gt;</span>
-<span style="color: #FFFFFF">using</span> <span style="color: #FFFFFF">namespace</span> <span style="color: #FFFFFF">std</span>;
+<span style="color: #FF8000">using</span> <span style="color: #FF8000">namespace</span> <span style="color: #FFFFFF">std</span>;
 
-<span style="color: #FFFFFF">class</span> <span style="color: #FFFFFF">Network</span> {
+<span style="color: #FF8000">class</span> <span style="color: #5E5EFF">Network</span> {
     <span style="color: #DD0000">/*</span>
-<span style="color: #DD0000">    +-------------------------------+</span>
-<span style="color: #DD0000">    |    Unit Perceptron Network    |</span>
-<span style="color: #DD0000">    +---+---------------------------+</span>
-<span style="color: #DD0000">    | x | 2D list of input vectors  |</span>
-<span style="color: #DD0000">    +---+---------------------------+</span>
-<span style="color: #DD0000">    | t | list of target values     |</span>
-<span style="color: #DD0000">    +---+---------------------------+</span>
-<span style="color: #DD0000">    | b | bias                      |</span>
-<span style="color: #DD0000">    +---+---------------------------+</span>
-<span style="color: #DD0000">    | r | learning rate             |</span>
-<span style="color: #DD0000">    +---+---------------------------+</span>
-<span style="color: #DD0000">    | w | network of weights        |</span>
-<span style="color: #DD0000">    +---+---------------------------+</span>
+<span style="color: #DD0000">    +---------------------------------+</span>
+<span style="color: #DD0000">    |     Unit Perceptron Network     |</span>
+<span style="color: #DD0000">    +---+-----------------------------+</span>
+<span style="color: #DD0000">    | x | 2D vector of input vectors  |</span>
+<span style="color: #DD0000">    +---+-----------------------------+</span>
+<span style="color: #DD0000">    | t | vector of target values     |</span>
+<span style="color: #DD0000">    +---+-----------------------------+</span>
+<span style="color: #DD0000">    | b | bias                        |</span>
+<span style="color: #DD0000">    +---+-----------------------------+</span>
+<span style="color: #DD0000">    | r | learning rate               |</span>
+<span style="color: #DD0000">    +---+-----------------------------+</span>
+<span style="color: #DD0000">    | w | network of weights (vector) |</span>
+<span style="color: #DD0000">    +---+-----------------------------+</span>
 <span style="color: #DD0000">    */</span>
-<span style="color: #FFFFFF">private</span>:
+<span style="color: #FF8000">private:</span>
     <span style="color: #FFFFFF">vector</span><span style="color: #FF8000">&lt;float&gt;</span> <span style="color: #FFFFFF">update</span>(
         <span style="color: #FF8000">const</span> <span style="color: #FFFFFF">vector</span><span style="color: #FF8000">&lt;float&gt;&amp;</span> <span style="color: #FFFFFF">xi</span>, <span style="color: #FFFFFF">vector</span><span style="color: #FF8000">&lt;float&gt;&amp;</span> <span style="color: #FFFFFF">w</span>,
         <span style="color: #FF8000">const</span> <span style="color: #FF8000">float&amp;</span> <span style="color: #FFFFFF">r</span>, <span style="color: #FF8000">const</span> <span style="color: #FF8000">int&amp;</span> <span style="color: #FFFFFF">ti</span>, <span style="color: #FF8000">const</span> <span style="color: #FF8000">int&amp;</span> <span style="color: #FFFFFF">ai</span>
@@ -409,7 +409,7 @@
         }
         <span style="color: #FF8000">return</span> <span style="color: #FFFFFF">out</span>;
     }
-<span style="color: #FFFFFF">public</span>:
+<span style="color: #FF8000">public:</span>
     <span style="color: #FFFFFF">vector</span><span style="color: #FF8000">&lt;int&gt;</span> <span style="color: #FFFFFF">results</span>;
     <span style="color: #FFFFFF">vector</span><span style="color: #FF8000">&lt;float&gt;</span> <span style="color: #FFFFFF">network</span>;
     <span style="color: #FF8000">int</span> <span style="color: #5E5EFF">perceptron</span>( <span style="color: #FFFFFF">vector</span><span style="color: #FF8000">&lt;float&gt;</span> <span style="color: #FFFFFF">x</span>, <span style="color: #FF8000">const</span> <span style="color: #FFFFFF">vector</span><span style="color: #FF8000">&lt;float&gt;&amp;</span> <span style="color: #FFFFFF">w</span> ) {
