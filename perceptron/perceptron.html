@@ -10,7 +10,7 @@
   <title>The Perceptron</title>
   <body style="background-color:#002240; color:white; padding:30px">
     <h1 style="color:#02FF02">The Perceptron Unit</h1>
-    <p aling = "justify">
+    <p align="justify">
       This page serves as a learning tool to assist in understanding a single perceptron unit and its applications,
       outside of multilayered nueral networks, with C++ and Python.
       Multilayered neural networks are the talk of the town. 
@@ -18,13 +18,13 @@
       Instead, let's start with a discussion of the units within the network, perceptrons.
       Once the perceptron is understood, a neural network can follow.
     </p>
-    <p aling = "justify">
+    <p align="justify">
       This page is not meant to be an exhaustive source of perceptron knowledge.
       It is meant to be breif and straight to the point.
       Additionally, this page may serve as a breif introductory comparison between C++ and Python.
     </p>
     <h1 style="color:#02FF02">Mathematical Model</h1>
-    <p aling = "justify">
+    <p align="justify">
       Let's describe a perceptron by a function f.
       The mathematical model for a typical perceptron is a simple step function (1), where τ is called the threshold.
       The function can be rewritten so that the inequalities are set to zero (2).
@@ -41,7 +41,7 @@
         <td><img style="width:75%; height:75%"; src="step_graph.png" /></td>
       </tr>
     </table
-    <p aling = "justify">
+    <p align="justify">
       The perceptron is really that simple, but the function is hiding some important details.
       The input for the perceptron is a weighted sum, which is given by the dot product of two vectors: 
       an inpute vector x and the network vector ω, each having n components (3). 
@@ -49,15 +49,21 @@
       The network vector contains the weight or coefficient for each input vector component.
     </p>
     <p align="center"><img style="width:25%; height:25%" src="step_function_3.png" /></p>
-    <p aling = "justify">
+    <p align="justify">
       To make things more compact, we can increase the size of both vectors to n + 1 and 
       force the first component of the input vector to be -1
       and the first component of the network vector to be the threshold τ,
       so that the first product in the sum is -τ, or the bias b (4).
     </p>
     <p align="center"><img style="width:50%; height:50%" src="step_function_4.png" /></p>
+    <p align="justify">
+      The perceptron is typically represented graphically as a node, 
+      in which there is an input layer of nodes each containing a component of the input vector and
+      arrows feeding into the perceptron upon which lie their weights.
+    </p>
+    <p align="center"><img style="width:50%; height:50%" src="node_image.png" /></p>
     <h1 style="color:#02FF02">In Python and C++</h1>
-    <p aling = "justify">
+    <p align="justify">
       Below is the code for a perceptron in Python (left) and C++ (right).
       Both of these examples use -1 as the first component of the input vector 
       and τ as the first component of the network vector.
