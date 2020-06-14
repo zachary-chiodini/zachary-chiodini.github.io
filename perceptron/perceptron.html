@@ -25,16 +25,27 @@
     </p>
     <h1 style="color:#02FF02">Mathematical Model</h1>
     <p>
+      Let's describe a perceptron by a function f.
       The mathematical model for a typical perceptron is a simple step function (1), where τ is called the threshold.
+      The function can be rewritten so that the inequalities are set to zero (2).
       This is also called a boolean function, because its output can only be either 1 or 0, which corresponds to true or false.
       A graph of the step function is shown to the right. It's no coincidence that it looks like a step.
     </p>
     <table align="center" style="border-spacing:0px" >
-       <tr><td>
-         <img style="width:75%; height:75%" src="step_function.png" />
-         </td><td>
-         <img style=; src="step_graph.png" />
-        </td></tr>
+      <tr>
+        <table>
+          <tr><td><img style="width:75%; height:75%" src="step_function.png" /></td></tr>
+          <tr><td><img style="width:75%; height:75%" src="step_function_2.png" /></td></tr>
+        </table>
+        <td><img style=; src="step_graph.png" /></td>
+      </tr>
     </table>
+    <p>
+      The function is hiding some important details.
+      The input x for the perceptron is a weighted sum, which is given by the dot product of two vectors: 
+      an inpute vector and a network vector. 
+      The input vector contains the data to be interpreted by the perceptron. 
+      The network vector contains the weight or coefficient for each input vector component.
+    </p>
   </body>
 </html>
