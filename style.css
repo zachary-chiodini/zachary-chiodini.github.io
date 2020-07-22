@@ -27,10 +27,6 @@ html
     left: 0;
 }
 
-section.particles-js .overlay {
-    pointer-events: none;
-}
-
 section.particles-js .overlay a,
 section.particles-js .overlay input,
 section.particles-js .overlay button,
