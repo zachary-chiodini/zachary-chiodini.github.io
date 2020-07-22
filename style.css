@@ -25,7 +25,10 @@ html
     z-index: -10;
     top: 0;
     left: 0;
-    pointer-events: all;
+}
+
+section.particles-js .overlay {
+    pointer-events: none;
 }
 
 section.particles-js .overlay a,
