@@ -27,6 +27,6 @@ html
     left: 0;
 }
 
-section.particles-js .overlay {
-    pointer-events: none;
+#particles-js {
+  pointer-events: all;
 }
