@@ -27,3 +27,13 @@ html
     left: 0;
     pointer-events: all;
 }
+
+section.particles-js .overlay a,
+section.particles-js .overlay input,
+section.particles-js .overlay button,
+section.particles-js .overlay textarea,
+section.particles-js .overlay label,
+section.particles-js .overlay .has-tab-index-or-lack-thereof,
+section.particles-js .overlay .has-hover-or-click-event-or-transition {
+    pointer-events: all;
+}
