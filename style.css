@@ -26,3 +26,10 @@ html
     top: 0;
     left: 0;
 }
+
+#content {
+    pointer-events: none;
+}
+a, button {
+    pointer-events: all;
+}
