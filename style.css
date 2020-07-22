@@ -9,7 +9,7 @@ body
   height: 100%;
   bachground: #002240;
 }
-#particles canvas{
+#particles-js canvas{
     position: absolute;
     width: 100%;
     height: 100%;
