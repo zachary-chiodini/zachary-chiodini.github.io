@@ -1,8 +1,11 @@
-#particles-js {
-    position: fixed;
-    width: 100%;
+body
+{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+#particles-js
+{
     height: 100%;
-    background-color: rgb(8, 6, 17);
-    left: 0px;
-    top: 0px;
+    background: #002240;
 }
