@@ -27,9 +27,6 @@ html
     left: 0;
 }
 
-#content {
+section.particles-js .overlay {
     pointer-events: none;
-}
-a, button {
-    pointer-events: all;
 }
