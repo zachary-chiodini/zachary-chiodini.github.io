@@ -25,8 +25,5 @@ html
     z-index: -10;
     top: 0;
     left: 0;
-}
-
-#particles-js {
-  pointer-events: all;
+    pointer-events: all;
 }
