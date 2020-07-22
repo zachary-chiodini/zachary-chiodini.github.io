@@ -8,4 +8,10 @@ body
 {
     height: 100%;
     background: #002240;
+    margin: 0px!important;
+    top: 0px!important;
+    left: 0px!important;
+    right: 0px!important;
+    bottom: 0px!important;
+    z-index: -1;
 }
