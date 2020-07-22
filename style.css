@@ -1,6 +1,8 @@
-#particles-js canvas{
-    position: absolute;
+#particles-js {
+    position: fixed;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    background-color: rgb(8, 6, 17);
+    left: 0px;
+    top: 0px;
 }
