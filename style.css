@@ -1,14 +1,3 @@
-body
-{
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-}
-#particles-js
-{
-  height: 100%;
-  bachground: #002240;
-}
 #particles-js canvas{
     position: absolute;
     width: 100%;
