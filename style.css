@@ -1,9 +1,10 @@
-body{
+body {
     margin: 0;
+    background: #002240
 }
 
 #particles-js {
-    height: 800px;
+    height: 750px;
     background: #002240;
 }
 
@@ -23,21 +24,25 @@ body{
     padding: 0px;
     color: white;
     position: absolute;
+    margin-left: auto;
+    margin-right: auto;
     width: 0px;
     height: 0px;
     top: 250px;
-    left: 422px;
-    right: 0;
+    left: 0;
+    right: 429px;
 }
 
 #summary {
     padding: 0px;
     color: white;
     position: absolute;
+    margin-left: auto;
+    margin-right: auto;
     width: 429px;
     height: 0px;
     top: 315px;
-    left: 422px;
+    left: 0;
     right: 0;
 }
 
