@@ -85,49 +85,71 @@
         Nonetheless, moving forward, it will be easy to see that the two languages share a lot in common.
     </p>
     <p align="justify">
-        The input and network vectors are implemented as dynamic arrays of floating point numbers 
+        The input and network vectors are implemented as dynamic arrays of floating point numbers,
         so that the functions can accept arrays of any size containing any number on the real number line.
-
+        Each array is passed as a reference to the original array, instead of passing a copy of it.
+        This is done automatically in Python and explicitly stated in C++ by the ampersand symbol proceeding each keyword.
+        These arrays remain constant throughout the dot product operation, which is also explicitly stated in C++.
+        Constants cannot be explicitly defined in Python.
     </p>
-    <table align="center" style="border-spacing:0px">
-        <tr>
-            <td><h2 style="color:#02FF02; text-align:center">Python</h2></td>
-            <td><h2 style="color:#02FF02; text-align:center ">C++</h2></td>
-        </tr>
-        <tr>
-            <td>
-                <div style="height:200px; width:600px; overflow:auto; font-family:courier">
-                    <table class="table">
-                        <tr>
-                            <td>
-                                <div class="linenodiv" style="background-color: #454545; padding-right: 10px">
-                                    <pre style="line-height: 125%">1
+    <p align="justify">
+        The C++ program shows more details of the operation.
+        An iterator is declared for each array, which will be used to refer to a particular element within the array.
+        The iterators are defined as constant because they will not be used to change any element to which they refer.
+        The iterators will be used to loop through the contents of the two arrays simultaneously.
+
+        The initialization statement of the for loop assigns each declared iterator to an iterator 
+        that refers to the first element of either array, using the begin() member function.
+        This is executed only once.
+        The condition for executing the code block checks whether one of the iterators are equal to the iterator 
+        that is one past the last element of the referenced array, which is given by the end() member function.
+        If they are equal, the loop will break.
+        The update statement of the loop increments each iterator to the next in the array and executes after every iteration.
+        Since each iterator is a reference to a particular element and not the value itself, 
+        they are dereferenced by an asterix and multiplied.
+
+        The zip function returns a special iterable called a zip object but functions in a similar way.
+        Since we are iterating over both arrays at the same time, the asymptotic time complexity is linear.
+    </p>
+        <table align="center" style="border-spacing:0px">
+            <tr>
+                <td><h2 style="color:#02FF02; text-align:center">Python</h2></td>
+                <td><h2 style="color:#02FF02; text-align:center ">C++</h2></td>
+            </tr>
+            <tr>
+                <td>
+                    <div style="height:200px; width:600px; overflow:auto; font-family:courier">
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <div class="linenodiv" style="background-color: #454545; padding-right: 10px">
+                                        <pre style="line-height: 125%">1
 2
 3
 4
 5
 6</pre>
-                                </div>
-                            </td>
-                            <td class="code">
-                                <pre style="font-family:Consolas;font-size:13px;line-height: 125%;color:gainsboro;background:#002240;"><span style="color:#569cd6;">from</span>&nbsp;<span style="color:#e090d0;">typing</span>&nbsp;<span style="color:#569cd6;">import</span>&nbsp;<span style="color:#4ec9b0;">List</span>&nbsp;<span style="color:#57a64a;">#&nbsp;dynamic&nbsp;array</span>
+                                    </div>
+                                </td>
+                                <td class="code">
+                                    <pre style="font-family:Consolas;font-size:13px;line-height: 125%;color:gainsboro;background:#002240;"><span style="color:#569cd6;">from</span>&nbsp;<span style="color:#e090d0;">typing</span>&nbsp;<span style="color:#569cd6;">import</span>&nbsp;<span style="color:#4ec9b0;">List</span>&nbsp;<span style="color:#57a64a;">#&nbsp;dynamic&nbsp;array</span>
 <span style="color:#569cd6;">def</span>&nbsp;<span style="color:#c8c8c8;">perceptron</span><span style="color:#b4b4b4;">(</span>&nbsp;<span style="color:#b4b4b4;">x</span>&nbsp;<span style="color:#b4b4b4;">:</span>&nbsp;<span style="color:#4ec9b0;">List</span><span style="color:#b4b4b4;">[</span>&nbsp;<span style="color:#4ec9b0;">float</span>&nbsp;<span style="color:#b4b4b4;">]</span><span style="color:#b4b4b4;">,</span>&nbsp;<span style="color:#b4b4b4;">w</span>&nbsp;<span style="color:#b4b4b4;">:</span>&nbsp;<span style="color:#4ec9b0;">List</span><span style="color:#b4b4b4;">[</span>&nbsp;<span style="color:#4ec9b0;">float</span>&nbsp;<span style="color:#b4b4b4;">]</span><span style="color:#b4b4b4;">,</span>&nbsp;<span style="color:#b4b4b4;">b</span>&nbsp;<span style="color:#b4b4b4;">:</span>&nbsp;<span style="color:#4ec9b0;">float</span>&nbsp;<span style="color:#b4b4b4;">)</span>&nbsp;<span style="color:#b4b4b4;">-&gt;</span>&nbsp;<span style="color:#4ec9b0;">int</span>&nbsp;<span style="color:#b4b4b4;">:</span>
 &nbsp;&nbsp;&nbsp;&nbsp;dot_product&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#b4b4b4;">b</span>
 &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">for</span>&nbsp;xi<span style="color:#b4b4b4;">,</span>&nbsp;wi&nbsp;<span style="color:#569cd6;">in</span>&nbsp;<span style="color:#4ec9b0;">zip</span><span style="color:#b4b4b4;">(</span>&nbsp;<span style="color:#b4b4b4;">x</span><span style="color:#b4b4b4;">,</span>&nbsp;<span style="color:#b4b4b4;">w</span>&nbsp;<span style="color:#b4b4b4;">)</span>&nbsp;<span style="color:#b4b4b4;">:</span>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dot_product&nbsp;<span style="color:#b4b4b4;">+=</span>&nbsp;xi<span style="color:#b4b4b4;">*</span>wi
 &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">return</span>&nbsp;<span style="color:#4ec9b0;">int</span><span style="color:#b4b4b4;">(</span>&nbsp;dot_product&nbsp;<span style="color:#b4b4b4;">&gt;</span>&nbsp;<span style="color:#b5cea8;">0</span>&nbsp;<span style="color:#b4b4b4;">)</span></pre>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </td>
-            <td>
-                <div style="height:200px; width:600px; overflow:auto; font-family:courier">
-                    <table class="table">
-                        <tr>
-                            <td>
-                                <div class="linenodiv" style="background-color: #454545; padding-right: 10px">
-                                    <pre style="line-height: 125%">1
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+                <td>
+                    <div style="height:200px; width:600px; overflow:auto; font-family:courier">
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <div class="linenodiv" style="background-color: #454545; padding-right: 10px">
+                                        <pre style="line-height: 125%">1
 2
 3
 4
@@ -140,10 +162,10 @@
 11
 12
 13</pre>
-                                </div>
-                            </td>
-                            <td class="code">
-                                <pre style="font-family:Consolas;font-size:13px;line-height: 125%;color:gainsboro;background:#002240;"><span style="color:#9b9b9b;">#include</span>&nbsp;<span style="color:#e8c9bb;">&lt;</span><span style="color:#d69d85;">vector</span><span style="color:#e8c9bb;">&gt;</span>&nbsp;<span style="color:#57a64a;">//&nbsp;dynamic&nbsp;array</span>
+                                    </div>
+                                </td>
+                                <td class="code">
+                                    <pre style="font-family:Consolas;font-size:13px;line-height: 125%;color:gainsboro;background:#002240;"><span style="color:#9b9b9b;">#include</span>&nbsp;<span style="color:#e8c9bb;">&lt;</span><span style="color:#d69d85;">vector</span><span style="color:#e8c9bb;">&gt;</span>&nbsp;<span style="color:#57a64a;">//&nbsp;dynamic&nbsp;array</span>
 <span style="color:#569cd6;">int</span>&nbsp;<span style="color:#dcdcaa;">perceptron</span><span style="color:#b4b4b4;">(</span>
 &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">const</span>&nbsp;<span style="color:#c8c8c8;">std</span><span style="color:#b4b4b4;">::</span><span style="color:#4ec9b0;">vector</span><span style="color:#b4b4b4;">&lt;</span><span style="color:#569cd6;">float</span><span style="color:#b4b4b4;">&gt;&amp;</span>&nbsp;<span style="color:#9a9a9a;">x</span><span style="color:#b4b4b4;">,</span>&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">const</span>&nbsp;<span style="color:#c8c8c8;">std</span><span style="color:#b4b4b4;">::</span><span style="color:#4ec9b0;">vector</span><span style="color:#b4b4b4;">&lt;</span><span style="color:#569cd6;">float</span><span style="color:#b4b4b4;">&gt;&amp;</span>&nbsp;<span style="color:#9a9a9a;">w</span><span style="color:#b4b4b4;">,</span>&nbsp;
@@ -156,16 +178,16 @@
 <span style="color:#b4b4b4;">}</span>
 &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#d8a0df;">return</span>&nbsp;<span style="color:#569cd6;">int</span><span style="color:#b4b4b4;">(</span>&nbsp;<span style="color:#9cdcfe;">dot_product</span>&nbsp;<span style="color:#b4b4b4;">&gt;</span>&nbsp;<span style="color:#b5cea8;">0</span>&nbsp;<span style="color:#b4b4b4;">);</span>
 <span style="color:#b4b4b4;">}</span></pre>
-                            </td>
-                        </tr>
-                    </table>
-            </td>
-        </tr>
-    </table>
-    </div>
-    </td></tr>
-    </table>
-    <h1 style="color:#02FF02">The Perceptron Training Algorithm and Classification</h1>
+                                </td>
+                            </tr>
+                        </table>
+                </td>
+            </tr>
+        </table>
+        </div>
+        </td></tr>
+        </table>
+        <h1 style="color:#02FF02">The Perceptron Training Algorithm and Classification</h1>
     <p align="justify">
         A more interesting application uses the perceptron training algorithm.
         This enables the perceptron to compute the correct network given a training set,
