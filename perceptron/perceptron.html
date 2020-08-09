@@ -222,9 +222,9 @@
     </p>
     <h1 style="color:#02FF02">Network Class</h1>
     <p align="justify">
-        A class Network is created in Python and C++ to store everything we need to start training and testing the perceptron.
-        The bias coeficient in the input vectors is added automatically to make inputing data into the
-        perceptron and learning algorithm easier.
+        A class Network is created in Python and C++ to provide everything we need to start training and testing the perceptron.
+        The two programs are nearly identical and easy to compare and contrast. 
+        The Network class is essentially an API that a user can apply to any appropriate data set.
     </p>
     <table align="center" style="border-spacing:0px">
         <tr>
@@ -509,10 +509,10 @@
                                 </div>
                             </td>
                             <td class="code">
-                                <pre style="font-family:Consolas;font-size:13px;line-height: 125%;color:gainsboro;background:#002240;"><span style="color:#9b9b9b;">#&nbsp;include</span>&nbsp;<span style="color:#e8c9bb;">&lt;</span><span style="color:#d69d85;">vector</span><span style="color:#e8c9bb;">&gt;</span>&nbsp;<span style="color:#57a64a;">//&nbsp;dynamic&nbsp;array</span>
+                                <pre style="font-family:Consolas;font-size:13px;line-height: 125%;color:gainsboro;background:#002240;"><span style="color:#9b9b9b;">#include</span>&nbsp;<span style="color:#e8c9bb;">&lt;</span><span style="color:#d69d85;">vector</span><span style="color:#e8c9bb;">&gt;</span>&nbsp;<span style="color:#57a64a;">//&nbsp;dynamic&nbsp;array</span>
 <span style="color:#9b9b9b;">#include</span>&nbsp;<span style="color:#e8c9bb;">&lt;</span><span style="color:#d69d85;">assert.h</span><span style="color:#e8c9bb;">&gt;</span>
-<span style="color:#9b9b9b;">#&nbsp;include</span>&nbsp;<span style="color:#e8c9bb;">&lt;</span><span style="color:#d69d85;">random</span><span style="color:#e8c9bb;">&gt;</span>
-<span style="color:#9b9b9b;">#&nbsp;include</span>&nbsp;<span style="color:#e8c9bb;">&lt;</span><span style="color:#d69d85;">iostream</span><span style="color:#e8c9bb;">&gt;</span>
+<span style="color:#9b9b9b;">#include</span>&nbsp;<span style="color:#e8c9bb;">&lt;</span><span style="color:#d69d85;">random</span><span style="color:#e8c9bb;">&gt;</span>
+<span style="color:#9b9b9b;">#include</span>&nbsp;<span style="color:#e8c9bb;">&lt;</span><span style="color:#d69d85;">iostream</span><span style="color:#e8c9bb;">&gt;</span>
  
 <span style="color:#569cd6;">class</span>&nbsp;<span style="color:#4ec9b0;">Network</span>&nbsp;<span style="color:#b4b4b4;">{</span>
 &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#57a64a;">/*&nbsp;Unit&nbsp;Perceptron&nbsp;Network&nbsp;*/</span>
