@@ -34,7 +34,7 @@
         This is called a boolean function, because its output can only be either 1 or 0, which corresponds to true or false.
         A graph of the step function is shown to the right. It's no coincidence that it looks like a step.
     </p>
-    <table align="center" style="border-spacing:0px; border-top:1px solid white; border-bottom:1px solid white">
+    <table align="center" style="border-spacing:0px">
         <tr>
             <td>
                 <table align="center" style="border-spacing:0px">
@@ -52,9 +52,7 @@
         The input vector contains the data to be interpreted by the perceptron.
         The network vector contains the weight or coefficient for each input vector component.
     </p>
-    <table align="center style="border-top:1px solid white; border-bottom:1px solid white">
-        <tr><td><img style="width:27%; height:27%" src="step_function_3.png" /></td></tr>
-    </table>
+    <p align="center"><img style="width:27%; height:27%" src="step_function_3.png" />
     <p align="justify">
         To make things more compact, we can increase the size of both vectors to n + 1 and
         force the first component of the input vector to be -1
@@ -76,6 +74,7 @@
         After feeding the data into the perceptron, if it outputs a 1, you should get up. Otherwise, take it easy.
     </p>
     <h1 style="color:#02FF02">In Python and C++</h1>
+    <hr>
     <p align="justify">
         Below is the code for a perceptron in C++ and Python.
         The C++ program must explicitly define all of the data types being used, whereas in Python, datatypes are assumed based on their context.
@@ -277,6 +276,7 @@
     </td></tr>
     </table>
     <h1 style="color:#02FF02">The Perceptron Training Algorithm and Classification</h1>
+    <hr>
     <p align="justify">
         A more interesting application uses the perceptron training algorithm.
         This enables the perceptron to compute the correct network given a training set,
@@ -701,6 +701,7 @@
     </td></tr>
     </table>
     <h1 style="color:#02FF02">Example</h1>
+    <hr>
     <p align="justify">
         To demonstrate, the iris dataset will be used. It contains measurements of iris flowers of three different species.
         The perceptron will be trained to differentiate between the iris setosa and the others (iris virginica and iris versicolor)
@@ -718,6 +719,7 @@
         can now be applied to a new sepal and petal length measurement of an unknown iris species to classify it.
     </p>
     <h1 style="color:#02FF02">Try It</h1>
+    <hr>
     <p align="justify">
         To simulate this idea, the program below takes a randomized sample from the setosa and others data to train the preceptron.
         The size of each sample is specified by the user's input.
