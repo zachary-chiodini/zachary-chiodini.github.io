@@ -34,8 +34,7 @@
         This is called a boolean function, because its output can only be either 1 or 0, which corresponds to true or false.
         A graph of the step function is shown to the right. It's no coincidence that it looks like a step.
     </p>
-    <hr>
-    <table align="center" style="border-spacing:0px">
+    <table align="center" style="border-spacing:0px; border-top:1px solid white; border-bottom:1px solid white">
         <tr>
             <td>
                 <table align="center" style="border-spacing:0px">
@@ -46,7 +45,6 @@
             <td><img style="width:75%; height:75%" ; src="step_graph.png" /></td>
         </tr>
     </table>
-    <hr>
     <p align="justify">
         The perceptron is really that simple, but the function is hiding some important details.
         The input for the perceptron is a weighted sum, which is given by the dot product of two vectors:
@@ -54,7 +52,9 @@
         The input vector contains the data to be interpreted by the perceptron.
         The network vector contains the weight or coefficient for each input vector component.
     </p>
-    <p align="center"><img style="width:27%; height:27%" src="step_function_3.png" /></p>
+    <table align="center style="border-top:1px solid white; border-bottom:1px solid white">
+        <tr><td><img style="width:27%; height:27%" src="step_function_3.png" /></td></tr>
+    </table>
     <p align="justify">
         To make things more compact, we can increase the size of both vectors to n + 1 and
         force the first component of the input vector to be -1
