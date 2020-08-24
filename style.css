@@ -1,7 +1,7 @@
-body {
+html, body {
     margin: 0;
     color: white;
-    background: #002240;
+    background: #002240
 }
 
 #stack{
@@ -18,4 +18,21 @@ body {
 
 .particles-js-canvas-el {
     position: fixed;
+}
+
+.fadeTable {
+    height: 450px;
+    position: absolute; 
+    top:50%; 
+    margin-top:-225px;
+    animation: fadeIn 4s ease-in;
+}
+
+@keyframes fadeIn{
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
