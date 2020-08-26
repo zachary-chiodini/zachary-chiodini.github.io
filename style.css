@@ -465,7 +465,6 @@ html, body {
         border-bottom: 2px solid rgba(255,255,255,0.5);
     }
         .drop-content a:hover {
-            font-weight: bold;
             color: #002240;
             background-color: rgba(255,255,255,0.75);
         }
