@@ -22,7 +22,8 @@ html, body {
     margin-left: -122px;
     margin-top: -65px;
     border-right: 2px solid rgba(60, 60, 60, 0.5);
-    animation: vbar 4s ease-out
+    animation: vbar 4s ease-out;
+    -webkit-animation: vbar 4s ease-out;
 }
 
 @keyframes vbar {
@@ -91,6 +92,7 @@ html, body {
     margin-top: -56px;
     z-index: 1;
     animation: me 4s ease-out;
+    -webkit-animation: me 4s ease-out;
 }
 
 @keyframes me {
@@ -143,6 +145,7 @@ html, body {
     margin-top: -65px;
     margin-left: 33px;
     animation: name 4s ease-out;
+    -webkit-animation: name 4s ease-out;
 }
 
 @keyframes name {
@@ -203,6 +206,7 @@ html, body {
     margin-top: -8px;
     margin-left: 123px;
     animation: title 4s ease-out;
+    -webkit-animation: title 4s ease-out;
 }
 
 @keyframes title {
@@ -249,6 +253,7 @@ html, body {
     background: transparent;
     z-index: 1;
     animation: github 4s ease-out;
+    -webkit-animation: github 4s ease-out;
 }
 
 @keyframes github {
@@ -286,6 +291,7 @@ html, body {
     background: transparent;
     z-index: 1;
     animation: linkedin 4s ease-out;
+    -webkit-animation: linkedin 4s ease-out;
 }
 
 @keyframes linkedin {
@@ -326,6 +332,7 @@ html, body {
     background: transparent;
     z-index: 1;
     animation: outlook 4s ease-out;
+    -webkit-animation: outlook 4s ease-out;
 }
 
 @keyframes outlook {
@@ -366,6 +373,7 @@ html, body {
     background: transparent;
     z-index: 1;
     animation: resume 4s ease-out;
+    -webkit-animation: resume 4s ease-out;
 }
 
 @keyframes resume {
@@ -403,10 +411,12 @@ html, body {
     display: inline-block;
     z-index: 1;
     animation: dropdown 4s ease-out;
+    -webkit-animation: dropdown 4s ease-out;
 }
     .dropdown:hover .drop-content {
         display: block;
         animation: dropcontent 1.5s ease-out;
+        -webkit-animation: dropcontent 1.5s ease-out;
     }
 
 @keyframes dropcontent{
@@ -477,6 +487,7 @@ html, body {
     margin-top: -102px;
     border-bottom: 2px solid rgba(60, 60, 60, 0.5);
     animation: hbar 4s ease-out;
+    -webkit-animation: hbar 4s ease-out;
 }
 
 @keyframes hbar {
