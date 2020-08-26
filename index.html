@@ -12,100 +12,45 @@
 </head>
 <body>
     <div id="particles-js">
-        <table class="fadeTable" >
-            <tr>
-                <td rowspan="3" align="right" style="padding-right:30px; border-right:2px solid rgba(255,255,255,0.5)">
-                    <div id="stack">
-                        <img style="width:175px; height:182px;" src="photos/me.png">
-                    </div>
-                </td>
-                <td colspan="4" align="left" style="padding-left:30px">
-                    <span style="color:white; opacity:0.75; font-family:helvetica, arial; font-size:30px">
-                        <b>Zachary Chiodini</b>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4" align="left" style="padding-left:30px">
-                    <span style="color:white; opacity:0.50; font-family:helvetica, arial; font-size:30px">
-                        STEM Grad | Data Professional
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td align="center">
-                    <div id="stack">
-                        <a href="chiodini_resume.pdf" title="Resume">
-                            <img style="height:50px; background:transparent" src="photos/resume.png" />
-                        </a>
-                    </div>
-                </td>
-                <td align="center">
-                    <div id="stack">
-                        <a href="mailto:zachary.chiodini@outlook.com" title="eMail">
-                            <img style="height:50px; background:transparent" src="photos/outlook.png" />
-                        </a>
-                    </div>
-                </td>
-                <td align="center">
-                    <div id="stack">
-                        <a href="https://www.linkedin.com/in/zacharychiodini/" title="LinkedIn">
-                            <img style="width:50px; background:transparent" src="photos/linkedin.png" />
-                        </a>
-                    </div>
-                </td>
-                <td align="center">
-                    <div id="stack">
-                        <a href="https://github.com/zachary-chiodini" title="GitHub">
-                            <img style="width:50px; background:transparent" src="photos/git.png" />
-                        </a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="5" style="padding-top:30px; padding-bottom:10px; border-bottom:2px solid rgba(255,255,255,0.5)">
-                    <span style="color:white; opacity:0.50; font-family:helvetica, arial; font-size:30px">
-                        Hobby Projects
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="5" align="center" style="padding-top:20px">
-                    <table>
-                        <tr>
-                            <td align="center">
-                                <div id="stack">
-                                    <a title="Web Scraping with Python" href="https://github.com/zachary-chiodini/enterprise-scrape" style="text-align:center">
-                                        <img style="height:150px; background:transparent" src="photos/webscrape.png" />
-                                    </a>
-                                </div>
-                            </td>
-                            <td align="center">
-                                <div id="stack">
-                                    <a title="Search Algorithms and Simple Robot Navigation" href="robot_navigation/n-robots.html" style="text-align:center">
-                                        <img style="height:150px; background:transparent" src="photos/search_process.png" />
-                                    </a>
-                                </div>
-                            </td>
-                            <td align="center">
-                                <div id="stack">
-                                    <a title="Helix Plotter with Matplotlib" href="https://github.com/zachary-chiodini/helix-plotter" style="text-align:center">
-                                        <img style="height:150px; background:transparent" src="photos/helix_construction.png" />
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <div id="stack">
-                                    <a title="Perceptron Unit in C++" href="https://github.com/zachary-chiodini/unit-perceptron" style="text-align:center">
-                                        <img style="height:150px; background:transparent" src="photos/perceptron_learning.png" />
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
+        <table class="hbar"></table>
+        <table class="vbar"></table>
+        <img class="me" src="photos/me.png">
+        <img class="name" src="photos/name.png">
+        <img class="title" src="photos/title.png">
+        <a class="github" href="https://github.com/zachary-chiodini" title="GitHub">
+            <img src="photos/git.png" />
+        </a>
+        <a class="linkedin" href="https://www.linkedin.com/in/zacharychiodini/" title="LinkedIn">
+            <img src="photos/linkedin.png" />
+        </a>
+        <a class="outlook" href="mailto:zachary.chiodini@outlook.com" title="eMail">
+            <img src="photos/outlook.png" />
+        </a>
+        <a class="resume" href="chiodini_resume.pdf" title="Resume">
+            <img style="height:50px; background:transparent" src="photos/resume.png" />
+        </a>
+        <div class="dropdown">
+            <button class="drop-button">
+                Hobby Projects<span style="float:right">&#9660;</span>
+            </button>
+            <div class="drop-content">
+                <a href="https://github.com/zachary-chiodini/enterprise-scrape"> 
+                    Enterprise Scrape API (Web Scraping with Python)
+                </a>
+                <a href="robot_navigation/n-robots.html">
+                    Search Algorithms and Simple Robot Navigation
+                </a>
+                <a href="https://github.com/zachary-chiodini/helix-plotter">
+                    Helix Plotter with Matplotlib
+                </a>
+                <a href="https://github.com/zachary-chiodini/unit-perceptron">
+                    The Perceptron Unit (C++)
+                </a>
+                <a href="https://github.com/zachary-chiodini/pi-orbit">
+                    Pi Orbits
+                </a>
+            </div>
+        </div>
     </div>
     <script type="text/javascript" src="particles/particles.js"></script>
     <script type="text/javascript" src="particles/app.js"></script>
