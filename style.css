@@ -19,11 +19,13 @@ html, body {
     position: absolute;
     height: 200px;
     top: 50%;
+    left: 50%;
     margin-left: -122px;
     margin-top: -65px;
     border-right: 2px solid rgba(60, 60, 60, 0.5);
     animation: vbar 4s ease-out;
     -webkit-animation: vbar 4s ease-out;
+    -moz-animation: vbar 4s ease-out;
 }
 
 @keyframes vbar {
@@ -95,6 +97,7 @@ html, body {
     z-index: 1;
     animation: me 4s ease-out;
     -webkit-animation: me 4s ease-out;
+    -moz-animation: me 4s ease-out;
 }
 
 @keyframes me {
@@ -149,6 +152,7 @@ html, body {
     clip: rect(0px,287px,65px,0px);
     animation: name 4s ease-out;
     -webkit-animation: name 4s ease-out;
+    -moz-animation: name 4s ease-out;
 }
 
 @keyframes name {
@@ -207,6 +211,7 @@ html, body {
     clip: rect(0px,467px,65px,0px);
     animation: title 4s ease-out;
     -webkit-animation: title 4s ease-out;
+    -moz-animation: title 4s ease-out;
 }
 
 @keyframes title {
@@ -255,6 +260,7 @@ html, body {
     clip: rect(0px,50px,50px,0px);
     animation: github 4s ease-out;
     -webkit-animation: github 4s ease-out;
+    -moz-animation: github 4s ease-out;
 }
 
 @keyframes github {
@@ -294,6 +300,7 @@ html, body {
     clip: rect(0px,50px,50px,0px);
     animation: linkedin 4s ease-out;
     -webkit-animation: linkedin 4s ease-out;
+    -moz-animation: linkedin 4s ease-out;
 }
 
 @keyframes linkedin {
@@ -335,6 +342,7 @@ html, body {
     clip: rect(0px,50px,50px,0px);
     animation: outlook 4s ease-out;
     -webkit-animation: outlook 4s ease-out;
+    -moz-animation: outlook 4s ease-out;
 }
 
 @keyframes outlook {
@@ -376,6 +384,7 @@ html, body {
     clip: rect(0px,50px,50px,0px);
     animation: resume 4s ease-out;
     -webkit-animation: resume 4s ease-out;
+    -moz-animation: resume 4s ease-out;
 }
 
 @keyframes resume {
@@ -416,6 +425,7 @@ html, body {
     z-index: 1;
     animation: dropdown 4s ease-out;
     -webkit-animation: dropdown 4s ease-out;
+    -moz-animation: dropdown 4s ease-out;
 }
 
     .dropdown .drop-button {
@@ -489,6 +499,7 @@ html, body {
     border-bottom: 2px solid rgba(60, 60, 60, 0.5);
     animation: hbar 4s ease-out;
     -webkit-animation: hbar 4s ease-out;
+    -moz-animation: hbar 4s ease-out;
 }
 
 @keyframes hbar {
