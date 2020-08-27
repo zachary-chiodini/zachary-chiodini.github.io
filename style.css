@@ -88,10 +88,11 @@ html, body {
     width: 175px;
     height: 182px;
     top: 50%;
-    margin-left: -240px;
+    left: 50%;
+    margin-left: -327px;
     margin-top: -56px;
-    z-index: 1;
     clip: rect(0px,175px,182px,0px);
+    z-index: 1;
     animation: me 4s ease-out;
     -webkit-animation: me 4s ease-out;
 }
@@ -99,34 +100,34 @@ html, body {
 @keyframes me {
     0% {
         margin-top: -91px;
-        margin-left: 87px;
+        margin-left: 0px;
         clip: rect(0px,0px,182px,0px);
     }
     12% {
         margin-top: -91px;
-        margin-left: 87px;
+        margin-left: 0px;
         clip: rect(0px,0px,182px,0px);
     }
     16% {
         margin-top: -91px;
-        margin-left: -87px;
+        margin-left: -174px;
         clip: rect(0px,175px,182px,0px);
     }
     25% {
         margin-top: -91px;
-        margin-left: -117px;
+        margin-left: -204px;
     }
     28% {
         margin-top: -91px;
-        margin-left: -170px;
+        margin-left: -257px;
     }
     37% {
         margin-top: -91px;
-        margin-left: -179px;
+        margin-left: -266px;
     }
     64% {
         margin-top: -91px;
-        margin-left: -240px;
+        margin-left: -327px;
     }
     74% {
         margin-top: -91px;
@@ -142,8 +143,9 @@ html, body {
     height: 65px;
     width: 287px;
     top: 50%;
+    left: 50%;
     margin-top: -65px;
-    margin-left: 33px;
+    margin-left: -110px;
     clip: rect(0px,287px,65px,0px);
     animation: name 4s ease-out;
     -webkit-animation: name 4s ease-out;
@@ -152,47 +154,45 @@ html, body {
 @keyframes name {
     0% {
         margin-top: -30px;
-        margin-left: -143px;
+        margin-left: -287px;
         clip: rect(0px,287px,65px,287px);
     }
 
     12% {
         margin-top: -30px;
-        margin-left: -143px;
+        margin-left: -287px;
         clip: rect(0px,287px,65px,287px);
     }
 
     16% {
         margin-top: -30px;
-        margin-left: 143px;
+        margin-left: 0px;
         clip: rect(0px,287px,65px,0px)
     }
 
     25% {
         margin-top: -30px;
-        margin-left: 155px;
+        margin-left: 12px;
     }
 
     28% {
         margin-top: -90px;
-        margin-left: 102px;
+        margin-left: -41px;
     }
 
     37% {
         margin-top: -100px;
-        margin-left: 93px;
+        margin-left: -50px;
     }
     64% {
         margin-top: -100px;
-        margin-left: 33px;
+        margin-left: -110px;
     }
     74% {
         margin-top: -100px;
-        margin-left: 33px;
     }
     80% {
         margin-top: -65px;
-        margin-left: 33px;
     }
 }
 
@@ -201,8 +201,9 @@ html, body {
     height: 65px;
     width: 467px;
     top: 50%;
+    left: 50%;
     margin-top: -8px;
-    margin-left: 123px;
+    margin-left: -110px;
     clip: rect(0px,467px,65px,0px);
     animation: title 4s ease-out;
     -webkit-animation: title 4s ease-out;
@@ -211,28 +212,28 @@ html, body {
 @keyframes title {
     0% {
         margin-top: -43px;
-        margin-left: -233px;
+        margin-left: -466px;
         clip: rect(0px,467px,65px,467px);
     }
 
     25% {
         margin-top: -43px;
-        margin-left: -233px;
+        margin-left: -466px;
         clip: rect(0px,467px,65px,467px);
     }
 
     28% {
         margin-top: -43px;
-        margin-left: 180px;
+        margin-left: -53px;
         clip: rect(0px,467px,65px,0px);
     }
     37% {
         margin-top: -43px;
-        margin-left: 183px;
+        margin-left: -50px;
     }
     64% {
         margin-top: -43px;
-        margin-left: 123px;
+        margin-left: -110px;
     }
     74% {
         margin-top: -43px;
@@ -406,9 +407,12 @@ html, body {
 
 .dropdown {
     position: absolute;
+    left: 50%;
+    margin-left: -350px;
+    width: 700px;
+    clip: rect(0px, 700px, 300px, 0px);
     top: 50%;
     margin-top: -157px;
-    display: inline-block;
     z-index: 1;
     animation: dropdown 4s ease-out;
     -webkit-animation: dropdown 4s ease-out;
@@ -478,7 +482,9 @@ html, body {
     position: absolute;
     opacity: 0;
     width: 0px;
+    left: 50%;
     top: 50%;
+    margin-left: 0;
     margin-top: -102px;
     border-bottom: 2px solid rgba(60, 60, 60, 0.5);
     animation: hbar 4s ease-out;
@@ -486,20 +492,19 @@ html, body {
 }
 
 @keyframes hbar {
-    0% {
-        opacity: 1;
-        width: 0px
-    }
     64% {
-        opacity: 1;
         width: 0px;
+        margin-left: 0;
+        opacity: 1;
     }
-    74%{
+    74% {
         width: 700px;
+        margin-left: -350px;
         opacity: 1;
     }
     79% {
         width: 700px;
+        margin-left: -350px;
         opacity: 1;
     }
     80% {
