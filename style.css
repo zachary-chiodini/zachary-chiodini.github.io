@@ -252,6 +252,7 @@ html, body {
     position: absolute;
     width: 50px;
     height: 50px;
+    left: 50%;
     top: 50%;
     margin-top: 65px;
     margin-left: 250px;
@@ -266,17 +267,17 @@ html, body {
 @keyframes github {
     0% {
         margin-top: 30px;
-        margin-left: -114px;
+        margin-left: -110px;
         clip: rect(0px,50px,50px,50px);
     }
     37% {
         margin-top: 30px;
-        margin-left: -114px;
+        margin-left: -110px;
         clip: rect(0px,50px,50px,50px);
     }
     40% {
         margin-top: 30px;
-        margin-left: -72px;
+        margin-left: -70px;
         clip: rect(0px,50px,50px,0px);
     }
     74% {
@@ -292,6 +293,7 @@ html, body {
     position: absolute;
     width: 50px;
     height: 50px;
+    left: 50%;
     top: 50%;
     margin-top: 65px;
     margin-left: 140px;
@@ -318,7 +320,7 @@ html, body {
 
     48% {
         margin-top: 30px;
-        margin-left: -97px;
+        margin-left: -95px;
         clip: rect(0px,50px,50px,0px);
     }
     74% {
@@ -334,6 +336,7 @@ html, body {
     position: absolute;
     width: 50px;
     height: 50px;
+    left: 50%;
     top: 50%;
     margin-top: 65px;
     margin-left: 35px;
@@ -348,19 +351,19 @@ html, body {
 @keyframes outlook {
     0% {
         margin-top: 30px;
-        margin-left: -149px;
+        margin-left: -155px;
         clip: rect(0px,50px,50px,50px);
     }
 
     53% {
         margin-top: 30px;
-        margin-left: -149px;
+        margin-left: -155px;
         clip: rect(0px,50px,50px,50px);
     }
 
     56% {
         margin-top: 30px;
-        margin-left: -115px;
+        margin-left: -113px;
         clip: rect(0px,50px,50px,0px);
     }
     74% {
@@ -376,6 +379,7 @@ html, body {
     position: absolute;
     width: 50px;
     height: 50px;
+    left: 50%;
     top: 50%;
     margin-top: 65px;
     margin-left: -70px;
@@ -390,19 +394,19 @@ html, body {
 @keyframes resume {
     0% {
         margin-top: 30px;
-        margin-left: -164px;
+        margin-left: -166px;
         clip: rect(0px,50px,50px,50px);
     }
 
     61% {
         margin-top: 30px;
-        margin-left: -164px;
+        margin-left: -166px;
         clip: rect(0px,50px,50px,50px);
     }
 
     64% {
         margin-top: 30px;
-        margin-left: -127px;
+        margin-left: -123px;
         clip: rect(0px,50px,50px,0px);
     }
     74% {
