@@ -1,58 +1,524 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Zach's Portfolio</title>
-    <meta charset="utf-8" />
-    <meta prefix="og: http://ogp.me/ns#" property="og:type" content="website" />
-    <meta prefix="og: http://ogp.me/ns#" property="og:title" content="Zach's Portfolio" />
-    <meta prefix="og: http://ogp.me/ns#" property="og:description" content="My GitHub Pages Website" />
-    <meta prefix="og: http://ogp.me/ns#" property="og:image" content="me.png" />
-    <meta prefix="og: http://ogp.me/ns#" property="og:url" content="https://zachary-chiodini.github.io/" />
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div id="particles-js">
-        <table class="hbar"></table>
-        <table class="vbar"></table>
-        <img class="me" src="photos/me.png">
-        <img class="name" src="photos/name.png">
-        <img class="title" src="photos/title.png">
-        <a class="github" href="https://github.com/zachary-chiodini" title="GitHub">
-            <img src="photos/git.png" />
-        </a>
-        <a class="linkedin" href="https://www.linkedin.com/in/zacharychiodini/" title="LinkedIn">
-            <img src="photos/linkedin.png" />
-        </a>
-        <a class="outlook" href="mailto:zachary.chiodini@outlook.com" title="eMail">
-            <img src="photos/outlook.png" />
-        </a>
-        <a class="resume" href="chiodini_resume.pdf" title="Resume">
-            <img style="height:50px; background:transparent" src="photos/resume.png" />
-        </a>
-        <div class="dropdown">
-            <button class="drop-button">
-                Hobby Projects<span style="float:right">&#9660;</span>
-            </button>
-            <div class="drop-content">
-                <a href="https://github.com/zachary-chiodini/enterprise-scrape">
-                    Enterprise Scrape API (Web Scraping with Python)
-                </a>
-                <a href="robot_navigation/n-robots.html">
-                    Search Algorithms and Simple Robot Navigation
-                </a>
-                <a href="https://github.com/zachary-chiodini/helix-plotter">
-                    Helix Plotter with Matplotlib
-                </a>
-                <a href="https://github.com/zachary-chiodini/unit-perceptron">
-                    The Perceptron Unit (C++)
-                </a>
-                <a href="https://github.com/zachary-chiodini/pi-orbit">
-                    Pi Orbits
-                </a>
-            </div>
-        </div>
-    </div>
-        <script type="text/javascript" src="particles/particles.js"></script>
-        <script type="text/javascript" src="particles/app.js"></script>
-    </body>
-    </html>
+html, body {
+    margin: 0;
+    color: white;
+    background: #181A1B;
+}
+
+#particles-js {
+    background: #181A1B;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.particles-js-canvas-el {
+    position: fixed;
+}
+
+.vbar {
+    position: absolute;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    margin-left: -122px;
+    margin-top: -65px;
+    border-right: 2px solid rgba(60, 60, 60, 0.5);
+    animation: vbar 4s ease-out;
+    -webkit-animation: vbar 4s ease-out;
+    -moz-animation: vbar 4s ease-out;
+}
+
+@keyframes vbar {
+    0% {
+        height: 0px;
+        top: 50%;
+        margin-left: 0px;
+        margin-top: 0px;
+    }
+    10% {
+        height: 190px;
+        top: 50%;
+        margin-left: 0px;
+        margin-top: -95px;
+    }
+    15% {
+        height: 200px;
+        top: 50%;
+        margin-left: 0px;
+        margin-top: -100px;
+    }
+    25% {
+        height: 200px;
+        top: 50%;
+        margin-left: 0px;
+        margin-top: -100px;
+    }
+    28% {
+        height: 200px;
+        top: 50%;
+        margin-left: -53px;
+        margin-top: -100px;
+    }
+    37% {
+        height: 200px;
+        top: 50%;
+        margin-left: -62px;
+        margin-top: -100px;
+    }
+    64% {
+        height: 200px;
+        top: 50%;
+        margin-left: -122px;
+        margin-top: -100px;
+    }
+    74% {
+        height: 200px;
+        top: 50%;
+        margin-left: -122px;
+        margin-top: -100px;
+    }
+    80% {
+        height: 200px;
+        top: 50%;
+        margin-left: -122px;
+        margin-top: -65px;
+    }
+}
+
+.me {
+    position: absolute;
+    width: 175px;
+    height: 182px;
+    top: 50%;
+    left: 50%;
+    margin-left: -327px;
+    margin-top: -56px;
+    clip: rect(0px,175px,182px,0px);
+    z-index: 1;
+    animation: me 4s ease-out;
+    -webkit-animation: me 4s ease-out;
+    -moz-animation: me 4s ease-out;
+}
+
+@keyframes me {
+    0% {
+        margin-top: -91px;
+        margin-left: 0px;
+        clip: rect(0px,0px,182px,0px);
+    }
+    12% {
+        margin-top: -91px;
+        margin-left: 0px;
+        clip: rect(0px,0px,182px,0px);
+    }
+    16% {
+        margin-top: -91px;
+        margin-left: -174px;
+        clip: rect(0px,175px,182px,0px);
+    }
+    25% {
+        margin-top: -91px;
+        margin-left: -204px;
+    }
+    28% {
+        margin-top: -91px;
+        margin-left: -257px;
+    }
+    37% {
+        margin-top: -91px;
+        margin-left: -266px;
+    }
+    64% {
+        margin-top: -91px;
+        margin-left: -327px;
+    }
+    74% {
+        margin-top: -91px;
+    }
+    80% {
+        margin-top: -56px;
+    }
+}
+
+
+.name {
+    position: absolute;
+    height: 65px;
+    width: 287px;
+    top: 50%;
+    left: 50%;
+    margin-top: -65px;
+    margin-left: -110px;
+    clip: rect(0px,287px,65px,0px);
+    animation: name 4s ease-out;
+    -webkit-animation: name 4s ease-out;
+    -moz-animation: name 4s ease-out;
+}
+
+@keyframes name {
+    0% {
+        margin-top: -30px;
+        margin-left: -287px;
+        clip: rect(0px,287px,65px,287px);
+    }
+
+    12% {
+        margin-top: -30px;
+        margin-left: -287px;
+        clip: rect(0px,287px,65px,287px);
+    }
+
+    16% {
+        margin-top: -30px;
+        margin-left: 0px;
+        clip: rect(0px,287px,65px,0px)
+    }
+
+    25% {
+        margin-top: -30px;
+        margin-left: 12px;
+    }
+
+    28% {
+        margin-top: -90px;
+        margin-left: -41px;
+    }
+
+    37% {
+        margin-top: -100px;
+        margin-left: -50px;
+    }
+    64% {
+        margin-top: -100px;
+        margin-left: -110px;
+    }
+    74% {
+        margin-top: -100px;
+    }
+    80% {
+        margin-top: -65px;
+    }
+}
+
+.title {
+    position: absolute;
+    height: 65px;
+    width: 467px;
+    top: 50%;
+    left: 50%;
+    margin-top: -8px;
+    margin-left: -110px;
+    clip: rect(0px,467px,65px,0px);
+    animation: title 4s ease-out;
+    -webkit-animation: title 4s ease-out;
+    -moz-animation: title 4s ease-out;
+}
+
+@keyframes title {
+    0% {
+        margin-top: -43px;
+        margin-left: -466px;
+        clip: rect(0px,467px,65px,467px);
+    }
+
+    25% {
+        margin-top: -43px;
+        margin-left: -466px;
+        clip: rect(0px,467px,65px,467px);
+    }
+
+    28% {
+        margin-top: -43px;
+        margin-left: -53px;
+        clip: rect(0px,467px,65px,0px);
+    }
+    37% {
+        margin-top: -43px;
+        margin-left: -50px;
+    }
+    64% {
+        margin-top: -43px;
+        margin-left: -110px;
+    }
+    74% {
+        margin-top: -43px;
+    }
+    80% {
+        margin-top: -8px;
+    }
+}
+
+.github img {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    margin-top: 65px;
+    margin-left: 250px;
+    background: transparent;
+    z-index: 1;
+    clip: rect(0px,50px,50px,0px);
+    animation: github 4s ease-out;
+    -webkit-animation: github 4s ease-out;
+    -moz-animation: github 4s ease-out;
+}
+
+@keyframes github {
+    0% {
+        margin-top: 30px;
+        margin-left: -114px;
+        clip: rect(0px,50px,50px,50px);
+    }
+    37% {
+        margin-top: 30px;
+        margin-left: -114px;
+        clip: rect(0px,50px,50px,50px);
+    }
+    40% {
+        margin-top: 30px;
+        margin-left: -72px;
+        clip: rect(0px,50px,50px,0px);
+    }
+    74% {
+        margin-top: 30px;
+    }
+    80% {
+        margin-top: 65px;
+        margin-left: 250px;
+    }
+}
+
+.linkedin img {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    margin-top: 65px;
+    margin-left: 140px;
+    background: transparent;
+    z-index: 1;
+    clip: rect(0px,50px,50px,0px);
+    animation: linkedin 4s ease-out;
+    -webkit-animation: linkedin 4s ease-out;
+    -moz-animation: linkedin 4s ease-out;
+}
+
+@keyframes linkedin {
+    0% {
+        margin-top: 30px;
+        margin-left: -134px;
+        clip: rect(0px,50px,50px,50px);
+    }
+
+    45% {
+        margin-top: 30px;
+        margin-left: -134px;
+        clip: rect(0px,50px,50px,50px);
+    }
+
+    48% {
+        margin-top: 30px;
+        margin-left: -97px;
+        clip: rect(0px,50px,50px,0px);
+    }
+    74% {
+        margin-top: 30px;
+    }
+    80% {
+        margin-top: 65px;
+        margin-left: 140px;
+    }
+}
+
+.outlook img {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    margin-top: 65px;
+    margin-left: 35px;
+    background: transparent;
+    z-index: 1;
+    clip: rect(0px,50px,50px,0px);
+    animation: outlook 4s ease-out;
+    -webkit-animation: outlook 4s ease-out;
+    -moz-animation: outlook 4s ease-out;
+}
+
+@keyframes outlook {
+    0% {
+        margin-top: 30px;
+        margin-left: -149px;
+        clip: rect(0px,50px,50px,50px);
+    }
+
+    53% {
+        margin-top: 30px;
+        margin-left: -149px;
+        clip: rect(0px,50px,50px,50px);
+    }
+
+    56% {
+        margin-top: 30px;
+        margin-left: -115px;
+        clip: rect(0px,50px,50px,0px);
+    }
+    74% {
+        margin-top: 30px;
+    }
+    80% {
+        margin-left: 35px;
+        margin-top: 65px;
+    }
+}
+
+.resume img {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    margin-top: 65px;
+    margin-left: -70px;
+    background: transparent;
+    z-index: 1;
+    clip: rect(0px,50px,50px,0px);
+    animation: resume 4s ease-out;
+    -webkit-animation: resume 4s ease-out;
+    -moz-animation: resume 4s ease-out;
+}
+
+@keyframes resume {
+    0% {
+        margin-top: 30px;
+        margin-left: -164px;
+        clip: rect(0px,50px,50px,50px);
+    }
+
+    61% {
+        margin-top: 30px;
+        margin-left: -164px;
+        clip: rect(0px,50px,50px,50px);
+    }
+
+    64% {
+        margin-top: 30px;
+        margin-left: -127px;
+        clip: rect(0px,50px,50px,0px);
+    }
+    74% {
+        margin-top: 30px;
+    }
+    80% {
+        margin-top: 65px;
+        margin-left: -70px;
+    }
+}
+
+.dropdown {
+    position: absolute;
+    left: 50%;
+    margin-left: -350px;
+    width: 700px;
+    clip: rect(0px, 700px, 300px, 0px);
+    top: 50%;
+    margin-top: -157px;
+    z-index: 1;
+    animation: dropdown 4s ease-out;
+    -webkit-animation: dropdown 4s ease-out;
+    -moz-animation: dropdown 4s ease-out;
+}
+
+    .dropdown .drop-button {
+        background-color: transparent;
+        font-family: Arial;
+        color: rgba(255,255,255,0.5);
+        padding: 10px;
+        font-size: 30px;
+        width: 700px;
+        border: none;
+        text-align: left;
+        border-bottom: 2px solid rgba(60, 60, 60, 0.5);
+        cursor: pointer;
+    }
+
+    .dropdown .drop-content {
+        background-color: transparent;
+        position: absolute;
+        min-width: 700px;
+        clip: rect(250px,700px,250px,0px);
+        transform: translateY(-250px);
+        transition: all 1.5s ease-out;
+    }
+
+    .dropdown:hover .drop-content {
+        clip: rect(0px,700px,250px,0px);
+        transform: translateY(0);
+    }
+
+    .dropdown .drop-content a {
+        font-family: Arial;
+        color: rgba(190, 190, 190,0.75);
+        padding: 12px 16px;
+        font-size: 19px;
+        text-decoration: none;
+        background-color: #001B33;
+        display: block;
+        border-bottom: 2px solid rgba(60, 60, 60, 0.5);
+        transition: all 0.3s;
+    }
+        .dropdown .drop-content a:hover {
+            color: white;
+            background-color: rgba(24,26,27,0.75);
+        }
+
+@keyframes dropdown {
+    0% {
+        margin-top: -100px;
+        clip: rect(0px, 700px, 0px, 0px);
+    }
+
+    74% {
+        margin-top: -100px;
+        clip: rect(0px, 700px, 0px, 0px);
+    }
+
+    80% {
+        margin-top: -157px;
+        clip: rect(0px, 700px, 60px, 0px);
+    }
+}
+
+.hbar {
+    position: absolute;
+    opacity: 0;
+    width: 0px;
+    left: 50%;
+    top: 50%;
+    margin-left: 0;
+    margin-top: -102px;
+    border-bottom: 2px solid rgba(60, 60, 60, 0.5);
+    animation: hbar 4s ease-out;
+    -webkit-animation: hbar 4s ease-out;
+    -moz-animation: hbar 4s ease-out;
+}
+
+@keyframes hbar {
+    64% {
+        width: 0px;
+        margin-left: 0;
+        opacity: 1;
+    }
+    74% {
+        width: 700px;
+        margin-left: -350px;
+        opacity: 1;
+    }
+    79% {
+        width: 700px;
+        margin-left: -350px;
+        opacity: 1;
+    }
+    80% {
+        opacity: 0;
+    }
+}
