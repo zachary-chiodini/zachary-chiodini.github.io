@@ -143,6 +143,7 @@ html, body {
 
 .name {
     position: absolute;
+    opacity: 0.75;
     height: 65px;
     width: 287px;
     top: 50%;
@@ -153,7 +154,12 @@ html, body {
     animation: name 4s ease-out;
     -webkit-animation: name 4s ease-out;
     -moz-animation: name 4s ease-out;
+    transition: all 0.3s;
+    z-index: 1;
 }
+    .name:hover {
+        opacity: 1;
+    }
 
 @keyframes name {
     0% {
@@ -202,6 +208,7 @@ html, body {
 
 .title {
     position: absolute;
+    opacity: 0.5;
     height: 65px;
     width: 467px;
     top: 50%;
@@ -212,6 +219,12 @@ html, body {
     animation: title 4s ease-out;
     -webkit-animation: title 4s ease-out;
     -moz-animation: title 4s ease-out;
+    transition: all 0.3s;
+    z-index: 1;
+}
+
+.title:hover{
+    opacity: 1;
 }
 
 @keyframes title {
@@ -250,8 +263,8 @@ html, body {
 
 .github img {
     position: absolute;
+    opacity: 0.75;
     width: 50px;
-    height: 50px;
     left: 50%;
     top: 50%;
     margin-top: 65px;
@@ -262,6 +275,11 @@ html, body {
     animation: github 4s ease-out;
     -webkit-animation: github 4s ease-out;
     -moz-animation: github 4s ease-out;
+    transition: all 0.3s;
+}
+
+.github img:hover{
+    opacity: 1;
 }
 
 @keyframes github {
@@ -291,8 +309,8 @@ html, body {
 
 .linkedin img {
     position: absolute;
+    opacity: 0.75;
     width: 50px;
-    height: 50px;
     left: 50%;
     top: 50%;
     margin-top: 65px;
@@ -303,6 +321,11 @@ html, body {
     animation: linkedin 4s ease-out;
     -webkit-animation: linkedin 4s ease-out;
     -moz-animation: linkedin 4s ease-out;
+    transition: all 0.3s;
+}
+
+.linkedin img:hover{
+    opacity: 1;
 }
 
 @keyframes linkedin {
@@ -334,8 +357,8 @@ html, body {
 
 .outlook img {
     position: absolute;
+    opacity: 0.75;
     width: 50px;
-    height: 50px;
     left: 50%;
     top: 50%;
     margin-top: 65px;
@@ -346,6 +369,11 @@ html, body {
     animation: outlook 4s ease-out;
     -webkit-animation: outlook 4s ease-out;
     -moz-animation: outlook 4s ease-out;
+    transition: all 0.3s;
+}
+
+.outlook img:hover{
+    opacity: 1;
 }
 
 @keyframes outlook {
@@ -377,7 +405,7 @@ html, body {
 
 .resume img {
     position: absolute;
-    width: 50px;
+    opacity: 0.75;
     height: 50px;
     left: 50%;
     top: 50%;
@@ -389,6 +417,11 @@ html, body {
     animation: resume 4s ease-out;
     -webkit-animation: resume 4s ease-out;
     -moz-animation: resume 4s ease-out;
+    transition: all 0.3s;
+}
+
+.resume img:hover{
+    opacity: 1;
 }
 
 @keyframes resume {
@@ -443,7 +476,19 @@ html, body {
         text-align: left;
         border-bottom: 2px solid rgba(60, 60, 60, 0.5);
         cursor: pointer;
+        transition: all 0.3s;
     }
+
+        .dropdown .drop-button:hover {
+            background-color: transparent;
+            font-family: Arial;
+            color: rgba(255,255,255,1);
+            padding: 10px;
+            font-size: 30px;
+            width: 700px;
+            text-align: left;
+            border-bottom: 2px solid rgba(60, 60, 60, 0.5);
+        }
 
     .dropdown .drop-content {
         background-color: transparent;
