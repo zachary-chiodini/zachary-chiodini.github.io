@@ -264,6 +264,7 @@ html, body {
 .github img {
     position: absolute;
     opacity: 0.75;
+    height: 50px;
     width: 50px;
     left: 50%;
     top: 50%;
@@ -310,6 +311,7 @@ html, body {
 .linkedin img {
     position: absolute;
     opacity: 0.75;
+    height: 50px;
     width: 50px;
     left: 50%;
     top: 50%;
@@ -358,6 +360,7 @@ html, body {
 .outlook img {
     position: absolute;
     opacity: 0.75;
+    height: 50px;
     width: 50px;
     left: 50%;
     top: 50%;
