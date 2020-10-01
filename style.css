@@ -35,48 +35,56 @@ html, body {
         margin-left: 0px;
         margin-top: 0px;
     }
+
     10% {
         height: 190px;
         top: 50%;
         margin-left: 0px;
         margin-top: -95px;
     }
+
     15% {
         height: 200px;
         top: 50%;
         margin-left: 0px;
         margin-top: -100px;
     }
+
     25% {
         height: 200px;
         top: 50%;
         margin-left: 0px;
         margin-top: -100px;
     }
+
     28% {
         height: 200px;
         top: 50%;
         margin-left: -53px;
         margin-top: -100px;
     }
+
     37% {
         height: 200px;
         top: 50%;
         margin-left: -62px;
         margin-top: -100px;
     }
+
     64% {
         height: 200px;
         top: 50%;
         margin-left: -122px;
         margin-top: -100px;
     }
+
     74% {
         height: 200px;
         top: 50%;
         margin-left: -122px;
         margin-top: -100px;
     }
+
     80% {
         height: 200px;
         top: 50%;
@@ -106,35 +114,43 @@ html, body {
         margin-left: 0px;
         clip: rect(0px,0px,182px,0px);
     }
+
     12% {
         margin-top: -91px;
         margin-left: 0px;
         clip: rect(0px,0px,182px,0px);
     }
+
     16% {
         margin-top: -91px;
         margin-left: -174px;
         clip: rect(0px,175px,182px,0px);
     }
+
     25% {
         margin-top: -91px;
         margin-left: -204px;
     }
+
     28% {
         margin-top: -91px;
         margin-left: -257px;
     }
+
     37% {
         margin-top: -91px;
         margin-left: -266px;
     }
+
     64% {
         margin-top: -91px;
         margin-left: -327px;
     }
+
     74% {
         margin-top: -91px;
     }
+
     80% {
         margin-top: -56px;
     }
@@ -157,6 +173,7 @@ html, body {
     transition: all 0.3s;
     z-index: 1;
 }
+
     .name:hover {
         opacity: 1;
     }
@@ -194,13 +211,16 @@ html, body {
         margin-top: -100px;
         margin-left: -50px;
     }
+
     64% {
         margin-top: -100px;
         margin-left: -110px;
     }
+
     74% {
         margin-top: -100px;
     }
+
     80% {
         margin-top: -65px;
     }
@@ -223,9 +243,9 @@ html, body {
     z-index: 1;
 }
 
-.title:hover{
-    opacity: 1;
-}
+    .title:hover {
+        opacity: 1;
+    }
 
 @keyframes title {
     0% {
@@ -245,17 +265,21 @@ html, body {
         margin-left: -53px;
         clip: rect(0px,467px,65px,0px);
     }
+
     37% {
         margin-top: -43px;
         margin-left: -50px;
     }
+
     64% {
         margin-top: -43px;
         margin-left: -110px;
     }
+
     74% {
         margin-top: -43px;
     }
+
     80% {
         margin-top: -8px;
     }
@@ -279,9 +303,9 @@ html, body {
     transition: all 0.3s;
 }
 
-.github img:hover{
-    opacity: 1;
-}
+    .github img:hover {
+        opacity: 1;
+    }
 
 @keyframes github {
     0% {
@@ -289,19 +313,23 @@ html, body {
         margin-left: -110px;
         clip: rect(0px,50px,50px,50px);
     }
+
     37% {
         margin-top: 30px;
         margin-left: -110px;
         clip: rect(0px,50px,50px,50px);
     }
+
     40% {
         margin-top: 30px;
         margin-left: -70px;
         clip: rect(0px,50px,50px,0px);
     }
+
     74% {
         margin-top: 30px;
     }
+
     80% {
         margin-top: 65px;
         margin-left: 250px;
@@ -326,9 +354,9 @@ html, body {
     transition: all 0.3s;
 }
 
-.linkedin img:hover{
-    opacity: 1;
-}
+    .linkedin img:hover {
+        opacity: 1;
+    }
 
 @keyframes linkedin {
     0% {
@@ -348,9 +376,11 @@ html, body {
         margin-left: -95px;
         clip: rect(0px,50px,50px,0px);
     }
+
     74% {
         margin-top: 30px;
     }
+
     80% {
         margin-top: 65px;
         margin-left: 140px;
@@ -375,9 +405,9 @@ html, body {
     transition: all 0.3s;
 }
 
-.outlook img:hover{
-    opacity: 1;
-}
+    .outlook img:hover {
+        opacity: 1;
+    }
 
 @keyframes outlook {
     0% {
@@ -397,9 +427,11 @@ html, body {
         margin-left: -113px;
         clip: rect(0px,50px,50px,0px);
     }
+
     74% {
         margin-top: 30px;
     }
+
     80% {
         margin-left: 35px;
         margin-top: 65px;
@@ -423,9 +455,9 @@ html, body {
     transition: all 0.3s;
 }
 
-.resume img:hover{
-    opacity: 1;
-}
+    .resume img:hover {
+        opacity: 1;
+    }
 
 @keyframes resume {
     0% {
@@ -445,9 +477,11 @@ html, body {
         margin-left: -123px;
         clip: rect(0px,50px,50px,0px);
     }
+
     74% {
         margin-top: 30px;
     }
+
     80% {
         margin-top: 65px;
         margin-left: -70px;
@@ -459,7 +493,8 @@ html, body {
     left: 50%;
     margin-left: -350px;
     width: 700px;
-    clip: rect(0px, 700px, 350px, 0px);
+    clip: rect(0px, 700px, 300px, 0px);
+    /*clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);*/
     top: 50%;
     margin-top: -157px;
     z-index: 1;
@@ -496,15 +531,13 @@ html, body {
     .dropdown .drop-content {
         background-color: transparent;
         position: absolute;
-        min-width: 700px;
-        clip: rect(350px, 700px, 350px, 0px);
-        transform: translateY(-350px);
+        width: 700px;
+        clip: rect(0px, 700px, 0px, 0px);
         transition: all 1.5s ease-out;
     }
 
     .dropdown:hover .drop-content {
-        clip: rect(0px, 700px, 350px, 0px);
-        transform: translateY(0);
+        clip: rect(0px, 700px, 300px, 0px);
     }
 
     .dropdown .drop-content a {
@@ -518,6 +551,7 @@ html, body {
         border-bottom: 2px solid rgba(60, 60, 60, 0.5);
         transition: all 0.3s;
     }
+
         .dropdown .drop-content a:hover {
             color: white;
             background-color: rgba(24,26,27,0.75);
@@ -560,16 +594,19 @@ html, body {
         margin-left: 0;
         opacity: 1;
     }
+
     74% {
         width: 700px;
         margin-left: -350px;
         opacity: 1;
     }
+
     79% {
         width: 700px;
         margin-left: -350px;
         opacity: 1;
     }
+
     80% {
         opacity: 0;
     }
