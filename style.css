@@ -493,7 +493,7 @@ html, body {
     left: 50%;
     margin-left: -350px;
     width: 700px;
-    clip: rect(0px, 700px, 350px, 0px);
+    clip: rect(0px, 700px, 400px, 0px);
     /*clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);*/
     top: 50%;
     margin-top: -157px;
@@ -537,7 +537,7 @@ html, body {
     }
 
     .dropdown:hover .drop-content {
-        clip: rect(0px, 700px, 350px, 0px);
+        clip: rect(0px, 700px, 400px, 0px);
     }
 
     .dropdown .drop-content a {
