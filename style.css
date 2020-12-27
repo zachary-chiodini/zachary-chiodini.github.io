@@ -1,4 +1,4 @@
-html, body {
+﻿html, body {
     margin: 0;
     color: white;
     background: #181A1B;
@@ -504,7 +504,7 @@ html, body {
 }
 
     .dropdown:hover {
-        margin-top: -182px;
+        margin-top: -197px; /*30px per row*/
     }
 
     .dropdown .drop-button {
