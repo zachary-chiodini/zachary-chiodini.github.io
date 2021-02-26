@@ -13504,9 +13504,9 @@ $</span></p>
 <br></p>
 <table align="left">
     <tr>
-        <td style="font-size:14px">$\color{blue}{Loss\ Function}$</td>
+        <td style="font-size:14px">$\color{blue}{Cost\ Function}$</td>
         <td style="font-size:24px">$
-        \color{pink}{C}(\color{yellow}{\hat{Y}};\color{yellow}{Y}) = 
+        \color{pink}{C}(\color{yellow}{\hat{Y}},\color{yellow}{Y}) = 
         \sum_{h=1}^{m}{\sum_{i=1}^{k} (\color{yellow}{\hat{y}}_{h,i} - \color{yellow}{y}_{h,i}})^{2} =
         \sum_{h=1}^{m}{\sum_{i=1}^{k} (\color{pink}{a}^{(ℓ)}_{h,i} - \color{yellow}{y}_{h,i}})^{2} 
         $</td>
@@ -13719,18 +13719,12 @@ $</span></p>
     <i>Training Algorithm</i>
 </span>
 <br>
-<br></p>
-<table align="left">
-    <tr>
-        <td style="font-size:14px">$\color{blue}{Initialization}$</td>
-        <td style="font-size:24px">
-            $
-            \nabla^{(ℓ)}_{\color{orange}{z}}\color{pink}{C}=
-            (\color{pink}{f}'⊙\color{orange}{Z}[ℓ])⊙\nabla^{(ℓ)}_{\color{pink}{a}}\color{pink}{C}
-            $
-        </td>
-    </tr>
-</table>
+<br>
+<span style="font-size:24px">$
+\color{green}{\Omega}^{(ℓ)} \rightarrow \color{green}{\Omega}^{(ℓ)} - r\nabla^{(ℓ)}_{\color{green}{\Omega}}\color{pink}{C} \\
+\color{green}{\beta}^{(ℓ)} \rightarrow \color{green}{\beta}^{(ℓ)} - r\nabla^{(ℓ)}_{\color{green}{\beta}}\color{pink}{C}
+$</span></p>
+
 </div>
 </div>
 </div>
