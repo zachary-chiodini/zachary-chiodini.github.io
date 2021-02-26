@@ -13346,7 +13346,7 @@ $</span></p>
 <br>
 <br>
 <span style="font-size:24px">$
-\color{green}{N}=\begin{bmatrix}
+\color{green}{W}=\begin{bmatrix}
    \color{green}{\Omega}^{(1)} &
    \color{green}{\Omega}^{(2)} & 
    \dots & 
@@ -13419,6 +13419,41 @@ $</span></p>
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><span style="color:#53C8FE; font-family:aparajita; font-size:18px">
+    <i>Initialize Random Weights and Biases</i>
+</span></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">FeedForwardNeuralNetwork</span><span class="p">(</span> <span class="n">FeedForwardNeuralNetwork</span>  <span class="p">)</span> <span class="p">:</span>
+    
+    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">X</span> <span class="p">:</span> <span class="n">Input_Matrix</span><span class="p">,</span> <span class="n">Y</span> <span class="p">:</span> <span class="n">Target_Matrix</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span> <span class="p">:</span>
+        <span class="n">inputs</span><span class="p">,</span> <span class="n">layer</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span> <span class="mi">1</span> <span class="p">],</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">biases</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">perceptrons</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">hidden_layer</span> <span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span> <span class="n">layer</span> <span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">perceptrons</span> <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">biases</span><span class="p">[</span> <span class="n">layer</span> <span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span> <span class="n">perceptrons</span> <span class="p">)</span>
+            <span class="n">inputs</span> <span class="o">=</span> <span class="n">perceptrons</span>
+            <span class="n">layer</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span> <span class="n">layer</span> <span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span> <span class="mi">1</span> <span class="p">]</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">biases</span><span class="p">[</span> <span class="n">layer</span> <span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span> <span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span> <span class="mi">1</span> <span class="p">]</span> <span class="p">)</span>
+        <span class="k">return</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><span style="color:#53C8FE; font-family:aparajita; font-size:18px">
     <i>Activation Function</i>
 </span>
 <br>
@@ -13426,7 +13461,7 @@ $</span></p>
 <table align="left">
     <tr>
         <td style="font-size:14px">$\color{blue}{Sigmoid}$</td>
-        <td style="font-size:24px">$
+        <td style="font-size:24px; text-align:left">$
         \color{pink}{f}(x) = \frac{1}{1+\color{blue}{e}^{-x}}
         $</td>
     </tr>
@@ -13462,6 +13497,11 @@ $</span></p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p><span style="color:#53C8FE; font-family:aparajita; font-size:18px">
+    <i>Cost and Gradient</i>
+</span>
+<br>
+<br></p>
 <table align="left">
     <tr>
         <td style="font-size:14px">$\color{blue}{Loss\ Function}$</td>
@@ -13473,17 +13513,25 @@ $</span></p>
     </tr>
     <tr>
         <td style="font-size:14px">$\color{blue}{Gradient}$</td>
-        <td style="font-size:24px">$
-        \nabla^{(ℓ)}_{\color{pink}{a}}\color{pink}{C}(\color{pink}{a}^{(ℓ)}_{\color{pink}{m,1}},...,\color{pink}{a}^{(ℓ)}_{\color{pink}{m,k}}) = \begin{bmatrix}
-                \frac{\partial \color{pink}{C}(\color{pink}{a}^{(ℓ)}_{\color{pink}{m,1}},...,\color{pink}{a}^{(ℓ)}_{\color{pink}{m,k}} ))}{\partial \color{pink}{a}^{(ℓ)}_{\color{pink}{m,1}}} &
+        <td style="font-size:24px; text-align:left">$
+        \nabla^{(ℓ)}_{\color{pink}{a}}\color{pink}{C} = \begin{bmatrix}
+                \frac{\partial \color{pink}{C}}{\partial \color{pink}{a}^{(ℓ)}_{\color{pink}{1,1}}} &
+                \frac{\partial \color{pink}{C}}{\partial \color{pink}{a}^{(ℓ)}_{\color{pink}{1,2}}} &
                 \dots & 
-                \frac{\partial \color{pink}{C}(\color{pink}{a}^{(ℓ)}_{\color{pink}{m,1}},...,\color{pink}{a}^{(ℓ)}_{\color{pink}{m,k}} )) }{\partial \color{pink}{a}^{(ℓ)}_{\color{pink}{m,k}}} 
-            \end{bmatrix} \\
-            \nabla^{(ℓ)}_{\color{pink}{a}}\color{pink}{C}(\color{pink}{a}^{(ℓ)}_{\color{pink}{m,1}},...,\color{pink}{a}^{(ℓ)}_{\color{pink}{m,k}}) = 2\begin{bmatrix}
-                \color{pink}{a}^{(ℓ)}_\color{pink}{m,1} - \color{yellow}{y_{m,1}}&
+                \frac{\partial \color{pink}{C}}{\partial \color{pink}{a}^{(ℓ)}_{\color{pink}{1,k}}} 
+                \\
+                \frac{\partial \color{pink}{C}}{\partial \color{pink}{a}^{(ℓ)}_{\color{pink}{2,1}}} &
+                \frac{\partial \color{pink}{C}}{\partial \color{pink}{a}^{(ℓ)}_{\color{pink}{2,2}}} &
                 \dots & 
-                \color{pink}{a}^{(ℓ)}_\color{pink}{m,k} - \color{yellow}{y_{m,k}}
-            \end{bmatrix}
+                \frac{\partial \color{pink}{C}}{\partial \color{pink}{a}^{(ℓ)}_{\color{pink}{2,k}}}
+                \\
+                \vdots & \vdots & \ddots & \vdots \\
+                \\
+                \frac{\partial \color{pink}{C}}{\partial \color{pink}{a}^{(ℓ)}_{\color{pink}{m,1}}} &
+                \frac{\partial \color{pink}{C}}{\partial \color{pink}{a}^{(ℓ)}_{\color{pink}{m,2}}} &
+                \dots & 
+                \frac{\partial \color{pink}{C}}{\partial \color{pink}{a}^{(ℓ)}_{\color{pink}{m,k}}}
+            \end{bmatrix} = 2(\color{yellow}{\hat{Y}}-\color{yellow}{Y}) 
         $</td>
     </tr>
 </table>
@@ -13497,7 +13545,7 @@ $</span></p>
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">FeedForwardNeuralNetwork</span><span class="p">(</span> <span class="n">FeedForwardNeuralNetwork</span>  <span class="p">)</span> <span class="p">:</span>
     
-    <span class="k">def</span> <span class="nf">loss</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">A</span> <span class="p">:</span> <span class="n">Output_Matrix</span><span class="p">,</span> <span class="n">Y</span> <span class="p">:</span> <span class="n">Target_Matrix</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Float64</span> <span class="p">:</span>
+    <span class="k">def</span> <span class="nf">cost</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">A</span> <span class="p">:</span> <span class="n">Output_Matrix</span><span class="p">,</span> <span class="n">Y</span> <span class="p">:</span> <span class="n">Target_Matrix</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Float64</span> <span class="p">:</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span> <span class="n">A</span> <span class="o">-</span> <span class="n">Y</span> <span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
     
     <span class="k">def</span> <span class="nf">grad</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">A</span> <span class="p">:</span> <span class="n">Output_Matrix</span><span class="p">,</span> <span class="n">Y</span> <span class="p">:</span> <span class="n">Target_Matrix</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span> <span class="p">:</span>
@@ -13528,7 +13576,7 @@ $</span></p>
     </tr>
     <tr>
         <td style="font-size:14px">$\color{blue}{Input Layer}$</td>
-        <td style="font-size:24px">$\color{blue}{L}^{(0)} = \color{blue}{X}$</td>
+        <td style="font-size:24px; text-align:left">$\color{blue}{L}^{(0)} = \color{blue}{X}$</td>
     </tr>
 </table>
 </div>
@@ -13542,8 +13590,8 @@ $</span></p>
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">FeedForwardNeuralNetwork</span><span class="p">(</span> <span class="n">FeedForwardNeuralNetwork</span>  <span class="p">)</span> <span class="p">:</span>
     
     <span class="k">def</span> <span class="nf">forwardpropagation</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">L</span> <span class="p">:</span> <span class="n">Input_Matrix</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Output_Matrix</span> <span class="p">:</span>
-        <span class="k">for</span> <span class="n">layer_n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">)</span> <span class="p">:</span>
-            <span class="n">L</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span> <span class="n">L</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span> <span class="n">layer_n</span> <span class="p">]</span> <span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">biases</span><span class="p">[</span> <span class="n">layer_n</span> <span class="p">]</span> <span class="p">)</span> 
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">)</span> <span class="p">:</span>
+            <span class="n">L</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span> <span class="n">L</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span> <span class="n">layer</span> <span class="p">]</span> <span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">biases</span><span class="p">[</span> <span class="n">layer</span> <span class="p">]</span> <span class="p">)</span> 
         <span class="k">return</span> <span class="n">L</span>
 </pre></div>
 
@@ -13572,7 +13620,7 @@ $</span></p>
     </tr>
     <tr>
         <td style="font-size:14px">$\color{blue}{Containers}$</td>
-        <td style="font-size:24px">
+        <td style="font-size:24px; text-align:left">
             $
             \color{pink}{A}[ℓ] = \color{blue}{L}^{(ℓ)}\\
             \color{orange}{Z}[ℓ] = \color{blue}{L}^{(ℓ-1)}\color{green}{\Omega}^{(ℓ)}+\color{green}{\beta}^{(ℓ)} 
@@ -13592,11 +13640,11 @@ $</span></p>
     
     <span class="k">def</span> <span class="nf">__forwardpropagation</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">X</span> <span class="p">:</span> <span class="n">Input_Matrix</span><span class="p">,</span> <span class="n">A</span> <span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Z</span> <span class="p">:</span> <span class="n">Dict</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Output_Matrix</span> <span class="p">:</span>
         <span class="n">A</span><span class="p">[</span> <span class="mi">0</span> <span class="p">]</span> <span class="o">=</span> <span class="n">X</span>
-        <span class="k">for</span> <span class="n">layer_n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">)</span> <span class="p">:</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">)</span> <span class="p">:</span>
             <span class="c1"># weighted input to layer n</span>
-            <span class="n">Z</span><span class="p">[</span> <span class="n">layer_n</span> <span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span> <span class="n">A</span><span class="p">[</span> <span class="n">layer_n</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span> <span class="n">layer_n</span> <span class="p">]</span> <span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">biases</span><span class="p">[</span> <span class="n">layer_n</span> <span class="p">]</span>
+            <span class="n">Z</span><span class="p">[</span> <span class="n">layer</span> <span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span> <span class="n">A</span><span class="p">[</span> <span class="n">layer</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span> <span class="n">layer</span> <span class="p">]</span> <span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">biases</span><span class="p">[</span> <span class="n">layer</span> <span class="p">]</span>
             <span class="c1"># output of layer n</span>
-            <span class="n">A</span><span class="p">[</span> <span class="n">layer_n</span> <span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span> <span class="n">Z</span><span class="p">[</span> <span class="n">layer_n</span> <span class="p">]</span> <span class="p">)</span>
+            <span class="n">A</span><span class="p">[</span> <span class="n">layer</span> <span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span> <span class="n">Z</span><span class="p">[</span> <span class="n">layer</span> <span class="p">]</span> <span class="p">)</span>
         <span class="k">return</span> <span class="n">A</span><span class="p">[</span> <span class="nb">len</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="p">)</span> <span class="p">]</span>
 </pre></div>
 
@@ -13609,17 +13657,19 @@ $</span></p>
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><span style="color:#53C8FE; font-family:aparajita; font-size:18px">
-    <i>Backpropagation and Training Algorithm</i>
+    <i>Backpropagation</i>
 </span>
 <br>
 <br></p>
 <table align="left">
     <tr>
         <td style="font-size:14px">$\color{blue}{Initialization}$</td>
-        <td style="font-size:24px">$
-        \nabla^{(ℓ)}_{\color{orange}{z}}\color{pink}{C}=
-        (\color{pink}{f}'⊙\color{orange}{Z}[ℓ])⊙\nabla^{(ℓ)}_{\color{pink}{a}}\color{pink}{C}
-        $</td>
+        <td style="font-size:24px; text-align:left">
+            $
+            \nabla^{(ℓ)}_{\color{orange}{z}}\color{pink}{C}=
+            (\color{pink}{f}'⊙\color{orange}{Z}[ℓ])⊙\nabla^{(ℓ)}_{\color{pink}{a}}\color{pink}{C}
+            $
+        </td>
     </tr>
     <tr>
         <td style="font-size:14px">$\color{blue}{Output\ and\ Hidden\ Layer}$</td>
@@ -13640,7 +13690,53 @@ $</span></p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">FeedForwardNeuralNetwork</span><span class="p">(</span> <span class="n">FeedForwardNeuralNetwork</span>  <span class="p">)</span> <span class="p">:</span>
+    
+    <span class="k">def</span> <span class="nf">backpropagate</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">grad_z</span> <span class="p">:</span> <span class="n">NDArray</span><span class="p">,</span> <span class="n">A</span> <span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Z</span> <span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">layer</span> <span class="p">:</span> <span class="nb">int</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span> <span class="p">:</span>
+        <span class="c1"># gradient with respect to the weights of the layer</span>
+        <span class="n">grad_w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span> <span class="n">A</span><span class="p">[</span> <span class="n">layer</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">grad_z</span> <span class="p">)</span>
+        <span class="c1"># gradient with respect to the biases of the layer</span>
+        <span class="n">grad_b</span> <span class="o">=</span> <span class="n">grad_z</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span>
+        <span class="c1"># gradient with respect to the weighted input of the layer</span>
+        <span class="k">if</span> <span class="n">layer</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="p">:</span> <span class="c1"># backpropagtion terminates if layer is 1</span>
+            <span class="n">grad_z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">derivative</span><span class="p">(</span> <span class="n">Z</span><span class="p">[</span> <span class="n">layer</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">]</span> <span class="p">)</span> <span class="o">*</span>\
+                     <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span> <span class="n">grad_z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span> <span class="n">layer</span> <span class="p">]</span><span class="o">.</span><span class="n">T</span> <span class="p">)</span>
+        <span class="k">return</span> <span class="n">grad_z</span><span class="p">,</span> <span class="n">grad_w</span><span class="p">,</span> <span class="n">grad_b</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><span style="color:#53C8FE; font-family:aparajita; font-size:18px">
+    <i>Training Algorithm</i>
+</span>
+<br>
+<br></p>
+<table align="left">
+    <tr>
+        <td style="font-size:14px">$\color{blue}{Initialization}$</td>
+        <td style="font-size:24px">
+            $
+            \nabla^{(ℓ)}_{\color{orange}{z}}\color{pink}{C}=
+            (\color{pink}{f}'⊙\color{orange}{Z}[ℓ])⊙\nabla^{(ℓ)}_{\color{pink}{a}}\color{pink}{C}
+            $
+        </td>
+    </tr>
+</table>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">FeedForwardNeuralNetwork</span><span class="p">(</span> <span class="n">FeedForwardNeuralNetwork</span>  <span class="p">)</span> <span class="p">:</span>
@@ -13654,7 +13750,7 @@ $</span></p>
         <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="n">totgrad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="p">)</span>
-        <span class="n">output_layer_n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="p">)</span>
+        <span class="n">output_layer</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="p">)</span>
         <span class="k">while</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span> <span class="n">totgrad</span> <span class="p">)</span> <span class="o">&gt;</span> <span class="n">convergence</span> <span class="p">:</span>
             <span class="n">totgrad</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="n">shuffle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span> <span class="n">X</span> <span class="p">)</span> <span class="p">)</span>
@@ -13667,26 +13763,13 @@ $</span></p>
                 <span class="c1"># gradient with respect to the output layer</span>
                 <span class="n">grad_a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span> <span class="n">output</span><span class="p">,</span> <span class="n">batch_y</span> <span class="p">)</span>
                 <span class="n">totgrad</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span> <span class="n">grad_a</span> <span class="p">)</span><span class="o">**</span><span class="mi">2</span>
-                <span class="c1"># gradient with respect to the weighted input to the output layer</span>
-                <span class="n">grad_z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">derivative</span><span class="p">(</span> <span class="n">Z</span><span class="p">[</span> <span class="n">output_layer_n</span> <span class="p">]</span> <span class="p">)</span> <span class="o">*</span> <span class="n">grad_a</span>
-                <span class="c1"># gradient with respect to the weights of the output layer</span>
-                <span class="n">grad_w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span> <span class="n">A</span><span class="p">[</span> <span class="n">output_layer_n</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">grad_z</span> <span class="p">)</span>
-                <span class="c1"># gradient with respect to the biases of the output layer</span>
-                <span class="n">grad_b</span> <span class="o">=</span> <span class="n">grad_z</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span>
-                <span class="c1"># updating the weights and biases of the output layer</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span> <span class="n">output_layer_n</span> <span class="p">]</span> <span class="o">-=</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">grad_w</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">biases</span><span class="p">[</span> <span class="n">output_layer_n</span> <span class="p">]</span> <span class="o">-=</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">grad_b</span>
-                <span class="k">for</span> <span class="n">hidden_layer_n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span> <span class="n">output_layer_n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span> <span class="p">)</span> <span class="p">:</span>
-                    <span class="c1"># gradient with respect to the weighted input to hidden layer n</span>
-                    <span class="n">grad_z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">derivative</span><span class="p">(</span> <span class="n">Z</span><span class="p">[</span> <span class="n">hidden_layer_n</span> <span class="p">]</span> <span class="p">)</span> <span class="o">*</span>\
-                             <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span> <span class="n">grad_z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span> <span class="n">hidden_layer_n</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">]</span><span class="o">.</span><span class="n">T</span> <span class="p">)</span>
-                    <span class="c1"># gradient with respect to the weights of hidden layer n</span>
-                    <span class="n">grad_w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span> <span class="n">A</span><span class="p">[</span> <span class="n">hidden_layer_n</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">grad_z</span> <span class="p">)</span>
-                    <span class="c1"># gradient with respect to the biases of hidden layer n</span>
-                    <span class="n">grad_b</span> <span class="o">=</span> <span class="n">grad_z</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span>
-                    <span class="c1"># updating the weights and biases of hidden layer n</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span> <span class="n">hidden_layer_n</span> <span class="p">]</span> <span class="o">-=</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">grad_w</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">biases</span><span class="p">[</span> <span class="n">hidden_layer_n</span> <span class="p">]</span> <span class="o">-=</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">grad_b</span>
+                <span class="c1"># gradient with respect to the weighted input of the output layer</span>
+                <span class="n">grad_z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">derivative</span><span class="p">(</span> <span class="n">Z</span><span class="p">[</span> <span class="n">output_layer</span> <span class="p">]</span> <span class="p">)</span> <span class="o">*</span> <span class="n">grad_a</span>
+                <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span> <span class="n">output_layer</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span> <span class="p">)</span> <span class="p">:</span>
+                    <span class="n">grad_z</span><span class="p">,</span> <span class="n">grad_w</span><span class="p">,</span> <span class="n">grad_b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">backpropagate</span><span class="p">(</span> <span class="n">grad_z</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">layer</span> <span class="p">)</span>
+                    <span class="c1"># updating the weights and biases of layer</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span> <span class="n">layer</span> <span class="p">]</span> <span class="o">-=</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">grad_w</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">biases</span><span class="p">[</span> <span class="n">layer</span> <span class="p">]</span> <span class="o">-=</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">grad_b</span>
             <span class="n">epoch</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">if</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span> <span class="o">&gt;</span> <span class="n">max_time</span> <span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span> <span class="s1">&#39;Maximum runtime encountered.&#39;</span> <span class="p">)</span>
@@ -13694,42 +13777,7 @@ $</span></p>
             <span class="k">if</span> <span class="n">epoch</span> <span class="o">&gt;</span> <span class="n">max_epoch</span> <span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span> <span class="s1">&#39;Maximum epoch encountered.&#39;</span> <span class="p">)</span>
                 <span class="k">break</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">forwardpropagation</span><span class="p">(</span> <span class="n">X</span> <span class="p">),</span> <span class="n">Y</span> <span class="p">)</span>
-        <span class="k">return</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><span style="color:#53C8FE; font-family:aparajita; font-size:18px">
-    <i>Initialize Random Weights and Bias</i>
-</span></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">FeedForwardNeuralNetwork</span><span class="p">(</span> <span class="n">FeedForwardNeuralNetwork</span>  <span class="p">)</span> <span class="p">:</span>
-    
-    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">X</span> <span class="p">:</span> <span class="n">Input_Matrix</span><span class="p">,</span> <span class="n">Y</span> <span class="p">:</span> <span class="n">Target_Matrix</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span> <span class="p">:</span>
-        <span class="n">inputs</span><span class="p">,</span> <span class="n">layer_n</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span> <span class="mi">1</span> <span class="p">],</span> <span class="mi">1</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">biases</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">perceptrons</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">hidden_layer</span> <span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span> <span class="n">layer_n</span> <span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">perceptrons</span> <span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">biases</span><span class="p">[</span> <span class="n">layer_n</span> <span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span> <span class="n">perceptrons</span> <span class="p">)</span>
-            <span class="n">inputs</span> <span class="o">=</span> <span class="n">perceptrons</span>
-            <span class="n">layer_n</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span> <span class="n">layer_n</span> <span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span> <span class="mi">1</span> <span class="p">]</span> <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">biases</span><span class="p">[</span> <span class="n">layer_n</span> <span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span> <span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span> <span class="mi">1</span> <span class="p">]</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cost</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">forwardpropagation</span><span class="p">(</span> <span class="n">X</span> <span class="p">),</span> <span class="n">Y</span> <span class="p">)</span>
         <span class="k">return</span>
 </pre></div>
 
